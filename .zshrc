@@ -99,9 +99,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias .zshrc="vim ~/.zshrc"
+alias dfm="dde-file-manager ./"
 alias l="ls"
 alias ll="ls -la"
 alias ..="cd .."
+alias doc="cd /home/demo/document"
 alias repo="cd /home/demo/repo"
 alias dtk="cd /home/demo/repo/dtk"
 alias dde="cd /home/demo/repo/dde"
@@ -117,10 +120,15 @@ alias qt5integration="cd /home/demo/repo/dtk-github/qt5integration"
 alias qt5platform-plugins="cd /home/demo/repo/dtk-github/qt5platform-plugins"
 alias dcc="cd /home/demo/repo/dde/dde-control-center"
 alias dss="cd /home/demo/repo/dde/dde-session-shell"
+alias dsc="cd /home/demo/repo/dde/deepin-signtool-client"
 alias qtbase5="cd /home/demo/repo/qt/qtbase-opensource-src-5.11.3.40"
 alias qtbase="cd /home/demo/repo/qt/qtbase"
 alias qttools="cd /home/demo/repo/qt/qttools"
 alias diff="/home/demo/software/p4v/bin/p4merge"
 alias qtcreator-plugin="cd /usr/lib/x86_64-linux-gnu/qtcreator/plugins"
 alias lowercase="for i in *; do mv "$i" "$(echo $i|tr A-Z a-z)"; done"
+
 export GOPATH=/usr/share/gocode:/home/demo/go
+DEBEMAIL="wangfeia@uniontech.com"
+DEBFULLNAME="wangfei"
+export DEBEMAIL DEBFULLNAME

@@ -3,6 +3,12 @@
 2. cd 到项目的根目录
 3. sudo mk-build-deps --install --tool='apt -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control
 
+# 构建deb包
+dpkg-buildpackage -us -uc -nc
+
+# 安装包依赖
+sudo apt build-dep dde-daemon
+
 # Qt 
 |命令|说明|
 |--|--|
@@ -47,7 +53,7 @@ sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=de
 tx pull -s -b m20 |  拉取翻译（-a -f 全部拉取）
 tx push -s -b master | 推送翻译
 
-# linux coredump
+# coredump
 1. sudo apt install systemd-coredump 安装
 2. sudo apt install dde-control-center-dbgsym 安装控制中心符号调试信息
 如果没有进行core dump 的相关设置，默认是不开启的。可以通过ulimit -c查看是否开启。如果输出为0，则没有开启，需要执行ulimit -c unlimited开启core dump功能
@@ -59,8 +65,24 @@ tx push -s -b master | 推送翻译
 # uos 激活
 uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v
 
-# 生成秘钥
+# ssh
 ssh-keygen -o
+
+/usr/sbin/sshd -T 查看出错原因
+
+no hostkeys available— exiting：
+
+1. root权限下，重新生成密钥：
+
+ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key 
+2. 修改密钥权限：
+
+chmod 600 /etc/ssh/ssh_host_dsa_key
+chmod 600 /etc/ssh/ssh_host_rsa_key
+3. 重启ssh
+systemctl restart ssh
+service ssh restart
 
 # wayland 下复制两次问题
 killall dde-clipboardloader 
@@ -71,22 +93,32 @@ killall dde-clipboardloader
 
 crp上ut失败时跳过ut
 
+# Git
+|命令|说明|
+|--|--|
+git push origin develop | 创建远程分支develop
+git push origin --delete develop | 删除远程分支develop
+git fetch origin develop/snipe:snipe | 从远程分支到本地分支
 
-1119 411
-1087 332
-1104 420
-1082 
+# 进程
+|命令|说明|
+|--|--|
+tr '\0' '\n' < /proc/12345/environ 或者 ps eww -p 12345 | 查看进程环境变量
+pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq） | 查看程依赖的so
+strings *.so | 查看so的字符
+
+# dbus
+|命令|说明|
+|--|--|
+qdbus --session  | 查看当前session所有的service信息
+qdbus --system   | 查看当前system所有的service信息
+could not find a Qt installation of '' | sudo apt install qtchooser
+qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
+dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
+
+# xprop 查看窗口属性
+
+# crontab 系统定时工具
 
 
-
-template <typename Func>
-inline Func getCupsFunc(const char *name) {
-    QLibrary cupsLibrary("cups", "2");
-    if (!cupsLibrary.isLoaded()) {
-        if (!cupsLibrary.load()) {
-            qWarning() << "Cups not found";
-            return {};
-        }
-    }
-    return reinterpret_cast<Func>(cupsLibrary.resolve(name));
-}
+WAYLAND_DEBUG=1
