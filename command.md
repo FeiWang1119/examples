@@ -70,19 +70,21 @@ ssh-keygen -o
 
 /usr/sbin/sshd -T 查看出错原因
 
-no hostkeys available— exiting：
+no hostkeys available— exiting:  
 
-1. root权限下，重新生成密钥：
+1. root权限下，重新生成密钥  
 
-ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
-ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key 
-2. 修改密钥权限：
+ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key  
+ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key   
 
-chmod 600 /etc/ssh/ssh_host_dsa_key
-chmod 600 /etc/ssh/ssh_host_rsa_key
-3. 重启ssh
-systemctl restart ssh
-service ssh restart
+2. 修改密钥权限  
+
+chmod 600 /etc/ssh/ssh_host_dsa_key  
+chmod 600 /etc/ssh/ssh_host_rsa_key  
+
+3. 重启ssh  
+systemctl restart sshd  
+service sshd restart
 
 # wayland 下复制两次问题
 killall dde-clipboardloader 
