@@ -1,10 +1,12 @@
 # 1. 拼接字符时，注意前后字符是否为空
+
 ```
     QString(“wangfei") + ":" + QString("003691")
 ```    
  当前后字符是外界传进来的时候，判断是否为空，为空时，中间“：”怎么处理？
 
 # 2. 自定义pkexec提权弹窗，需要配置policy文件
+
 com.deepin.signclient.deepin-certplat-checker.policy
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,6 +81,7 @@ main.cpp:
 ```
 
 # 5. 启动器快捷图标 deepin-signtool-client.desktop
+
 deepin-signtool-client.desktop
 ```
 [Desktop Entry]
@@ -107,6 +110,7 @@ install(FILES deepin-signtool-client.desktop DESTINATION share/applications)
 ```
 
 # 5. 日志过滤规则使用 Q_LOGGING_CATEGORY
+
 头文件声明：
 ```
 Q_DECLARE_LOGGING_CATEGORY(signclient)
@@ -137,24 +141,28 @@ QT_LOGGING_RULES="sign.client=true;sign.client.info=false" && deepin-signtool-cl
 ```
 
 # 6. 单例进程
+
 ```
     app->setSingleInstance(app->applicationName());
     app->setAutoActivateWindows(true);  // 自动激活上一个进程窗口
 ```
 
 # 7. 保存主题切换的设置
+
 ```
     DApplicationSettings as;
     Q_UNUSED(as)
 ```
 
 # 8. 应用图标和标题框图标
+
 ```
     app->setProductIcon(QIcon::fromTheme(APP_ICON));
     app->setWindowIcon(QIcon::fromTheme(APP_ICON));
 ```
 
 # 9. UI上考虑最大化和最小化布局，主题切换颜色
+
 最大化：哪些地方需要拉伸，尽量不要写死长宽。  
 主题切换：自定义调色板颜色需要自己适配主题切换
 ```
@@ -170,12 +178,14 @@ QT_LOGGING_RULES="sign.client=true;sign.client.info=false" && deepin-signtool-cl
 ```
 
 # 10. 兼容性打包
+
 1. 找不到DPaletterHelper, 替换成DApplicationHelper
 2. 找不到libdtkcommon-dev, 编译依赖去掉libdtkcommon-dev,  libdtkcore-dev,
  libdtkgui-dev,，只要libdtkwidget-dev，它会依赖core，gui。
 3. 去掉运行依赖libdframeworkdbus2。
 
 # 11. 对对话框的处理，需要考虑右上角关闭按钮
+
 修改前：
 ```
 void MainWindow::closeEvent(QCloseEvent *event)
