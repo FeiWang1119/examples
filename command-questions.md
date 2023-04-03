@@ -24,7 +24,7 @@ drawPixmap(rect,  pix)
 rect和pix的大小不匹配 ，导致scale。
 
 
-# ssh 克隆仓库遇到 Permission denied (publickey).
+# ssh Permission denied (publickey).
 
 ## Diagnosis
 
