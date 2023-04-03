@@ -64,4 +64,4 @@ Verify that you have a private key generated and loaded into SSH.
 ssh-add -l -E sha256
 ```
 
-   [Reference url]( https://confluence.atlassian.com/bitbucketserverkb/ssh-rsa-key-rejected-with-message-no-mutual-signature-algorithm-1026057701.html)
+   [More Detail]( https://confluence.atlassian.com/bitbucketserverkb/ssh-rsa-key-rejected-with-message-no-mutual-signature-algorithm-1026057701.html)
