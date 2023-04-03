@@ -13,13 +13,16 @@ QT_SCALE_FACTOR=1.25
 QIcon::fromeTheme("search")
 qApp->setAttribute(Qt::AA_UseHighDpiPixmaps,  true);
 ```
-流程：  
+
+
+
 1. fromeTheme (...)   ==>  platformTheme->createIconEngine(...) 返回 DIconProxyEngine (qdeepin主题插件);
 2.  DIconProxyEngine:paint(...) 转到  XdgIconProxyEngine:paint(...);
 3.  rect(16*16), ratio = 1.25 , pixmap(20*20) when    AA_UseHighDpiPixmaps=true;
 4.   rect(16*16), ratio = 1, pixmap(16*16) when  AA_UseHighDpiPixmaps=false;
 
-原因:  
+ ## Cause
+
 drawPixmap(rect,  pix)
 rect和pix的大小不匹配 ，导致scale。
 
@@ -44,7 +47,7 @@ gerrit:
 
    由于各种安全漏洞，RSA SHA-1 哈希算法正迅速在操作系统和 SSH 客户端中被弃用，其中许多技术现在完全拒绝使用该算法。注意，默认情况下 Bitbucket 提供对 ECDSA 和 ED25519 算法的支持。 使用这些算法生成的密钥不受 RSA 弃用的影响。
 
-  ##  Resolutions
+##  Resolutions
    
    - Workaround for re-enabling RSA
    
@@ -64,4 +67,4 @@ Verify that you have a private key generated and loaded into SSH.
 ssh-add -l -E sha256
 ```
 
-   [More Detail]( https://confluence.atlassian.com/bitbucketserverkb/ssh-rsa-key-rejected-with-message-no-mutual-signature-algorithm-1026057701.html)
+[More Detail]( https://confluence.atlassian.com/bitbucketserverkb/ssh-rsa-key-rejected-with-message-no-mutual-signature-algorithm-1026057701.html)
