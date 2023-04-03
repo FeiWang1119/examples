@@ -36,7 +36,9 @@ gerrit:
 ```
  ssh -vv -p 29418 ut003691@gerrit.uniontech.com
 ```
- 信息里出现：` send_pubkey_test: no mutual signature algorithm  `  
+ the following output can be seen：  
+ 
+ ` send_pubkey_test: no mutual signature algorithm  `  
 
  ## Cause
 
@@ -44,12 +46,12 @@ gerrit:
 
   ##  Resolutions
    
-   1. Workaround for re-enabling RSA
+   - Workaround for re-enabling RSA
    
    In order to re-enable ssh-rsa support, inserting the following line into the affected SSH client's config file can re-enable this algorithm:
    `PubkeyAcceptedKeyTypes +ssh-rsa`
 
-   2. Resolution using ECDSA and ED25519 algorithms  
+   - Resolution using ECDSA and ED25519 algorithms  
    
 ```
    ssh-keygen -t ed25519 -C "your_email@example.com"
