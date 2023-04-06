@@ -118,6 +118,14 @@ could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
 
+# cmake 指定 特定路径下的qt库
+
+```
+cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
+```
+
+- Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
+- Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
 # xprop 查看窗口属性
 
 # crontab 系统定时工具
