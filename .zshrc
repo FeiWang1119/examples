@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git  zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,19 +111,19 @@ alias dde="cd /home/fei/repo/dde"
 alias qt="cd /home/fei/repo/qt"
 alias wf="cd /home/fei/repo/wf"
 alias third-party="cd /home/fei/repo/third-party"
-alias dtkwidget="cd /home/fei/repo/dtk-github/dtkwidget"
-alias dtkcore="cd /home/fei/repo/dtk/dtkcore"
-alias dtkgui="cd /home/fei/repo/dtk/dtkgui"
-alias das="cd /home/fei/repo/dtk/dde-app-services"
-alias dtkdeclarative="cd /home/fei/repo/dtk/dtkdeclarative"
-alias qt5integration="cd /home/fei/repo/dtk-github/qt5integration"
-alias qt5platform-plugins="cd /home/fei/repo/dtk-github/qt5platform-plugins"
-alias dcc="cd /home/fei/repo/dde/dde-control-center"
-alias dss="cd /home/fei/repo/dde/dde-session-shell"
-alias dsc="cd /home/fei/repo/dde/deepin-signtool-client"
-alias qtbase5="cd /home/fei/repo/qt/qtbase-opensource-src-5.11.3.40"
-alias qtbase="cd /home/fei/repo/qt/qtbase"
-alias qttools="cd /home/fei/repo/qt/qttools"
+alias dtkwidget="cd /home/fei/repo/dtkwidget"
+alias dtkcore="cd /home/fei/repo/dtkcore"
+alias dtkgui="cd /home/fei/repo/dtkgui"
+alias das="cd /home/fei/repo/dde-app-services"
+alias dtkdeclarative="cd /home/fei/repo/dtkdeclarative"
+alias qt5integration="cd /home/fei/repo/qt5integration"
+alias qt5platform-plugins="cd /home/fei/repo/qt5platform-plugins"
+alias dcc="cd /home/fei/repo/dde-control-center"
+alias dss="cd /home/fei/repo/dde-session-shell"
+alias dsc="cd /home/fei/repo/deepin-signtool-client"
+alias qtbase5="cd /home/fei/repo/qtbase-opensource-src-5.11.3.40"
+alias qtbase="cd /home/fei/repo/qtbase"
+alias qttools="cd /home/fei/repo/qttools"
 alias diff="/home/fei/software/p4v/bin/p4merge"
 alias qtcreator-plugin="cd /usr/lib/x86_64-linux-gnu/qtcreator/plugins"
 alias lowercase="for i in *; do mv "$i" "$(echo $i|tr A-Z a-z)"; done"
