@@ -24,7 +24,7 @@ sudo apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | �
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
 sudo apt install qtbase5-examples qt5-doc | 安装例子和帮助文档
 sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
-
+../configure -nomake tests -nomake examples -system-sqlite --prefix=/home/fei/qt5.15  |  配置源码
 # 仓库
 
 gerrit http://aptly.uniontech.com/pkg/uos-exprimental/commit/

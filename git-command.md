@@ -20,6 +20,7 @@ git config [--global] core.editor vim | 编辑Git配置文件
 git config [--global] user.name "[name]" | 设置提交代码时的用户名
 git config [--global] user.email "[email address]" | 设置提交代码时的邮箱地址
 git config [--global] commit.template ~/.gitmessage.txt | 设置提交模板
+git config [--global] help.autocorrect  1 |  设置自动纠正时间  
 
 ## 增加/删除文件
 
