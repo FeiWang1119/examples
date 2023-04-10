@@ -16,9 +16,10 @@ git clone [url] | 下载一个项目和它的整个代码历史
 命令 | 说明
 -----|---
 git config --list | 显示当前的Git配置
-git config -e [--global] | 编辑Git配置文件
+git config [--global] core.editor vim | 编辑Git配置文件
 git config [--global] user.name "[name]" | 设置提交代码时的用户名
 git config [--global] user.email "[email address]" | 设置提交代码时的邮箱地址
+git config [--global] commit.template ~/.gitmessage.txt | 设置提交模板
 
 ## 增加/删除文件
 
