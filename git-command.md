@@ -188,6 +188,34 @@ git clean -df | 删除当前目录下没有被 track 过的文件和文件夹
     $ git stash pop
 
 
+## 配置第三方比较工具
 
+1. 编辑脚本extMerge： vim /usr/local/bin/extMerge
 
+``` sh
+#!/bin/sh
+/Your/Path/To/p4merge $*
+```
 
+2.  编辑脚本extDiff：vim /usr/local/bin/extDiff
+
+``` sh
+#!/bin/sh
+[ $# -eq 7 ] && /usr/local/bin/extMerge "$2" "$5"
+```
+
+3. 修改权限  
+
+  ``` sh 
+sudo chmod +x /usr/local/bin/extMerge
+sudo chmod +x /usr/local/bin/extDiff
+```
+4. 配置git
+
+``` sh
+git config --global merge.tool extMerge
+git config --global mergetool.extMerge.cmd \
+  'extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"' 
+git config --global mergetool.extMerge.trustExitCode false
+git config --global diff.external extDiff
+```
