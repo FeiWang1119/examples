@@ -1,4 +1,5 @@
 # 构建依赖
+
 method 1:
 1. sudo apt install devscripts
 2. cd 到项目的根目录
@@ -6,12 +7,13 @@ method 1:
    
 method 2:  
 - sudo apt build-dep dde-daemon
+  
 # 构建deb包
+
 dpkg-buildpackage -us -uc -nc
 
-
-
 # Qt 
+
 |命令|说明|
 |--|--|
 apt source qtbase-opensource-src | 获取源码
@@ -24,13 +26,10 @@ sudo apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | �
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
 sudo apt install qtbase5-examples qt5-doc | 安装例子和帮助文档
 sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
-../configure -nomake tests -nomake examples -system-sqlite --prefix=/home/fei/qt5.15  |  配置源码
-# 仓库
-
-gerrit http://aptly.uniontech.com/pkg/uos-exprimental/commit/
-索引 http://aptly.uniontech.com/pkg/uos-exprimental/commit/dists/unstable/main/binary-amd64/
+../configure -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
 
 #  gsetting
+
 |命令|说明|
 |--|--|
 glib-compile-schemas | /usr/share/glib-2.0/schemas
@@ -46,17 +45,20 @@ gsettings reset-recursively SCHEMA| 恢复指定schema的所有key的值为默�
 gsettings list-recursively [SCHEMA]|如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
 
 #  dde-daemon
+
 |命令|说明|
 |--|--|
 sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
 
-#  翻译
+#  translation
+
 |命令|说明|
 |--|--|
 tx pull -s -b m20 |  拉取翻译（-a -f 全部拉取）
 tx push -s -b master | 推送翻译
 
 # coredump
+
 1. sudo apt install systemd-coredump 安装
 2. sudo apt install dde-control-center-dbgsym 安装控制中心符号调试信息
 如果没有进行core dump 的相关设置，默认是不开启的。可以通过ulimit -c查看是否开启。如果输出为0，则没有开启，需要执行ulimit -c unlimited开启core dump功能
@@ -66,10 +68,26 @@ tx push -s -b master | 推送翻译
 6. sudo apt install lz4; lz4 -d FILE 来解压coredump文件
 
 # uos 激活
+
 uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v
 
 # ssh
-ssh-keygen -o
+
+generate key :  
+
+``` sh
+ssh-keygen  // default key type : RSA 
+ssh-keygen -t ed25519 //  specify key type: ed25519  
+```
+
+proxy config：~/.ssh/config
+
+
+``` sh
+Host github.com
+    Hostname github.com
+    ProxyCommand /usr/bin/corkscrew 10.20.52.42 7890 %h %p
+```
 
 /usr/sbin/sshd -T 查看出错原因
 
@@ -99,6 +117,7 @@ killall dde-clipboardloader
 crp上ut失败时跳过ut
 
 # Git
+
 |命令|说明|
 |--|--|
 git push origin develop | 创建远程分支develop
@@ -106,6 +125,7 @@ git push origin --delete develop | 删除远程分支develop
 git fetch origin develop/snipe:snipe | 从远程分支到本地分支
 
 # 进程
+
 |命令|说明|
 |--|--|
 tr '\0' '\n' < /proc/12345/environ 或者 ps eww -p 12345 | 查看进程环境变量
@@ -113,6 +133,7 @@ pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| 
 strings *.so | 查看so的字符
 
 # dbus
+
 |命令|说明|
 |--|--|
 qdbus --session  | 查看当前session所有的service信息
@@ -129,9 +150,9 @@ cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
 
 - Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
 - Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
+
 # xprop 查看窗口属性
 
 # crontab 系统定时工具
-
 
 WAYLAND_DEBUG=1
