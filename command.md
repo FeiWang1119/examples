@@ -165,3 +165,13 @@ WAYLAND_DEBUG=1
 sudo apt install default-jre
 sudo apt install graphviz
 ```
+
+# qtcreator 配置文件
+
+linux ：   
+~/.config/QtProject  （测过）  
+~/.local/share/data/QtProject/qtcreator   
+
+window ：   
+%APPDATA%\QtProject  
+%LOCALAPPDATA%\QtProject  
