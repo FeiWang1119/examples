@@ -156,3 +156,12 @@ cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
 # crontab 系统定时工具
 
 WAYLAND_DEBUG=1
+
+# 支持 plantuml
+
+安装java和Graphviz
+
+``` sh
+sudo apt install default-jre
+sudo apt install graphviz
+```

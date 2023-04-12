@@ -1,0 +1,6 @@
+@startuml
+
+QNativeSocketEngine --> QAbstractSocketEngine
+QHttpSocketEngine --> QAbstractSocketEngine
+
+@enduml
