@@ -1,0 +1,14 @@
+[core]
+	editor = vim
+[user]
+	name = wangfei
+	email = wangfeia@uniontech.com
+[help]
+	autocorrect = 1
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = false
+[diff]
+	external = extDiff
