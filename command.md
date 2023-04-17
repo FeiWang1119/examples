@@ -1,16 +1,12 @@
-# 构建依赖
+# debian
 
-method 1:
-1. sudo apt install devscripts
-2. cd 到项目的根目录
-3. sudo mk-build-deps --install --tool='apt -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control
-   
-method 2:  
-- sudo apt build-dep dde-daemon
-  
-# 构建deb包
-
-dpkg-buildpackage -us -uc -nc
+|命令|说明|
+|--|--|
+ sudo apt build-dep packagename | 构建依赖
+dpkg-buildpackage -us -uc -nc | 构建deb包
+apt depends packagename | packagename依赖的包
+apt rdepends packagename | 哪些包依赖packagename
+apt-file search file | 搜索文件相关的包
 
 # Qt 
 
@@ -136,8 +132,8 @@ strings *.so | 查看so的字符
 
 |命令|说明|
 |--|--|
-qdbus --session  | 查看当前session所有的service信息
-qdbus --system   | 查看当前system所有的service信息
+qdbus --session | 查看当前session所有的service信息
+qdbus --system  | 查看当前system所有的service信息
 could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
