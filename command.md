@@ -168,9 +168,9 @@ dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服�
 
 WAYLAND_DEBUG=1
 
-# 支持 plantuml
+# plantuml (vscode plugin)
 
-安装java和Graphviz
+install java & Graphviz
 
 ``` sh
 sudo apt install default-jre
@@ -185,7 +185,7 @@ sudo vim /etc/sysctl.d/10-ptrace.conf
 ```
 type : kernel.yama.ptrace_scope = 0
 
-立即生效：
+take effect immediately：
 
 ``` sh
 sudo sysctl --system -a -p | grep yama
