@@ -126,11 +126,9 @@ chmod 600 /etc/ssh/ssh_host_dsa_key
 chmod 600 /etc/ssh/ssh_host_rsa_key  
 
 3. 重启ssh  
+
 systemctl restart sshd  
 service sshd restart
-
-# wayland 下复制两次问题
-killall dde-clipboardloader 
 
 # CRP跳过单元测试方法：
 项目-编辑-构建参数列表
@@ -164,8 +162,6 @@ could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
 
-
-
 # xprop 查看窗口属性
 
 # crontab 系统定时工具
@@ -179,4 +175,18 @@ WAYLAND_DEBUG=1
 ``` sh
 sudo apt install default-jre
 sudo apt install graphviz
+```
+#  gammaray 
+
+/proc/sys/kernel/yama/ptrace_scope to 0
+
+``` sh
+sudo vim /etc/sysctl.d/10-ptrace.conf
+```
+type : kernel.yama.ptrace_scope = 0
+
+立即生效：
+
+``` sh
+sudo sysctl --system -a -p | grep yama
 ```
