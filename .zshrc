@@ -70,7 +70,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git  zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,6 +121,7 @@ alias qt5platform-plugins="cd /home/fei/repo/qt5platform-plugins"
 alias dcc="cd /home/fei/repo/dde-control-center"
 alias dss="cd /home/fei/repo/dde-session-shell"
 alias dsc="cd /home/fei/repo/deepin-signtool-client"
+alias job-data="cd /home/fei/repo/job-data"
 alias qtbase5="cd /home/fei/repo/qtbase-opensource-src-5.11.3.40"
 alias qtbase="cd /home/fei/repo/qtbase"
 alias qttools="cd /home/fei/repo/qttools"

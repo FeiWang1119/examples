@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorSession>
-<!-- Written by QtCreator 9.0.2, 2023-04-12T15:21:00. -->
+<!-- Written by QtCreator 9.0.2, 2023-04-17T10:23:40. -->
 <qtcreator>
  <data>
   <variable>CascadeSetActive</variable>
@@ -22,10 +22,9 @@
   <variable>ProjectList</variable>
   <valuelist type="QVariantList">
    <value type="QString">/home/fei/repo/dtkwidget/CMakeLists.txt</value>
-   <value type="QString">/home/fei/repo/deepin-signtool-client/CMakeLists.txt</value>
    <value type="QString">/home/fei/repo/qt5integration/qt5integration.pro</value>
-   <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735/dtreeview-bug193735.pro</value>
-   <value type="QString">/home/fei/Desktop/qt_07/qt_07.pro</value>
+   <value type="QString">/home/fei/repo/dtkcore/CMakeLists.txt</value>
+   <value type="QString">/home/fei/repo/dtkgui/CMakeLists.txt</value>
   </valuelist>
  </data>
  <data>
@@ -73,14 +72,6 @@
   <variable>value-ProjectTree.ExpandData</variable>
   <valuelist type="QVariantList">
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/src</value>
-    <value type="QString">dtkwidget</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dde-appearance</value>
-    <value type="QString">&lt;File System&gt;</value>
-   </valuelist>
-   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget</value>
     <value type="QString">&lt;File System&gt;</value>
    </valuelist>
@@ -90,7 +81,11 @@
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/src</value>
-    <value type="QString">src</value>
+    <value type="QString">dtkwidget</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/dde-appearance</value>
+    <value type="QString">&lt;File System&gt;</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/src</value>
@@ -101,8 +96,16 @@
     <value type="QString">styles</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget</value>
-    <value type="QString">DtkWidget [toolbutton]</value>
+    <value type="QString">/home/fei/repo/dtkwidget/src</value>
+    <value type="QString">src</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
+    <value type="QString">Sources</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/dtkwidget/src/widgets</value>
+    <value type="QString">widgets</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/examples/collections</value>
@@ -113,12 +116,8 @@
     <value type="QString">Source Files</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
-    <value type="QString">Sources</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/src/widgets</value>
-    <value type="QString">widgets</value>
+    <value type="QString">/home/fei/repo/dtkwidget</value>
+    <value type="QString">DtkWidget [toolbutton]</value>
    </valuelist>
   </valuelist>
  </data>
