@@ -1,6 +1,6 @@
 # debian
 
-|命令|说明|
+|command|description|
 |--|--|
  sudo apt build-dep packagename | 构建依赖
 dpkg-buildpackage -us -uc -nc | 构建deb包
@@ -10,7 +10,7 @@ apt-file search file | 搜索文件相关的包
 
 # Qt 
 
-|命令|说明|
+|command|description|
 |--|--|
 apt source qtbase-opensource-src | 获取源码
 -nograb -platformpluginpath /home/fei/repo/dtk/qt5integration/bin/plugins | 指定平台插件
@@ -20,7 +20,7 @@ export QT_PLUGIN_PATH=qtbuilddir/plugins | Qt插件
 export PKG_CONFIG_PATH=qtbuilddir/lib/pkgconfig:dtkbuilddir/lib/pkgconfig | 在 Qt pro 中配置的 phgconfig 就是用过查找该目录下的.PC文件 实现头文件和库的引入
 sudo apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 安装Qt的调试库
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
-sudo apt install qtbase5-examples qt5-doc | 安装例子和帮助文档
+sudo apt install qtbase5-examples qt5-doc qt5-doc-html | 安装例子和帮助文档
 sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
 ../configure -opensource -confirm-license  -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
 
@@ -53,7 +53,7 @@ sudo ninja install
 
 #  gsetting
 
-|命令|说明|
+|command|description|
 |--|--|
 glib-compile-schemas | /usr/share/glib-2.0/schemas
 gsettings list-schemas |             显示系统已安装的不可重定位的schema  
@@ -69,13 +69,13 @@ gsettings list-recursively [SCHEMA]|如果有SCHEMA参数，则递归显示指�
 
 #  dde-daemon
 
-|命令|说明|
+|command|description|
 |--|--|
 sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
 
 #  translation
 
-|命令|说明|
+|command|description|
 |--|--|
 tx pull -s -b m20 |  拉取翻译（-a -f 全部拉取）
 tx push -s -b master | 推送翻译
@@ -138,7 +138,7 @@ crp上ut失败时跳过ut
 
 # Git
 
-|命令|说明|
+|command|description|
 |--|--|
 git push origin develop | 创建远程分支develop
 git push origin --delete develop | 删除远程分支develop
@@ -146,7 +146,7 @@ git fetch origin develop/snipe:snipe | 从远程分支到本地分支
 
 # 进程
 
-|命令|说明|
+|command|description|
 |--|--|
 tr '\0' '\n' < /proc/12345/environ 或者 ps eww -p 12345 | 查看进程环境变量
 pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq） | 查看程依赖的so
@@ -154,7 +154,7 @@ strings *.so | 查看so的字符
 
 # dbus
 
-|命令|说明|
+|command|description|
 |--|--|
 qdbus --session | 查看当前session所有的service信息
 qdbus --system  | 查看当前system所有的service信息
