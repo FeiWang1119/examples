@@ -22,7 +22,34 @@ sudo apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | �
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
 sudo apt install qtbase5-examples qt5-doc | 安装例子和帮助文档
 sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
-../configure -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
+../configure -opensource -confirm-license  -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
+
+# qtcreator 配置文件
+
+linux ：   
+~/.config/QtProject  （测过）  
+~/.local/share/data/QtProject/qtcreator   
+
+window ：   
+%APPDATA%\QtProject  
+%LOCALAPPDATA%\QtProject  
+
+# cmake 指定 特定路径下的qt库
+
+``` sh
+cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
+```
+
+- Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
+- Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
+  
+# cmake 构建安装
+
+``` sh
+mkdir build && cd build
+cmake ../ -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
+sudo ninja install
+```
 
 #  gsetting
 
@@ -77,7 +104,6 @@ ssh-keygen -t ed25519 //  specify key type: ed25519
 ```
 
 proxy config：~/.ssh/config
-
 
 ``` sh
 Host github.com
@@ -138,14 +164,7 @@ could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
 
-# cmake 指定 特定路径下的qt库
 
-```
-cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
-```
-
-- Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
-- Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
 
 # xprop 查看窗口属性
 
@@ -161,13 +180,3 @@ WAYLAND_DEBUG=1
 sudo apt install default-jre
 sudo apt install graphviz
 ```
-
-# qtcreator 配置文件
-
-linux ：   
-~/.config/QtProject  （测过）  
-~/.local/share/data/QtProject/qtcreator   
-
-window ：   
-%APPDATA%\QtProject  
-%LOCALAPPDATA%\QtProject  
