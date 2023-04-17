@@ -1,6 +1,10 @@
 @startuml
 
-QNativeSocketEngine --> QAbstractSocketEngine
-QHttpSocketEngine --> QAbstractSocketEngine
+QAbstractSocketEngine <|-- QNativeSocketEngine
+QAbstractSocketEngine <|-- QHttpSocketEngine
+QObject <|-- QLocalServer
+QIODevice <|--  QLocalSocket
+QTcpSocket  <|-- QLocalUnixSocket
+QAbstractSocket <|--  QTcpSocket 
 
 @enduml

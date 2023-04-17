@@ -24,7 +24,7 @@ sudo apt install qtbase5-examples qt5-doc qt5-doc-html | 安装例子和帮助�
 sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
 ../configure -opensource -confirm-license  -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
 
-# qtcreator 配置文件
+# qtcreator configure file
 
 linux ：   
 ~/.config/QtProject  （测过）  
