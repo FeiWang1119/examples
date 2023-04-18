@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 path "
+# 参数使用绝对路径， 如果路径不存在会自动创建。
+# 如果使用相对路径，会出现路径嵌套。例如 /tmp/clone-dtk.sh ./repo  (不加参数时 默认./ 同样出现嵌套)
+# repo目录下有dtkcore，dtkcore目录下有dktgui, 依次嵌套。可能git clone 后当前路径会变成克隆后的路径。
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 absolutePath repoName"
   exit 1
 fi
-
-INIT_PATH="$(pwd)"
-echo "Current path: $INIT_PATH"
 
 DTKCORE=""
 DTKGUI=""
@@ -45,25 +46,21 @@ fi
 git clone git@github.com:FeiWang1119/dtkcore.git $DTKCORE
 cd $DTKCORE_PATH
 git remote add linuxdeepin git@github.com:linuxdeepin/dtkcore.git
-cd $INIT_PATH
 
 git clone git@github.com:FeiWang1119/dtkgui.git $DTKGUI
 cd $DTKGUI_PATH
 git remote add linuxdeepin git@github.com:linuxdeepin/dtkgui.git
-cd $INIT_PATH
 
 git clone git@github.com:FeiWang1119/dtkwidget.git $DTKWIDGET
 cd $DTKWIDGET_PATH
 git remote add linuxdeepin git@github.com:linuxdeepin/dtkwidget.git
-cd $INIT_PATH
 
 git clone git@github.com:FeiWang1119/qt5integration.git $QI
 cd $QI_PATH
 git remote add linuxdeepin git@github.com:linuxdeepin/qt5integration.git
-cd $INIT_PATH
 
 git clone git@github.com:FeiWang1119/qt5platform-plugins.git $QP
 cd $QP_PATH
 git remote add linuxdeepin git@github.com:linuxdeepin/qt5platform-plugins.git
-cd $INIT_PATH
+
 
