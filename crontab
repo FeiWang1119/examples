@@ -1,0 +1,7 @@
+ 0 */1 * * * /home/fei/auto-commit.sh 2>/home/fei/auto-commit.log
+ 1 8-18/1 * * * /home/fei/auto-update.sh /home/fei/repo/dtkwidget
+ 2 8-18/1 * * * /home/fei/auto-update.sh /home/fei/repo/dtkcore
+ 3 8-18/1 * * * /home/fei/auto-update.sh /home/fei/repo/dtkgui
+ 4 8-18/1 * * * /home/fei/auto-update.sh /home/fei/repo/qt5platform-plugins
+ 5 8-18/1 * * * /home/fei/auto-update.sh /home/fei/repo/qt5integration
+
