@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# example : clone.sh ./ repo dtkcore dtkwidget
+# example : clone.sh ./repo dtkcore dtkwidget
 
 if [ $# -lt 2 ]; then
   echo "Usage: $0 path repo"

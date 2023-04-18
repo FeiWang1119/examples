@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
+# example : clone-dtk.sh ./repo
+
+if [ $# -lt 1 ]; then
   echo "Usage: $0 path "
   exit 1
 fi
