@@ -34,7 +34,7 @@ window ：
 %APPDATA%\QtProject  
 %LOCALAPPDATA%\QtProject  
 
-# cmake 指定 特定路径下的qt库
+# cmake 指定特定路径下的qt库
 
 ``` sh
 cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
@@ -129,12 +129,6 @@ chmod 600 /etc/ssh/ssh_host_rsa_key
 
 systemctl restart sshd  
 service sshd restart
-
-# CRP跳过单元测试方法：
-项目-编辑-构建参数列表
-{'i386': 'DEB_BUILD_OPTIONS=nocheck ', 'arm64': 'DEB_BUILD_OPTIONS=nocheck ','amd64': 'DEB_BUILD_OPTIONS=nocheck ', 'mips64el': 'DEB_BUILD_OPTIONS=nocheck ', 'sw_64': 'DEB_BUILD_OPTIONS=nocheck ', 'loongarch64': 'DEB_BUILD_OPTIONS=nocheck '}
-
-crp上ut失败时跳过ut
 
 # Git
 
