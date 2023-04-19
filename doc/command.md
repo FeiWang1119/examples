@@ -13,7 +13,7 @@ apt-file search file | 搜索文件相关的包
 |command|description|
 |--|--|
 apt source qtbase-opensource-src | 获取源码
--nograb -platformpluginpath /home/fei/repo/dtk/qt5integration/bin/plugins | 指定平台插件
+-nograb -platformpluginpath /home/fei/repo/qt5integration/bin/plugins | 指定平台插件
 export LD_LIBRARY_PATH=qtbuilddir/lib:dtkbuilddir/lib | 设置程序运行是链接库的路径
 export QT_QPA_PLATFORM_PLUGIN_PATH=qtbuilddir/plugins/platforms |  平台相关插件
 export QT_PLUGIN_PATH=qtbuilddir/plugins | Qt插件
