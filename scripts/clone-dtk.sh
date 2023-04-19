@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# example : clone-dtk.sh ./repo
+# Usage: clone-dtk.sh ./repo
 
 if [ $# -lt 1 ]; then
   echo "Usage: $0 path "
