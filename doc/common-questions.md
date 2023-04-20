@@ -16,14 +16,36 @@ qApp->setAttribute(Qt::AA_UseHighDpiPixmaps,  true);
 流程：  
 1. fromeTheme (...)   ==>  platformTheme->createIconEngine(...) 返回 DIconProxyEngine (qdeepin主题插件);
 2.  DIconProxyEngine:paint(...) 转到  XdgIconProxyEngine:paint(...);
-3.  rect(16*16), ratio = 1.25 , pixmap(20*20) when    AA_UseHighDpiPixmaps=true;
-4.   rect(16*16), ratio = 1, pixmap(16*16) when  AA_UseHighDpiPixmaps=false;
+3.  rect(16*16), ratio = 1.25 , pixmap(20*20) when AA_UseHighDpiPixmaps=true;
+4.   rect(16*16), ratio = 1, pixmap(16*16) when AA_UseHighDpiPixmaps=false;
 
 原因:  
 drawPixmap(rect,  pix)
 rect和pix的大小不匹配 ，导致scale。
 
++++++ 1 QRect(32,14 16x16) QSize(16, 16)
++++++ 1 QRect(32,44 16x16) QSize(16, 16)
++++++ 1 QRect(32,76 16x16) QSize(16, 16)
++++++ 1 QRect(32,106 16x16) QSize(16, 16)
++++++ 1 QRect(32,136 16x16) QSize(16, 16)
++++++ 1 QRect(32,166 16x16) QSize(16, 16)
++++++ 1 QRect(32,198 16x16) QSize(16, 16)
 
+ +++++ 2 QRect(48,6 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,36 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,68 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,98 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,128 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,158 32x32) QSize(64, 64)
+ +++++ 2 QRect(48,190 32x32) QSize(64, 64)
+
++++++ 2 QRect(32,14 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,44 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,76 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,106 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,136 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,166 16x16) QSize(32, 32) QSize(32, 32)
++++++ 2 QRect(32,198 16x16) QSize(32, 32) QSize(32, 32)
 # ssh 克隆仓库遇到 Permission denied (publickey).
 
 1.  调试看信息：    
