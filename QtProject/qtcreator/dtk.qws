@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorSession>
-<!-- Written by QtCreator 9.0.2, 2023-04-20T17:40:00. -->
+<!-- Written by QtCreator 9.0.2, 2023-04-21T10:00:53. -->
 <qtcreator>
  <data>
   <variable>CascadeSetActive</variable>
@@ -35,7 +35,7 @@
  </data>
  <data>
   <variable>value-ActiveMode</variable>
-  <value type="QString">Edit</value>
+  <value type="QString">Project</value>
  </data>
  <data>
   <variable>value-Bookmarks</variable>
@@ -177,10 +177,6 @@
     <value type="QString">qt5deepintheme-plugin</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt5platform-plugins</value>
-    <value type="QString">qt5platform-plugins [master]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/examples</value>
     <value type="QString">examples</value>
    </valuelist>
@@ -203,10 +199,6 @@
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkcore/src</value>
     <value type="QString">src</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/dtoolbutton-icontest</value>
-    <value type="QString">dtoolbutton-icontest</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/src</value>
