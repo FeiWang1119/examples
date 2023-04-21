@@ -144,6 +144,7 @@ git stash pop | 命令恢复之前缓存的工作目录，将缓存堆栈中的�
 git stash pop stash@{$num} | 如果要应用并删除其他stash，命令
 git stash drop stash@{$num} | 丢弃stash@{$num}存储，从列表中删除这个存储
 git stash clear | 删除所有缓存的stash
+git stash push -m savefile file | 保存特定文件file
 
 ## 其他
 命令 | 说明
