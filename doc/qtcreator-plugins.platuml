@@ -1,0 +1,5 @@
+    @startuml
+
+QAbstractSocketEngine <|-- QNativeSocketEngine
+
+@enduml
