@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorQtVersions>
-<!-- Written by QtCreator 9.0.2, 2023-04-21T15:27:41. -->
+<!-- Written by QtCreator 9.0.2, 2023-04-21T17:43:31. -->
 <qtcreator>
  <data>
   <variable>QtVersion.0</variable>
@@ -16,6 +16,7 @@
   <variable>QtVersion.1</variable>
   <valuemap type="QVariantMap">
    <value type="int" key="Id">3</value>
+   <value type="QString" key="Name">Qt %{Qt:Version} (local)</value>
    <value type="QString" key="QMakePath">/home/fei/qt5.15/bin/qmake</value>
    <value type="QString" key="QtVersion.Type">Qt4ProjectManager.QtVersion.Desktop</value>
    <value type="QString" key="autodetectionSource"></value>
