@@ -1,5 +1,7 @@
-    @startuml
+@startuml
 
-QAbstractSocketEngine <|-- QNativeSocketEngine
+QObject <|-- IPlugin 
+IPlugin <|-- CorePlugin
+IPlugin <|-- GitPlugin
 
 @enduml
