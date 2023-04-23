@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProfiles>
-<!-- Written by QtCreator 9.0.2, 2023-04-22T14:55:44. -->
+<!-- Written by QtCreator 9.0.2, 2023-04-22T17:04:14. -->
 <qtcreator>
  <data>
   <variable>Kit.IrrelevantAspects</variable>
@@ -57,7 +57,7 @@
     </valuelist>
     <valuemap type="QVariantMap" key="CMake.GeneratorKitInformation">
      <value type="QString" key="ExtraGenerator"></value>
-     <value type="QString" key="Generator">Ninja</value>
+     <value type="QString" key="Generator">Unix Makefiles</value>
      <value type="QString" key="Platform"></value>
      <value type="QString" key="Toolset"></value>
     </valuemap>
