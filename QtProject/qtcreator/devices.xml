@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorDevices>
-<!-- Written by QtCreator 10.0.82, 2023-04-24T13:50:04. -->
+<!-- Written by QtCreator 10.0.0, 2023-04-24T15:54:19. -->
 <qtcreator>
  <data>
   <variable>DeviceManager</variable>
@@ -11,7 +11,6 @@
    <valuelist type="QVariantList" key="DeviceList">
     <valuemap type="QVariantMap">
      <value type="int" key="Authentication">0</value>
-     <value type="QString" key="ClientOsType">Linux</value>
      <value type="QString" key="DebugServerKey"></value>
      <valuemap type="QVariantMap" key="ExtraData"/>
      <value type="QString" key="FreePortsSpec">30000-31000</value>
