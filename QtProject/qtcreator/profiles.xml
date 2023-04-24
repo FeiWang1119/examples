@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProfiles>
-<!-- Written by QtCreator 10.0.0, 2023-04-24T11:49:26. -->
+<!-- Written by QtCreator 10.0.82, 2023-04-24T13:50:04. -->
 <qtcreator>
  <data>
   <variable>Kit.IrrelevantAspects</variable>
@@ -70,13 +70,13 @@
      <value type="QByteArray" key="C">{8bf2ac39-a118-4881-b483-4712d1e001de}</value>
      <value type="QByteArray" key="Cxx">{70029f9b-7f7e-4970-adbf-701b3c84fdc8}</value>
     </valuemap>
-    <value type="int" key="QtSupport.QtInformation">6</value>
+    <value type="int" key="QtSupport.QtInformation">7</value>
    </valuemap>
    <value type="QString" key="PE.Profile.DeviceTypeForIcon"></value>
    <value type="QString" key="PE.Profile.Icon"></value>
    <value type="QString" key="PE.Profile.Id">{9181ae50-4c47-47da-bbd2-8559d10cbf45}</value>
    <valuelist type="QVariantList" key="PE.Profile.MutableInfo"/>
-   <value type="QString" key="PE.Profile.Name">Qt 6.6.0 (local)</value>
+   <value type="QString" key="PE.Profile.Name">Qt 6.4.2 (local)</value>
    <value type="bool" key="PE.Profile.SDK">false</value>
    <valuelist type="QVariantList" key="PE.Profile.StickyInfo"/>
   </valuemap>

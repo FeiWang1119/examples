@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorQtVersions>
-<!-- Written by QtCreator 10.0.0, 2023-04-24T11:49:26. -->
+<!-- Written by QtCreator 10.0.82, 2023-04-24T13:50:02. -->
 <qtcreator>
  <data>
   <variable>QtVersion.0</variable>
@@ -26,8 +26,8 @@
  <data>
   <variable>QtVersion.2</variable>
   <valuemap type="QVariantMap">
-   <value type="int" key="Id">6</value>
-   <value type="QString" key="QMakePath">/usr/local/qt6.6/bin/qmake</value>
+   <value type="int" key="Id">7</value>
+   <value type="QString" key="QMakePath">/usr/local/qt6.4.2/bin/qmake</value>
    <value type="QString" key="QtVersion.Type">Qt4ProjectManager.QtVersion.Desktop</value>
    <value type="QString" key="autodetectionSource"></value>
    <value type="bool" key="isAutodetected">false</value>
