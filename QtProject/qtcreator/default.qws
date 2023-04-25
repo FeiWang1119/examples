@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorSession>
-<!-- Written by QtCreator 10.0.0, 2023-04-25T10:56:50. -->
+<!-- Written by QtCreator 10.0.0, 2023-04-25T15:52:46. -->
 <qtcreator>
  <data>
   <variable>CascadeSetActive</variable>
@@ -35,12 +35,7 @@
  </data>
  <data>
   <variable>value-Breakpoints</variable>
-  <valuelist type="QVariantList">
-   <valuemap type="QVariantMap">
-    <value type="QString" key="filename">/home/fei/Downloads/untitled/untitled/widget.cpp</value>
-    <value type="int" key="linenumber">32</value>
-   </valuemap>
-  </valuelist>
+  <valuelist type="QVariantList"/>
  </data>
  <data>
   <variable>value-DebuggerSeparateWidgetGeometry</variable>
@@ -56,28 +51,7 @@
  </data>
  <data>
   <variable>value-ProjectTree.ExpandData</variable>
-  <valuelist type="QVariantList">
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/untitled/untitled</value>
-    <value type="QString">untitled</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/untitled/untitled</value>
-    <value type="QString">Forms</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/untitled-qt/untitled-qt</value>
-    <value type="QString">untitled</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/untitled-qt/untitled-qt</value>
-    <value type="QString">Sources</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Downloads/untitled/untitled</value>
-    <value type="QString">Sources</value>
-   </valuelist>
-  </valuelist>
+  <valuelist type="QVariantList"/>
  </data>
  <data>
   <variable>value-TaskWindow.Categories</variable>
@@ -98,13 +72,9 @@
   <valuelist type="QVariantList">
    <value type="QString">ActiveMode</value>
    <value type="QString">Breakpoints</value>
-   <value type="QString">DebuggerSeparateWidgetGeometry</value>
-   <value type="QString">DefaultFormats</value>
-   <value type="QString">IndividualFormats</value>
    <value type="QString">ProjectTree.ExpandData</value>
    <value type="QString">TaskWindow.Categories</value>
    <value type="QString">TaskWindow.IncludeWarnings</value>
-   <value type="QString">Watchers</value>
   </valuelist>
  </data>
 </qtcreator>
