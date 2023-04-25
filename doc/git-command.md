@@ -149,7 +149,7 @@ git stash push -m savefile file | 保存特定文件file
 ## 其他
 命令 | 说明
 -----|---
- git archive |  生成一个可供发布的压缩包
+git archive |  生成一个可供发布的压缩包
 git clean -df | 删除当前目录下没有被 track 过的文件和文件夹
 
 # 案例
