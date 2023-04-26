@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorSession>
-<!-- Written by QtCreator 10.0.82, 2023-04-24T13:55:02. -->
+<!-- Written by QtCreator 10.0.0, 2023-04-26T17:53:16. -->
 <qtcreator>
  <data>
   <variable>CascadeSetActive</variable>
@@ -75,6 +75,82 @@
   <variable>value-ProjectTree.ExpandData</variable>
   <valuelist type="QVariantList">
    <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/localfortuneclient</value>
+    <value type="QString">Sources</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtdeclarative/src/plugins</value>
+    <value type="QString">plugins</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/cleanlooks/cleanlooks.pro</value>
+    <value type="QString">cleanlooks</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2</value>
+    <value type="QString">Sources</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/dtkwidget/src</value>
+    <value type="QString">src</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
+    <value type="QString">dtreeview-bug193735</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtdeclarative</value>
+    <value type="QString">QtDeclarative [dev]</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtdeclarative/src/core</value>
+    <value type="QString">Header Files</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2/gtk2.pro</value>
+    <value type="QString">gtk2</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtbase-opensource-src-5.15.7.2/src</value>
+    <value type="QString">src [master]</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
+    <value type="QString">Source Files</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
+    <value type="QString">app</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/localfortuneclient</value>
+    <value type="QString">Headers</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
+    <value type="QString">Source Files</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtquickdesigner-components</value>
+    <value type="QString">qtquickdesigner-components [dev]</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
+    <value type="QString">Header Files</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/gtk2/gtk2.pro</value>
+    <value type="QString">gtk2</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2</value>
+    <value type="QString">Headers</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator</value>
+    <value type="QString">qt-creator [master]</value>
+   </valuelist>
+   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/src</value>
     <value type="QString">Source Files</value>
    </valuelist>
@@ -91,96 +167,16 @@
     <value type="QString">plugins</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/localfortuneclient</value>
-    <value type="QString">Headers</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtquickdesigner-components</value>
-    <value type="QString">qtquickdesigner-components [dev]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/gtk2/gtk2.pro</value>
-    <value type="QString">gtk2</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
-    <value type="QString">Header Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator</value>
-    <value type="QString">qt-creator [master]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2</value>
-    <value type="QString">Headers</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
-    <value type="QString">dtreeview-bug193735</value>
-   </valuelist>
-   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/src</value>
+    <value type="QString">dtkwidget</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/src.pro</value>
     <value type="QString">src</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtdeclarative/src/core</value>
-    <value type="QString">Header Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtdeclarative</value>
-    <value type="QString">QtDeclarative [dev]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtbase-opensource-src-5.15.7.2/src</value>
-    <value type="QString">src [master]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2/gtk2.pro</value>
-    <value type="QString">gtk2</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
-    <value type="QString">app</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/localfortuneclient</value>
-    <value type="QString">Sources</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtdeclarative/src/plugins</value>
-    <value type="QString">plugins</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/gtk2</value>
-    <value type="QString">Sources</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/cleanlooks/cleanlooks.pro</value>
-    <value type="QString">cleanlooks</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/examples</value>
-    <value type="QString">examples</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/git</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qttools/src</value>
-    <value type="QString">src</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget</value>
-    <value type="QString">&lt;File System&gt;</value>
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/platformthemes.pro</value>
+    <value type="QString">platformthemes</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dde-appearance</value>
@@ -191,64 +187,28 @@
     <value type="QString">Terminal</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/plastique/plastique.pro</value>
-    <value type="QString">plastique</value>
-   </valuelist>
-   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/qttools/src/assistant</value>
     <value type="QString">assistant</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/src</value>
-    <value type="QString">dtkwidget</value>
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/plastique/plastique.pro</value>
+    <value type="QString">plastique</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/platformthemes/platformthemes.pro</value>
-    <value type="QString">platformthemes</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/src.pro</value>
+    <value type="QString">/home/fei/repo/qttools/src</value>
     <value type="QString">src</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
-    <value type="QString">Copilot</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/terminal</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator</value>
+    <value type="QString">/home/fei/repo/dtkwidget</value>
     <value type="QString">&lt;File System&gt;</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/motif</value>
-    <value type="QString">Headers</value>
+    <value type="QString">/home/fei/repo/dtkwidget/examples</value>
+    <value type="QString">examples</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin/find</value>
-    <value type="QString">find</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/plastique</value>
-    <value type="QString">Headers</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
-    <value type="QString">qtcreator</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtbase/src</value>
-    <value type="QString">src</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/bb10style/bb10style.pro</value>
-    <value type="QString">bb10style</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtbase-opensource-src-5.15.7.2</value>
-    <value type="QString">qtbase [master]</value>
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/git</value>
+    <value type="QString">Source Files</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/localfortuneclient</value>
@@ -263,52 +223,60 @@
     <value type="QString">Sources</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/plugins.pro</value>
-    <value type="QString">plugins</value>
+    <value type="QString">/home/fei/repo/qtbase-opensource-src-5.15.7.2</value>
+    <value type="QString">qtbase [master]</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/src/widgets</value>
-    <value type="QString">widgets</value>
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/bb10style/bb10style.pro</value>
+    <value type="QString">bb10style</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
-    <value type="QString">Sources</value>
+    <value type="QString">/home/fei/repo/qt-creator</value>
+    <value type="QString">&lt;File System&gt;</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/git</value>
-    <value type="QString">Git</value>
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin/find</value>
+    <value type="QString">find</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src</value>
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/motif</value>
+    <value type="QString">Headers</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/app</value>
+    <value type="QString">qtcreator</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/plastique</value>
+    <value type="QString">Headers</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtbase/src</value>
     <value type="QString">src</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtdeclarative/src/core</value>
-    <value type="QString">QmlCore</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin</value>
-    <value type="QString">Core</value>
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/copilot</value>
+    <value type="QString">Copilot</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/qt-creator/src/plugins/terminal</value>
-    <value type="QString">terminal</value>
+    <value type="QString">Source Files</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/motif/motif.pro</value>
-    <value type="QString">motif</value>
+    <value type="QString">/home/fei/repo/localfortuneserver</value>
+    <value type="QString">Sources</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget</value>
     <value type="QString">DtkWidget [toolbutton]</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-   <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/localfortuneserver</value>
     <value type="QString">localfortuneserver</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin</value>
+    <value type="QString">Source Files</value>
    </valuelist>
    <valuelist type="QVariantList">
     <value type="QString">/home/fei/repo/dtkwidget/examples/collections</value>
@@ -319,8 +287,40 @@
     <value type="QString">Source Files</value>
    </valuelist>
    <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/localfortuneserver</value>
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/terminal</value>
+    <value type="QString">terminal</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/styles/motif/motif.pro</value>
+    <value type="QString">motif</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtstyleplugins/src/plugins/plugins.pro</value>
+    <value type="QString">plugins</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/coreplugin</value>
+    <value type="QString">Core</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/Desktop/dtreeview-bug193735/dtreeview-bug193735</value>
     <value type="QString">Sources</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/dtkwidget/src/widgets</value>
+    <value type="QString">widgets</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src</value>
+    <value type="QString">src</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qt-creator/src/plugins/git</value>
+    <value type="QString">Git</value>
+   </valuelist>
+   <valuelist type="QVariantList">
+    <value type="QString">/home/fei/repo/qtdeclarative/src/core</value>
+    <value type="QString">QmlCore</value>
    </valuelist>
   </valuelist>
  </data>

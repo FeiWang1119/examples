@@ -14,60 +14,60 @@
 - QScopedPointer
 - QScopedArrayPointer
 
-Q指针（4.0）
-QSharedDataPointer (4.0)
-QExplicitlySharedDataPointer (4.3/4.4)
-QtPatternist::AutoPtr（内部类，4.4）
-QSharedPointer (4.5)
-QWeakPointer (4.5)
-QGuard（内部类，4.6）
-QScopedPointer (4.6)
-注意：QExplicitlySharedDataPointer 是在 4.3 中引入的，但 API 是在 4.4 中公开和记录的
+按时间顺序：
 
-这么多吧？
+- QPointer（4.0）
+- QSharedDataPointer (4.0)
+- QExplicitlySharedDataPointer (4.3/4.4)
+- QtPatternist::AutoPtr（internal class，4.4）
+- QSharedPointer (4.5)
+- QWeakPointer (4.5)
+- QGuard（internal class，4.6）
+- QScopedPointer (4.6)
 
-每个案例都有其用途，它们都（除了一个）今天仍然有效。
+# 共享指针与共享数据
 
-共享指针与共享数据
-首先，让我们弄清楚一件事：共享指针和共享数据是有区别的。当您共享指针时，指针的值及其生命周期受到智能指针类的保护。换句话说，指针是不变量。但是，指针指向的对象完全不受其控制。我们不知道该对象是否可复制，是否可分配。
-
+首先，共享指针和共享数据是有区别的。当共享指针时，指针的值及其生命周期受到智能指针类的保护。换句话说，指针是不变量。但是，指针指向的对象完全不受其控制。不知道该对象是否可复制，是否可分配。
 现在，数据共享涉及到智能指针类对共享数据有所了解。事实上，关键在于数据正在共享，我们不在乎如何共享。在这一点上，使用指针来共享数据这一事实是无关紧要的。例如，您真的不关心 Qt 工具类是如何隐式共享的，对吗？对您来说重要的是它们是共享的（因此减少了内存消耗）并且它们的工作方式就好像它们没有共享一样。
 
-强指针引用与弱指针引用
-强引用和弱引用之间的区别在于给定指针上的智能指针类的存在是否保证该对象不会被删除。换句话说，如果你有这个智能指针，你确定它会一直有效吗（当然，前提是每个人都按照相同的规则玩）？
+# 强指针引用与弱指针引用
 
+强引用和弱引用之间的区别在于给定指针上的智能指针类的存在是否保证该对象不会被删除。换句话说，如果你有这个智能指针，你确定它会一直有效吗（当然，前提是每个人都按照相同的规则玩）？
 上面的一些指针类并不能保证这一点。如果他们不保证该对象仍然有效，那么他们的主要目的就是告诉您该对象是否已被删除。有些类可能会提供额外的功能，允许您将弱指针提升为强指针，从而保证它不会再被删除。
 
-Qt 智能指针类
-1.Q指针
-QPointer 是一个弱指针类，它共享指针值，而不是数据。它只对QObject和 QObject 派生类进行操作。这个类是在 Qt 4.0 中添加的，是 Qt 3 的QGuardedPtr（和 Qt 2 的QGuardedPtr）的直接升级。像它的前辈一样，QPointer 也受到破坏的常量支持的影响并显示出它的年龄。
+# Qt 智能指针类
 
-它在生活中的唯一目的是告诉你 QObject 是否已经被删除。但是，与 Qt 2 和 Qt 3 不同，Qt 4 的 QObject 可以存在于多个线程中。这意味着 QPointer 有一个严重的缺陷：它让你知道对象是否已被删除，但它不能保证下一行！例如，以下代码可能会遇到麻烦：
+## QPointer  
 
-    QPointer<QObject> o = getObject();
- // [...] if (!o.isNull()) o->setProperty( "objectName" , "Object" );
+QPointer 是一个弱指针类，它共享指针值，而不是数据。当数据销毁后，该指针自动清零，防止成为野指针。它只对QObject和 QObject 派生类进行操作。这个类是在 Qt 4.0 中添加的，是 Qt 3 的QGuardedPtr（和 Qt 2 的QGuardedPtr）的直接升级。像它的前辈一样，QPointer 也受到破坏的常量支持的影响并显示出它的年龄。
 
+它唯一目的是告诉你 QObject 是否已经被删除。但是，与 Qt 2 和 Qt 3 不同，Qt 4 的 QObject 可以存在于多个线程中。这意味着 QPointer 有一个严重的缺陷：它让你知道对象是否已被删除，但它不能保证下一行！例如，以下代码可能会遇到麻烦：
+
+``` c++
+ QPointer<QObject> o = getObject();
+ // [...] 
+ if (!o.isNull())
+  o->setProperty( "objectName" , "Object" );
+```
  
-
-
-
 即使 isNull() 返回false，也不能保证该对象不会被下一行删除。
 
 因此，如果您可以通过外部方式保证该对象不会被删除，则只能使用 QPointer 来访问该对象。例如，QWidget及其后代只能在 GUI 线程中创建、操作和删除。如果您的代码在 GUI 线程上运行或该线程被阻塞，那么 QPointer 的使用是安全的。
 
-2.QSharedDataPointer
+## QSharedDataPointer
+
 现在这是一个不错的小班级。由于其独创性，它实际上是迄今为止 Qt 中最重要的智能指针类：它提供隐式共享和线程安全的写时复制。它要求您的类有一个名为ref的成员，它提供一个名为ref()的函数来增加引用计数，另一个名为deref() 的函数可以减少引用计数并在它降为零时返回false 。如果你从QSharedData派生你的类，你就会得到它。此外，QSharedDataPointer 对象的大小正好是指针的大小。这意味着您可以在代码中用它替换普通指针而不会破坏二进制兼容性。
 
 此类是所有 Qt 值类型、隐式共享、线程安全的写时复制最新类的基础，例如QNetworkProxy。它没有在 QByteArray、QString 和 QList 等基类中使用的唯一原因是这些类是在创建此类之前开发的。从技术上讲，没有什么可以阻止使用 QSharedDataPointer 对这些类进行改造。
 
 所以QSharedDataPointer是一个强大的智能指针类，共享数据。
 
-3. QExplicitlySharedDataPointer
+##  QExplicitlySharedDataPointer
 这个类与 QSharedDataPointer 完全一样（所以它是一个强大的智能指针类，共享数据），唯一的区别是它从不隐式地导致分离。使用 QSharedDataPointer，任何非常量访问都将导致数据被复制。对于 QExplicitlySharedDataPointer，您必须调用detach()才能实现。这允许您实现显式共享的数据类——Qt 不再有，但 Qt 3 在QMemArray中实现了（因此它存在于 Qt4 的 Qt3Support Q3MemArray中）。
 
 但它也允许您对分离操作进行更细粒度的控制。事实上，如果 Qt 工具类要用智能指针类进行改造，它们会改用 QExplicitlySharedDataPointer。使用此类允许代码将分离延迟到最后一刻，确保不会发生不必要的内存访问。
 
-4.QtPatternist::AutoPtr
+## QtPatternist::AutoPtr
 这是QtXmlPatterns模块使用的内部类。它基本上是你的股票，愚蠢的指针包装器。所以它实现了一个强 指针。但是，它不共享它。
 
 此类首先存在的原因是 QtXmlPatterns 模块在内部广泛使用了异常。为了在不泄漏内存的情况下抛出异常，指示了一个指针包装器。QtXmlPatterns 还使用引用计数的类，其中未指定 AutoPtr——在这种情况下，它使用 QExplicitlySharedDataPointer。
@@ -79,7 +79,7 @@ QPointer 是一个弱指针类，它共享指针值，而不是数据。它只�
 
 不过，它是有代价的：为了正确支持多态性，QSharedPointer 的大小实际上是普通指针大小的两倍。这意味着在 API 的公共部分用它替换普通指针时，您无法保持二进制兼容性。不过，您可以在代码内部使用它。
 
-6.QWeakPointer
+## QWeakPointer
 这是 QSharedPointer 的伴随类。如果说实现了对指针的强控制，那么QWeakPointer就是一个弱智能指针类，共享指针。它与 QSharedPointer 协同工作：QWeakPointer 只能从 QSharedPointer 创建，并且当 QSharedPointer 被删除时它们会通知您。
 
 不过，它们可以以线程安全的方式提升为 QSharedPointer。所以它允许我们重写上面的代码以更安全：
@@ -89,18 +89,14 @@ QPointer 是一个弱指针类，它共享指针值，而不是数据。它只�
 
  QSharedPointer<Data> ptr = weak; 如果(!ptr.isNull()) ptr->doSomething();
 
- 
-
-
-
-在这种情况下，将 QWeakPointer 提升为 QSharedPointer 要么成功，要么不成功。但这是一个线程安全的决定：如果它确实成功了，那么在您持有ptr引用时，保证不会删除生成的对象（同样，只要每个人都遵守相同的规则）。
+ 在这种情况下，将 QWeakPointer 提升为 QSharedPointer 要么成功，要么不成功。但这是一个线程安全的决定：如果它确实成功了，那么在您持有ptr引用时，保证不会删除生成的对象（同样，只要每个人都遵守相同的规则）。
 
 在 4.6 中，我向 QWeakPointer 添加了一个漂亮的新功能：它也可以跟踪 QObject，而无需通过 QSharedPointer。它可用于确定 QObject 派生对象是否已被删除。所以它实现了一个弱指针类，共享QObject派生类的指针值。听起来很熟悉？是的，就是这个想法：您可以用更快、更现代的替代品替换旧的、慢速的 QPointer。请注意 QWeakPointer 的大小与 QPointer 的大小不同。
 
-7.Q卫士
+## QGuard
 这是另一个内部类。添加它是为了替换 QPointer，因为它非常慢（它使用全局的、受互斥锁保护的 QHash，每个 QObject 析构函数都必须访问它）。这实际上是促使我编写 QWeakPointer QObject 跟踪功能的原因。但它处于不断变化的状态：我们不知道我们是否要保留甚至使用这个类。反正都是内部的，你真的不用管它。
 
-8.QScopedPointer
+## QScopedPointer
 这是块中的新成员：它实现了一个非共享的强 指针包装器。它的创建是因为我们试图在我们的容器类中处理 Symbian 平台的异常：我们需要一种释放资源的方法，而无需在所有地方编写 try/catch。作用域指针提供了一种非常好的执行RAII 的方法。事实上，QScopedPointer 实际上是 QtXmlPattern 的 QtPatternist::AutoPtr 的完全替代。两者实现相同的功能，因此可以删除内部的。
 
 有些人在 Harald 的博客中评论说我们可以使用 QSharedPointer。实际上，我们不能：QSharedPointer 有两个指针的大小，但我们要替换具有一个指针大小的 Qt 代码，所以我们需要一个适合该空间的类。这也是 QScopedPointer 将自定义删除器作为模板参数的原因，而不是构造函数的参数（就像 QSharedPointer 那样）：它在这 4 或 8 个字节中没有空间来存储自定义删除器。
