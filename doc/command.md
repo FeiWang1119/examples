@@ -78,7 +78,7 @@ sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=de
 |command|description|
 |--|--|
 sudo apt install transifex-client |  安装tx
-tx pull -s -b m20 |  拉取翻译（-a -f 全部拉取）
+tx pull -t -a -s -b master |  拉取翻译（-a -f 全部拉取）
 tx push -s -b master | 推送翻译
 
 # coredump
