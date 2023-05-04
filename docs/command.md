@@ -19,10 +19,10 @@ export LD_LIBRARY_PATH=qtbuilddir/lib:dtkbuilddir/lib | 设置程序运行是链
 export QT_QPA_PLATFORM_PLUGIN_PATH=qtbuilddir/plugins/platforms |  平台相关插件
 export QT_PLUGIN_PATH=qtbuilddir/plugins | Qt插件
 export PKG_CONFIG_PATH=qtbuilddir/lib/pkgconfig:dtkbuilddir/lib/pkgconfig | 在 Qt pro 中配置的 phgconfig 就是用过查找该目录下的.PC文件 实现头文件和库的引入
-sudo apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 安装Qt的调试库
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
-sudo apt install qtbase5-examples qt5-doc qt5-doc-html | 安装例子和帮助文档
-sudo apt install qt5-default |  配置qt5 为qt开发的默认版本
+apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 安装Qt的调试库
+apt install qtbase5-examples qt5-doc qt5-doc-html | 安装例子和帮助文档
+apt install qt5-default |  配置qt5 为qt开发的默认版本
 ../configure -opensource -confirm-license  -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
 
 # qtcreator configure file
