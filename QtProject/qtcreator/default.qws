@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorSession>
-<!-- Written by QtCreator 10.0.0, 2023-05-04T09:47:43. -->
+<!-- Written by QtCreator 10.0.0, 2023-05-04T13:43:26. -->
 <qtcreator>
  <data>
   <variable>CascadeSetActive</variable>
@@ -42,24 +42,7 @@
  </data>
  <data>
   <variable>value-ProjectTree.ExpandData</variable>
-  <valuelist type="QVariantList">
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/examples</value>
-    <value type="QString">examples</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget</value>
-    <value type="QString">DtkWidget [translate]</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/examples/collections</value>
-    <value type="QString">collections</value>
-   </valuelist>
-   <valuelist type="QVariantList">
-    <value type="QString">/home/fei/repo/dtkwidget/examples/collections</value>
-    <value type="QString">Source Files</value>
-   </valuelist>
-  </valuelist>
+  <valuelist type="QVariantList"/>
  </data>
  <data>
   <variable>value-TaskWindow.Categories</variable>
@@ -75,7 +58,6 @@
   <variable>valueKeys</variable>
   <valuelist type="QVariantList">
    <value type="QString">ActiveMode</value>
-   <value type="QString">Bookmarks</value>
    <value type="QString">Breakpoints</value>
    <value type="QString">ProjectTree.ExpandData</value>
    <value type="QString">TaskWindow.Categories</value>
