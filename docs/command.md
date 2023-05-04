@@ -2,11 +2,12 @@
 
 |command|description|
 |--|--|
- sudo apt build-dep packagename | 构建依赖
+apt build-dep packagename | 构建依赖
 dpkg-buildpackage -us -uc -nc | 构建deb包
 apt depends packagename | packagename依赖的包
 apt rdepends packagename | 哪些包依赖packagename
 apt-file search file | 搜索文件相关的包
+apt download packagename | 下载包
 
 # Qt 
 
