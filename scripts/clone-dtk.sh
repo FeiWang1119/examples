@@ -5,7 +5,7 @@
 init_path="$(pwd)"
 echo "Current path: $init_path"
 
-repos="dtkcore dtkgui dtkwidget qt5integration  qt5platform-plugins"
+repos="dtkcommon dtkcore dtkgui dtkwidget qt5integration  qt5platform-plugins"
 
 for repo in $repos
 do
