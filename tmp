@@ -1,0 +1,27 @@
+
+#define FILE_SUFFIX QLatin1String(".json")
+
+QStringList DLicenseInfoPrivate::licensePaths() const
+{
+    QStringList prefixes {
+                         QString("%1/deepin").arg(DStandardPaths::path(DStandardPaths::XDG::DataHome)),
+                         "/etc/deepin",
+                         QString("/usr/share/%1").arg(QCoreApplication::applicationName()),
+                         "/usr/share/deepin"};
+    QStringList paths;
+    for (auto item : prefixes) {
+        paths.append(QDir::cleanPath(QString("%1/credits/%2.json").arg(item).arg(QCoreApplication::applicationName())));
+    }
+    return paths;
+}
+
+
+bool DLicenseInfoPrivate::load()
+{
+    for (const QString &path : licensePaths()) {
+        if (loadJsonFile(path)) {
+            return true;
+        }
+    }
+    return false;
+}
