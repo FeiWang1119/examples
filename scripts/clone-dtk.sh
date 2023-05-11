@@ -21,5 +21,6 @@ do
   git clone git@github.com:FeiWang1119/$repo.git $current_path
   cd $repo_path
   git remote add linuxdeepin git@github.com:linuxdeepin/$repo.git
+  git fetch --all 
   cd $init_path
 done
