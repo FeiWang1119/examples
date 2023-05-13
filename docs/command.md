@@ -8,6 +8,7 @@ apt depends packagename | packagename依赖的包
 apt rdepends packagename | 哪些包依赖packagename
 apt-file search file | 搜索文件相关的包
 apt download packagename | 下载包
+apt source packagename | 下载源码包
 
 # Qt 
 
@@ -164,5 +165,6 @@ sudo sysctl --system -a -p | grep yama
 ```
 
 # proxy
-10.20.52.42
+
+10.20.52.42  7890  
 localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
