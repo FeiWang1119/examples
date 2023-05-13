@@ -13,17 +13,15 @@ apt download packagename | 下载包
 
 |command|description|
 |--|--|
-apt source qtbase-opensource-src | 获取源码
--nograb -platformpluginpath /home/fei/repo/qt5integration/bin/plugins | 指定平台插件
-export LD_LIBRARY_PATH=qtbuilddir/lib:dtkbuilddir/lib | 设置程序运行是链接库的路径
-export QT_QPA_PLATFORM_PLUGIN_PATH=qtbuilddir/plugins/platforms |  平台相关插件
-export QT_PLUGIN_PATH=qtbuilddir/plugins | Qt插件
-export PKG_CONFIG_PATH=qtbuilddir/lib/pkgconfig:dtkbuilddir/lib/pkgconfig | 在 Qt pro 中配置的 phgconfig 就是用过查找该目录下的.PC文件 实现头文件和库的引入
+-nograb -platformpluginpath /your/plugins | 指定平台插件
+export LD_LIBRARY_PATH=qtbuilddir/lib:dtkbuilddir/lib | 设置程序运行链接库的路径
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
-apt install libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 安装Qt的调试库
-apt install qtbase5-examples qt5-doc qt5-doc-html | 安装例子和帮助文档
-apt install qt5-default |  配置qt5 为qt开发的默认版本
+libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | Qt调试库
+qtbase5-examples qt5-doc qt5-doc-html | 例子和帮助文档
+qt5-default |  提供默认的 Qt5 开发库和工具
+QT_SCALE_FACTOR | 缩放倍数
 ../configure -opensource -confirm-license  -nomake tests -nomake examples --sqlite=system --prefix=/home/fei/qt5.15  |  配置源码
+libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-cursor-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev |  Qt for x11 requirements
 
 # qtcreator configure file
 
@@ -49,7 +47,8 @@ cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
 ``` sh
 mkdir build && cd build
 cmake ../ -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
-sudo ninja install
+ninja -C ,
+sudo  ninja install
 ```
 
 #  gsetting
@@ -117,29 +116,6 @@ Host github.com
 
 no hostkeys available— exiting:  
 
-1. root权限下，重新生成密钥  
-
-ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key  
-ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key   
-
-2. 修改密钥权限  
-
-chmod 600 /etc/ssh/ssh_host_dsa_key  
-chmod 600 /etc/ssh/ssh_host_rsa_key  
-
-3. 重启ssh  
-
-systemctl restart sshd  
-service sshd restart
-
-# Git
-
-|command|description|
-|--|--|
-git push origin develop | 创建远程分支develop
-git push origin --delete develop | 删除远程分支develop
-git fetch origin develop/snipe:snipe | 从远程分支到本地分支
-
 # 进程
 
 |command|description|
@@ -179,7 +155,7 @@ sudo apt install graphviz
 ``` sh
 sudo vim /etc/sysctl.d/10-ptrace.conf
 ```
-type : kernel.yama.ptrace_scope = 0
+type : ` kernel.yama.ptrace_scope = 0`
 
 take effect immediately：
 
@@ -190,7 +166,3 @@ sudo sysctl --system -a -p | grep yama
 # proxy
 10.20.52.42
 localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
-
-# Qt for x11 requirements
-
-sudo apt install libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-cursor-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev

@@ -111,6 +111,7 @@ git reflog | 显示当前分支的最近几次提交
 -----|---
 git review -r origin yourbranchname |  提交到远程仓库某分支
 git fetch [remote] | 下载远程仓库的所有变动
+git fetch origin develop/snipe:snipe | 从远程分支到本地分支
 git remote -v | 显示所有远程仓库
 git remote show [remote] | 显示某个远程仓库的信息
 git remote add [shortname] [url] | 增加一个新的远程仓库，并命名
@@ -118,6 +119,7 @@ git pull [remote] [branch] | 取回远程仓库的变化，并与本地分支合
 git submodule update --init --recursive | 已经clone了之后，下载整个子模块
 git pull linuxdeepin pull/92/head:92 | 取回github的某个pr
 git push [remote] [branch] | 上传本地指定分支到远程仓库
+git push [remote] --delete [branch] | 删除远程分支develop
 git push [remote] --force | 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all | 推送所有分支到远程仓库
 git checkout [file] | 撤销# 恢复暂存区的指定文件到工作区
