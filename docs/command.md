@@ -137,10 +137,6 @@ dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服�
 
 # xprop 查看窗口属性
 
-# crontab 系统定时工具
-
-WAYLAND_DEBUG=1
-
 # plantuml (vscode plugin)
 
 install java & Graphviz

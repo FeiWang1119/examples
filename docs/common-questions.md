@@ -1,28 +1,3 @@
-# 在高分辨率下，图标变小的问题
-
-## 分析
-
-更改某个应用分辨率的环境变量：  
-
-D_DXCB_DISABLE_OVERRIDE_HIDPI=1   
-QT_SCALE_FACTOR=1.25
-
-调用主题图标： 
-
-``` c++
-QIcon::fromeTheme("search")
-qApp->setAttribute(Qt::AA_UseHighDpiPixmaps,  true);
-```
-流程：  
-1. fromeTheme (...)   ==>  platformTheme->createIconEngine(...) 返回 DIconProxyEngine (qdeepin主题插件);
-2.  DIconProxyEngine:paint(...) 转到  XdgIconProxyEngine:paint(...);
-3.  rect(16*16), ratio = 1.25 , pixmap(20*20) when AA_UseHighDpiPixmaps=true;
-4.   rect(16*16), ratio = 1, pixmap(16*16) when AA_UseHighDpiPixmaps=false;
-
-原因:  
-drawPixmap(rect,  pix)
-rect和pix的大小不匹配 ，导致scale。
-
 # ssh 克隆仓库遇到 Permission denied (publickey).
 
 1.  调试看信息：    
