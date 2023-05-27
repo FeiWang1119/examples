@@ -10,7 +10,7 @@ apt-file search file | 搜索文件相关的包
 apt download packagename | 下载包
 apt source packagename | 下载源码包
 
-# Qt 
+# Qt
 
 |command|description|
 |--|--|
@@ -164,3 +164,4 @@ sudo sysctl --system -a -p | grep yama
 
 10.20.52.42  7890  
 localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
+
