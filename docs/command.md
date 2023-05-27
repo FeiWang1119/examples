@@ -164,4 +164,7 @@ sudo sysctl --system -a -p | grep yama
 
 10.20.52.42  7890  
 localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
+git config --global http.proxy 'http://127.0.0.1:7890'
+git config --global https.proxy 'https://127.0.0.1:7890'
+
 
