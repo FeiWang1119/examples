@@ -15,9 +15,8 @@ apt source packagename | 下载源码包
 |command|description|
 |--|--|
 -nograb -platformpluginpath /your/plugins | 指定平台插件
-export LD_LIBRARY_PATH=qtbuilddir/lib:dtkbuilddir/lib | 设置程序运行链接库的路径
-LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语
-libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | Qt调试库
+LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语 (维语 ug_CN)
+libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 调试库
 qtbase5-examples qt5-doc qt5-doc-html | 例子和帮助文档
 qt5-default |  提供默认的 Qt5 开发库和工具
 QT_SCALE_FACTOR | 缩放倍数
@@ -26,11 +25,11 @@ libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfi
 
 # qtcreator configure file
 
-linux ：   
+linux ：  
 ~/.config/QtProject  （测过）  
-~/.local/share/data/QtProject/qtcreator   
+~/.local/share/data/QtProject/qtcreator  
 
-window ：   
+window ：  
 %APPDATA%\QtProject  
 %LOCALAPPDATA%\QtProject  
 
@@ -52,7 +51,7 @@ ninja -C ,
 sudo  ninja install
 ```
 
-#  gsetting
+# gsetting
 
 |command|description|
 |--|--|
@@ -68,13 +67,13 @@ gsettings reset SCHEMA KEY      |   恢复指定schema的指定项KEY的值为�
 gsettings reset-recursively SCHEMA| 恢复指定schema的所有key的值为默认值
 gsettings list-recursively [SCHEMA]|如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
 
-#  dde-daemon
+# dde-daemon
 
 |command|description|
 |--|--|
 sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
 
-#  translation
+# translation
 
 |command|description|
 |--|--|
