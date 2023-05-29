@@ -34,24 +34,6 @@ window ：
 %APPDATA%\QtProject  
 %LOCALAPPDATA%\QtProject  
 
-# cmake 指定特定路径下的qt库
-
-``` sh
-cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
-```
-
-- Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
-- Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
-  
-# cmake 构建安装
-
-``` sh
-mkdir build && cd build
-cmake ../ -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
-ninja -C ,
-sudo  ninja install
-```
-
 # gsetting
 
 |command|description|
@@ -142,10 +124,10 @@ dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服�
 install java & Graphviz
 
 ``` sh
-sudo apt install default-jre
-sudo apt install graphviz
+sudo apt install default-jre graphviz
 ```
-#  gammaray 
+
+#  gammaray
 
 /proc/sys/kernel/yama/ptrace_scope to 0
 
@@ -166,5 +148,4 @@ sudo sysctl --system -a -p | grep yama
 localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
 git config --global http.proxy 'http://127.0.0.1:7890'
 git config --global https.proxy 'https://127.0.0.1:7890'
-
 
