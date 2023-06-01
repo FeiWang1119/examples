@@ -98,6 +98,7 @@ git blame [file] | 显示指定文件是什么人在什么时间修改过
 git diff | 显示暂存区和工作区的差异
 git diff --cached [file] | 显示暂存区和上一个commit的差异
 git diff HEAD | 显示工作区与当前分支最新commit之间的差异
+git diff HEAD^ HEAD | 显示这次提交和上次之间的差异
 git diff [first-branch]...[second-branch] | 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" | 显示今天你写了多少行代码
 git show [commit] | 显示某次提交的元数据和内容变化
