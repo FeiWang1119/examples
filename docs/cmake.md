@@ -1,20 +1,22 @@
 
-# cmake 指定特定路径下的qt库
+# cmake 指定特定路经下的qt库
 
 ``` sh
 cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/5.11.2/gcc_64 ..
 ```
+## CMAKE_PREFIX_PATH
+Semicolon-separated list of directories specifying installation prefixes to be searched by the find_package(), find_program(), find_library(), find_file(), and find_path() commands. Each command will add appropriate subdirectories (like bin, lib, or include) as specified in its own documentation.
 
 - Make sure to clear the build directory before changing CMAKE_PREFIX_PATH
 - Are you sure there's a lib/cmake folder inside /home/cavit/Qt/5.6? (That's where CMake finds the Qt5 config files)
-  
+
 # cmake 构建安装
 
 ``` sh
 mkdir build && cd build
 cmake ../ -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
-ninja -C ,
-sudo  ninja install
+ninja -C .
+sudo ninja install
 ```
 
 # cmake-basic
@@ -81,7 +83,7 @@ add_library(hello_library SHARED
     src/Hello.cpp
 )
 #  an alias target is an alternative name for a target
- add_library(hello::library ALIAS hello_library)
+add_library(hello::library ALIAS hello_library)
 
 # Creating an Executable
 add_executable(${PROJECT_NAME} ${SOURCES})
