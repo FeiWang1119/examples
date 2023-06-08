@@ -149,4 +149,15 @@ localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com
 git config --global http.proxy 'http://127.0.0.1:7890'  
 git config --global https.proxy 'https://127.0.0.1:7890'  
 export http_proxy=https://127.0.0.1:7890/--
-export https_proxy=https://127.0.0.1:7890/--
+e#!/bin/bash
+
+# Change these variables to match your content and directory
+content="This is my multi-line content.\nIt goes on multiple lines."
+directory="/path/to/directory"
+
+# Loop through all files in the directory
+for file in "$directory"/*
+do
+  # Use sed to insert the content at the beginning of the file
+    sed -i "1s/^/$content\n/" "$file"
+donexport https_proxy=https://127.0.0.1:7890/--
