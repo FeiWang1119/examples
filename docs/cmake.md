@@ -23,7 +23,10 @@ sudo ninja install
 
 ``` cmake
 # specify the minimum version of CMake
-cmake_minimum_required(VERSION 3.5) 
+cmake_minimum_required(VERSION 3.5)
+
+# A CMakeLists.txt file can include and call sub-directories which include a CMakeLists.txt files.
+add_subdirectory(subbinary)
 
 # include a project name to make referencing certain variables easier when using multiple projects.
 project (hello_cmake)  # create a variable ${PROJECT_NAME} with the value hello_cmake
@@ -66,13 +69,6 @@ set(SOURCES
 # An alternative to setting specific file names in the SOURCES variable is to use a GLOB command to find files using wildcard pattern matching.
 # file(GLOB SOURCES "src/*.cpp")
 
-# Including Directories
-# add these directories to the compiler with the -I flag e.g. -I/directory/path
-target_include_directories(target
-    PRIVATE
-        ${PROJECT_SOURCE_DIR}/include
-)
-
 # Creating a static library  libhello_library.a  
 add_library(hello_library STATIC
     src/Hello.cpp
@@ -87,6 +83,13 @@ add_library(hello::library ALIAS hello_library)
 
 # Creating an Executable
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+# Including Directories
+# add these directories to the compiler with the -I flag e.g. -I/directory/path
+target_include_directories(target
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
+)
 
 # Linking a Library
 target_link_libraries( hello_binary
@@ -134,6 +137,26 @@ CMAKE_BINARY_DIR |  The root binary / build directory. This is the directory whe
 CMAKE_CURRENT_BINARY_DIR | The build directory you are currently in.
 PROJECT_BINARY_DIR |  The build directory for the current project.
 
+# sub-projects
+
+```cmake
+add_subdirectory(sublibrary1)
+add_subdirectory(sublibrary2)
+add_subdirectory(subbinary)
+```
+# To reference the source directory for a different project you can use.
+
+${sublibrary1_SOURCE_DIR}
+${sublibrary2_SOURCE_DIR}
+
+|Variable|Info|
+|--|--|
+PROJECT_NAME | The name of the project set by the current project().
+CMAKE_PROJECT_NAME | the name of the first project set by the project() command, i.e. the top level project.
+PROJECT_SOURCE_DIR | The source directory of the current project.
+PROJECT_BINARY_DIR | The build directory for the current project.
+name_SOURCE_DIR | The source directory of the project called "name". sublibrary1_SOURCE_DIR
+name_BINARY_DIR | The binary directory of the project called "name". sublibrary1_BINARY_DIR
 # Public VS Private VS Interface
 
 https://leimao.github.io/blog/CMake-Public-Private-Interface/
