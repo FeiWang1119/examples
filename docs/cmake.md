@@ -124,6 +124,10 @@ install (FILES cmake-examples.conf
 
 # After make install has been run, CMake generates an install_manifest.txt file which includes details on all installed files.
 
+# To do variable substitution in a file you can use the configure_file() function in CMake. 
+configure_file(path.h.in ${PROJECT_BINARY_DIR}/path.h @ONLY)
+# const char* path = "@CMAKE_SOURCE_DIR@"; // path.h.in
+# const char* path = "/home/matrim/workspace/cmake-examples/03-code-generation/configure-files"; // path.h 
 ```
 
 # Directory Paths
