@@ -70,7 +70,7 @@ INTERFACE | All the include directories following INTERFACE will NOT be used for
 |Link Type|Description|
 |--|--|
 PUBLIC | All the objects following PUBLIC will be used for linking to the current target and providing the interface to the other targets that have dependencies on the current target.
-PRIVATE	| All the objects following PRIVATE will only be used for linking to the current target.
+PRIVATE | All the objects following PRIVATE will only be used for linking to the current target.
 INTERFACE | All the objects following INTERFACE will only be used for providing the interface to the other targets that have dependencies on the current target.
 
 ## Conclusion
