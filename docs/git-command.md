@@ -55,7 +55,8 @@ git branch -a | 列出所有本地分支和远程分支
 git branch [branch-name] | 新建一个分支，但依然停留在当前分支
 git checkout -b [branch] | 新建一个分支，并切换到该分支
 git checkout -b [branch] [remote-branch] | 从远程某分支创建新分支
-git checkout <commit_hash> | 在当前分支切换到commit_hash提交
+git checkout commit_hash | 在当前分支切换到指定提交commit_hash
+git checkout -b branch commit_hash | 新建分支，并指定提交commit_hash
 git branch [branch] [commit] | 新建一个分支，指向指定commit
 git branch --track [branch] [remote-branch] | 新建一个分支，与指定的远程分支建立追踪关系
 git checkout [branch-name] | 切换到指定分支，并更新工作区
@@ -114,6 +115,7 @@ git reflog | 显示当前分支的最近几次提交
 git review -r origin yourbranchname |  提交到远程仓库某分支
 git fetch [remote] | 下载远程仓库的所有变动
 git fetch origin develop/snipe:snipe | 从远程分支到本地分支
+git fetch origin pull/2/head:branch | 拉去github的pr到分支branch
 git remote -v | 显示所有远程仓库
 git remote show [remote] | 显示某个远程仓库的信息
 git remote add [shortname] [url] | 增加一个新的远程仓库，并命名
