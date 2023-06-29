@@ -7,3 +7,6 @@
 
 apt install ripgrep
 
+# clipboard doesn't work 
+
+privide a clipboard tool like xclip for using system's clipboard. 
