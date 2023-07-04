@@ -1,5 +1,5 @@
 [core]
-	editor = vim
+	editor = nvim
 [user]
 	name = wangfei
 	email = wangfei@deepin.org
