@@ -4,7 +4,7 @@
 |--|--|
 QT_PLUGIN_PATH | 指定插件目录
 QT_DEBUG_PLUGINS | 调试插件
--nograb -platformpluginpath /your/plugins | 指定平台插件
+ /your/plugins | 指定平台插件
 LANG=bo_CN LANGUAGE=bo_CN dde-file-manager |  藏语 (维语 ug_CN)
 libqt5gui5-dbgsym libqt5widgets5-dbgsym libqt5core5a-dbgsym | 调试库
 qtbase5-examples qt5-doc qt5-doc-html | 例子和帮助文档
