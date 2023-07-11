@@ -12,3 +12,5 @@
 	trustExitCode = false
 [diff]
 	external = extDiff
+[pull]
+	rebase = true
