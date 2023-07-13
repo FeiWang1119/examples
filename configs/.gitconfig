@@ -14,3 +14,5 @@
 	external = extDiff
 [pull]
 	rebase = true
+[remote]
+	pushdefault = origin
