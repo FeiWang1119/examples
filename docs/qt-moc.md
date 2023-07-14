@@ -130,3 +130,171 @@ foo.moc: foo.cpp
     ...
 #endif
 ```
+# 诊断
+
+moc 将警告您 Q_OBJECT 类声明中的许多危险或非法构造。
+
+如果您在程序的最后构建阶段遇到链接错误，指出 YourClass::className() 未定义或 YourClass 缺少 vtable，则表明某些操作出错了。 大多数情况下，您忘记编译或 #include moc 生成的 C 代码，或者（在前一种情况下）在链接命令中包含该目标文件。 如果您使用 qmake，请尝试重新运行它来更新您的 makefile。 这应该可以解决问题。
+
+# 构建系统
+
+## 包含头文件moc文件
+
+qmake 和 CMake 在包含头 moc 文件方面的行为不同。
+
+为了通过示例来说明这一点，假设您有两个标头以及相应的源文件：a.h、a.cpp、b.h 和 b.cpp。 每个标头都有一个 Q_OBJECT 宏：
+
+```c++
+// a.h
+class A : public QObject
+{
+    Q_OBJECT
+
+    public:
+        // ...
+};
+```
+
+```c++
+// a.cpp
+#include "a.h"
+
+// ...
+
+#include "moc_a.cpp"
+```
+
+```c++
+// b.h
+class B : public QObject
+{
+    Q_OBJECT
+
+    public:
+        // ...
+};
+```
+
+```c++
+// b.cpp
+#include "b.h"
+
+// ...
+
+#include "moc_b.cpp"
+```
+
+使用 qmake，如果不包含 moc 生成的文件 (moc_a.cpp/moc_b.cpp)，则 a.cpp、b.cpp、moc_a.cpp 和 moc_b.cpp 将单独编译。 这可能会导致构建速度变慢。如果包含 moc 生成的文件，则仅需要编译 a.cpp 和 b.cpp，因为 moc 生成的代码包含在这些文件中。
+
+使用 CMake，如果不包含这些文件，则 moc 会生成一个附加文件（为了示例，我们将其称为 cmake.cpp）。 cmake.cpp 将包括 moc_a.cpp 和 moc_b.cpp。 CMake 仍然允许包含 moc 生成的文件，但这不是必需的。
+
+# 局限性
+
+moc不处理所有的 C++。主要问题是类模板不能具有Q_OBJECT宏。这是一个例子：
+
+
+```c++
+class SomeTemplate<int> : public QFrame
+{
+    Q_OBJECT
+    ...
+
+signals:
+    void mySignal(int);
+};
+```
+
+以下构造是非法的。他们都有我们认为通常更好的替代方案，因此消除这些限制对我们来说并不是首要任务。
+
+## 多重继承要求QObject在前
+
+如果您使用多重继承，moc则假设第一个继承的类是QObject。另外，请确保只有第一个继承的类是QObject。
+
+```c++
+// correct
+class SomeClass : public QObject, public OtherClass
+{
+    ...
+};
+```
+
+虚拟继承QObject不支持。
+
+## 函数指针不能是信号或槽参数
+
+在大多数情况下，您会考虑使用函数指针作为信号或槽参数，我们认为继承是更好的选择。这是非法语法的示例：
+
+```c++
+class SomeClass : public QObject
+{
+    Q_OBJECT
+
+public slots:
+    void apply(void (*apply)(List *, void *), char *); // WRONG
+};
+```
+
+您可以像这样解决此限制：
+
+```c++
+typedef void (*ApplyFunction)(List *, void *);
+
+class SomeClass : public QObject
+{
+    Q_OBJECT
+
+public slots:
+    void apply(ApplyFunction, char *);
+};
+```
+
+有时用继承和虚函数代替函数指针可能会更好。
+
+# 枚举和类型定义必须完全符合信号和槽参数的要求
+
+在检查其参数的签名时，QObject::connect() 按字面意思比较数据类型。因此，Alignment和Qt::Alignment被视为两种不同的类型。要解决此限制，请确保在声明信号和槽以及建立连接时完全限定数据类型。例如：
+
+```c++
+class MyClass : public QObject
+{
+    Q_OBJECT
+
+    enum Error {
+        ConnectionRefused,
+        RemoteHostClosed,
+        UnknownError
+    };
+
+signals:
+    void stateChanged(MyClass::Error error);
+};
+```
+
+## 嵌套类不能有信号或槽
+
+这是一个有问题的结构的例子：
+
+```c++
+class A
+{
+public:
+    class B
+    {
+        Q_OBJECT
+
+    public slots:   // WRONG
+        void b();
+    };
+};
+```
+
+## 信号/槽返回类型不能被引用
+
+信号和槽可以有返回类型，但返回引用的信号或槽将被视为返回 void。
+
+## 只有信号和槽可以出现在类的signals和部分中slots
+
+如果您尝试将除信号和槽之外的其他构造放入类的信号或槽部分中，moc 会抱怨。
+
+
+
