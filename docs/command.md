@@ -26,12 +26,6 @@ gsettings reset SCHEMA KEY      |   恢复指定schema的指定项KEY的值为�
 gsettings reset-recursively SCHEMA| 恢复指定schema的所有key的值为默认值
 gsettings list-recursively [SCHEMA]|如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
 
-# dde-daemon
-
-|command|description|
-|--|--|
-sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
-
 # translation
 
 |command|description|
@@ -49,10 +43,6 @@ tx push -s -b master | 推送翻译
 4. 使用coredumpctl list查看崩溃列表 获取崩溃的pid 
 5. 复现问题后马上使用coredumpctl dump查看堆栈信息 或者 coredumpctl info + 崩溃pid
 6. sudo apt install lz4; lz4 -d FILE 来解压coredump文件
-
-# uos 激活
-
-uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v
 
 # ssh
 
@@ -79,8 +69,8 @@ no hostkeys available— exiting:
 
 |command|description|
 |--|--|
-tr '\0' '\n' < /proc/12345/environ 或者 ps eww -p 12345 | 查看进程环境变量
-pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq） | 查看程依赖的so
+cat /proc/28818/environ \| tr '\0' '\n' | 查看进程28816的环境变量
+pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq）| 查看程依赖的so
 strings *.so | 查看so的字符
 
 # dbus
@@ -93,8 +83,6 @@ could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
 
-# xprop 查看窗口属性
-
 # plantuml (vscode plugin)
 
 install java & Graphviz
@@ -103,7 +91,7 @@ install java & Graphviz
 sudo apt install default-jre graphviz
 ```
 
-#  gammaray
+# gammaray
 
 /proc/sys/kernel/yama/ptrace_scope to 0
 
@@ -127,12 +115,17 @@ git config --global https.proxy 'https://127.0.0.1:7890'
 export http_proxy=https://127.0.0.1:7890/  
 export https_proxy=https://127.0.0.1:7890/  
 
-# install manpages
-
-sudo apt install manpages-dev
-
 # DTK
 
 |command|description|
 |--|--|
 D_DXCB_FORCE_NO_TITLEBAR | 强制无标题栏
+
+# others
+
+|command|description|
+|--|--|
+sudo apt install manpages-dev | 安装手册
+xprop | 查看窗口属性
+uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v | 激活UOS
+sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
