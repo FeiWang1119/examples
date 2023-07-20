@@ -65,12 +65,12 @@ Host github.com
 
 no hostkeys available— exiting:  
 
-# 进程
+# process 
 
 |command|description|
 |--|--|
 cat /proc/28818/environ \| tr '\0' '\n' | 查看进程28816的环境变量
-pldd 12345 或者 （cat /proc/12345/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq）| 查看程依赖的so
+pldd 12345 或者（cat /proc/12344/maps \| awk '{print $6}' \| grep '\.so' \| sort \| uniq）| 查看程依赖的so
 strings *.so | 查看so的字符
 
 # dbus

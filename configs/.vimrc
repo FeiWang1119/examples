@@ -1,40 +1,40 @@
-" backspace work
-set backspace=indent,eol,start
-
-" set line number
-set nu
-
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases
-set smartcase
-
-" Highlight search results
+" highlight matched
 set hlsearch
-
-" Makes search act like search in modern browsers
+" case insensitive search
+set ignorecase
+set smartcase
+" search while typing
 set incsearch
+" wrap-around when searching
+set wrapscan
+" show pressed keys in lower right corner
+set showcmd
+" tab -> spaces
+set expandtab
+set tabstop=4
+set shiftwidth=4
+" keep a 5 line buffer for the cursor from top/bottom of window
+set scrolloff=5
+" X11 clipboard
+set clipboard=unnamed
+" use ~ with movement
+set tildeop
 
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
+" mappings
+nnoremap ; :
+inoremap jj <Esc>
 
-" For regular expressions turn magic on
-set magic
+" clear highlighted search term on space
+noremap <silent> <Space> :nohls<CR>
 
-" Show matching brackets when text indicator is over them
-set showmatch
+" reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
 
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" Set to auto read when a file is changed from the outside
-set autoread
-au FocusGained,BufEnter * checktime
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
+" MOVE LINE/BLOCK
+nnoremap <C-S-J> :m+<CR>==
+nnoremap <C-S-K> :m-2<CR>==
+inoremap <C-S-J> <Esc>:m+<CR>==gi
+inoremap <C-S-K> <Esc>:m-2<CR>==gi
+vnoremap <C-S-J> :m'>+<CR>gv=gv
+vnoremap <C-S-K> :m-2<CR>gv=gv
