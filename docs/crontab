@@ -1,6 +1,0 @@
- 0 */1 * * * $HOME/auto-commit.sh 2>$HOME/auto-commit.log
- 1 8-18/1 * * * $HOME/auto-update.sh $HOME/repo/dtkwidget
- 2 8-18/1 * * * $HOME/auto-update.sh $HOME/repo/dtkcore
- 3 8-18/1 * * * $HOME/auto-update.sh $HOME/repo/dtkgui
- 4 8-18/1 * * * $HOME/auto-update.sh $HOME/repo/qt5platform-plugins
- 5 8-18/1 * * * $HOME/auto-update.sh $HOME/repo/qt5integration
