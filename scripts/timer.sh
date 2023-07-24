@@ -9,4 +9,4 @@ fi
 
 current_time=$(date +"%m-%d %H:%M")
 
-notify-send "${current_time} : $1" -t 5000 -i dialog-warning
+XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send "Have a good health" "${current_time} : $1" -t 5000 -i dialog-warning
