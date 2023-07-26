@@ -42,7 +42,7 @@ keymap("n", "<C-m>", "<Plug>MarkdownPreview", opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+keymap("i", "jj", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
