@@ -1,7 +1,7 @@
 
 # install
 
-## install neovim
+## neovim
 
 ```sh
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -11,7 +11,7 @@ chmod u+x nvim.appimage
 sudo mv ./nvim.appimage /usr/local/bin/nvim
 ```
 
-## install lazygit
+## lazygit
 
 ```sh
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
@@ -20,13 +20,13 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 ```
 
-## install LazyVim
+## LazyVim
 
 ```sh
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 ```
 
-## install dependencies
+## dependencies
 
 apt install ripgrep // telescope grep doesn't work
 
