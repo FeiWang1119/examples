@@ -120,6 +120,7 @@ export https_proxy=https://127.0.0.1:7890/
 |command|description|
 |--|--|
 D_DXCB_FORCE_NO_TITLEBAR | 强制无标题栏
+D_DXCB_DISABLE_OVERRIDE_HIDPI | 使能放大倍数
 
 # others
 
