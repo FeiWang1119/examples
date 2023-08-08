@@ -22,14 +22,18 @@
 
 线程ID (pthread_t 结构)
 
+``` c
 int pthread_equal(pthread_t tid1, pthread_t tid2); // 比较两个线程ID是否相等:  
 
 pthread_t pthread_self(void) // 获取线程ID
+```
 
 ## 线程创建
 
+``` c
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
                    void *(*start_routine) (void *), void *arg);
+```
 
 ## 线程终止
 
@@ -39,6 +43,38 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 2. 线程可以被同一进程中的其他线程取消;
 3. 线程调用pthread_exit.
 
+``` c
 void pthread_exit(void *retval);
 
 int pthread_join(pthread_t thread, void **retval);
+```
+
+线程通过调用pthread_cancel函数来请求取消同一进程的其他线程。
+
+``` c
+int pthread_cancel(pthread_t thread);
+```
+
+线程退出调用函数，即线程清理处理程序, 一个线程可以有多个清理处理程序。
+
+```c
+void pthread_cleanup_push(void (*routine)(void *), void *arg);
+void pthread_cleanup_pop(int execute);
+```
+线程分离
+
+```c
+int pthread_detach(pthread_t thread);
+```
+
+线程和进程的原语比较：
+
+|线程|进程|描述|
+|--|--|--|
+|fork|pthread_create|创建新的控制流|
+|exit| pthread_exit|从现有的控制流中退出|
+|waitpid| pthread_join|从控制流中得到退出状态|
+|atexit|pthread_cancel_push|注册在退出控制流时调用的函数|
+|gtpid|pthread_self|获取控制流的ID|
+|abort|pthread_cancel|请求控制流的非正常退出|
+
