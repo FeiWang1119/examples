@@ -128,7 +128,7 @@ git push [remote] --force | 强行推送当前分支到远程仓库，即使有�
 git push [remote] --all | 推送所有分支到远程仓库
 git checkout [file] | 撤销# 恢复暂存区的指定文件到工作区
 git checkout [commit] [file] | 恢复某个commit的指定文件到暂存区和工作区
-git checkout . | 恢复暂存区的所有文件到工作区a
+git checkout . | 恢复暂存区的所有文件到工作区
 git checkout hashValue -- file | 将文件file恢复到hashValue的提交
 git checkout hashValue~1 -- file | 将文件file恢复到hashValue的前一个提交
 git reset [file] | 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
