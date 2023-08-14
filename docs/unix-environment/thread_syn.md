@@ -49,3 +49,24 @@ pthread_mutex_timedlock 达到超时时间时, 不会对互斥量进行加锁而
 
 - 读共享，写独占
 - 当读写同时到达时，写优先级高(避免读模式锁长期占用，而写模式锁一直得不到满足)
+
+初始化和销毁：
+
+```c
+pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;
+int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock,
+                        const pthread_rwlockattr_t *restrict attr);
+int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+```
+
+加锁和解锁：
+
+```c
+int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+```
+
+
