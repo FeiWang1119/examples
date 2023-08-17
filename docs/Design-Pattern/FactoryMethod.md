@@ -5,23 +5,24 @@ Factory Method is a creational design pattern that provides an interface for cre
 ## Structure
 
 @startuml
+
 class Product {
 {abstract} void Operation()
 }
 class ConcreteProduct1 {
-{abstract} void Operation()
+void Operation()
 }
 class ConcreteProduct2 {
-{abstract} void Operation()
+void Operation()
 }
 class Creator {
 {abstract} Product* FactoryMethod()
 }
 class ConcreteCreator1 {
-{abstract} Product* FactoryMethod()
+Product* FactoryMethod()
 }
 class ConcreteCreator2 {
-{abstract} Product* FactoryMethod()
+Product* FactoryMethod()
 }
 Product <|-- ConcreteProduct1
 Product <|-- ConcreteProduct2
@@ -31,7 +32,7 @@ Creator ..> Product
 
 @enduml
 
-## example
+## Example
 ```c
 /**
  * The Product interface declares the operations that all concrete products must
@@ -157,4 +158,4 @@ Pros:
 
 Cons:
 
-The code may become more complicated since you need to introduce a lot of new subclasses to implement the pattern. The best case scenario is when you’re introducing the pattern into an existing hierarchy of creator classes.
+- The code may become more complicated since you need to introduce a lot of new subclasses to implement the pattern. The best case scenario is when you’re introducing the pattern into an existing hierarchy of creator classes.
