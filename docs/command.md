@@ -127,7 +127,7 @@ D_DXCB_DISABLE_OVERRIDE_HIDPI | 使能放大倍数
 |command|description|
 |--|--|
 dch -m -D unstable -bv "5.6.16+test" "Test 5.6.16+test" | changelog(package : devscripts)
-gbp deepin-changelog -N <version> --deepin-branch=<branch> | changelog(package : git-buildpackage)
+gbp deepin-changelog -N <version> --deepin-branch=<branch> | changelog(package : git-buildpackage deepin-gbp-dch-plugins)
 sudo apt install manpages-dev | 安装手册
 xprop | 查看窗口属性
 uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v | 激活UOS
