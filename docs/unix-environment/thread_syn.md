@@ -69,4 +69,50 @@ int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);
 int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
 ```
 
+带有超时的读写锁：
+
+```c
+int pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock,
+                               const struct timespec *restrict abstime);
+int pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock,
+                               const struct timespec *restrict abstime);
+```
+
+## 条件变量
+
+与互斥量一起使用，允许线程以无竞争的方式等待特定的条件发生。
+
+条件本身是由互斥量保护的。线程在改变条件状态之前必须首先锁住互斥量。其他线程在获得互斥量之前不会察觉到这种改变。因为互斥量必须在锁定以后才能计算条件。
+
+初始化和销毁：
+
+```c
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int pthread_cond_init(pthread_cond_t *restrict cond,
+                      const pthread_condattr_t *restrict attr);
+int pthread_cond_destroy(pthread_cond_t *cond);
+```
+
+等待条件满足：
+
+```c
+int pthread_cond_wait(pthread_cond_t *restrict cond,
+                      pthread_mutex_t *restrict mutex);
+int pthread_cond_timedwait(pthread_cond_t *restrict cond,
+                           pthread_mutex_t *restrict mutex,
+                           const struct timespec *restrict abstime);
+```
+
+传递给 `pthread_cond_wait` 的互斥量对条件进行保护。调用者把锁住的互斥量传给函数，函数然后自动把调用线程放到等待条件的线程列表上，对互斥量解锁。这就关闭了条件检查和线程进入休眠状态等待条件改变这两个操作之间的时间通道，这样线程就不会错过条件的任何变化。`pthread_cond_wait` 返回时，互斥量再次被锁住。
+
+从`pthread_cond_wait` 或者 `pthread_cond_timedwait` 调用成功返回时，线程需要重新计算条件，因为另一个线程可能己经在运行并改变了条件。
+
+通知：
+
+```c
+int pthread_cond_signal(pthread_cond_t *cond);
+int pthread_cond_broadcast(pthread_cond_t *cond);
+```
+
+这两个函数可以用于通知线程条件已经满足。`pthread_cond_signal` 函数至少能唤醒等待该条件的线程，而 `pthread_cond_broadcast` 函数则能唤醒等待该条件的所有线程。
 
