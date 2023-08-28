@@ -134,6 +134,21 @@ int pthread_spin_lock(pthread_spinlock_t *lock);
 int pthread_spin_trylock(pthread_spinlock_t *lock);
 int pthread_spin_unlock(pthread_spinlock_t *lock);
 ```
+## 屏障
 
+屏障（barrier）是用户协调多个线程并行工作的同步机制。屏障允许每个线程等待，直到所有的合作线程都到达某一点，然后从该点继续执行。我们已经看到一种屏障，pthread_join函数就是一种屏障，允许一个线程等待，直到另一个线程退出。
 
+初始化和销毁:
+
+```c
+int pthread_barrier_init(pthread_barrier_t *restrict barrier,
+                         const pthread_barrierattr_t *restrict attr, unsigned count);
+int pthread_barrier_destroy(pthread_barrier_t *barrier);
+```
+
+等待：
+
+```c
+int pthread_barrier_wait(pthread_barrier_t *barrier);
+```
 
