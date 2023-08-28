@@ -121,6 +121,7 @@ export https_proxy=https://127.0.0.1:7890/
 |--|--|
 D_DXCB_FORCE_NO_TITLEBAR | 强制无标题栏
 D_DXCB_DISABLE_OVERRIDE_HIDPI | 使能放大倍数
+/usr/lib/x86_64-linux-gnu/dtk5/DGui/bin/deepin-gui-settings | 设置gui属性
 
 # others
 
@@ -130,5 +131,6 @@ dch -m -D unstable -bv "5.6.16+test" "Test 5.6.16+test" | changelog(package : de
 gbp deepin-changelog -N <version> --deepin-branch=<branch> | changelog(package : git-buildpackage deepin-gbp-dch-plugins)
 sudo apt install manpages-dev | 安装手册
 xprop | 查看窗口属性
+xwininfo | 查看窗口属性
 uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v | 激活UOS
 sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
