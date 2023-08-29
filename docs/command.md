@@ -134,3 +134,4 @@ xprop | 查看窗口属性
 xwininfo | 查看窗口属性
 uos-activator-cmd -s --kms kms.uniontech.com:8900:Vlc1cGIyNTBaV05v | 激活UOS
 sudo pkill -ef /usr/lib/deepin-daemon/dde-system-daemon; sudo DDE_DEBUG_LEVEL=debug DDE_DEBUG_MATCH=account /usr/lib/deepin-daemon/dde-system-daemon | 定位 dde-daemon
+DEEPIN_APPLICATION_MANAGER_APP_LAUNCH_HELPER_BIN=./build/apps/app-launch-helper/src/app-launch-helper ./build/apps/dde-application-manager/src/dde-application-manager
