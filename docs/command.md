@@ -82,6 +82,7 @@ qdbus --system  | 查看当前system所有的service信息
 could not find a Qt installation of '' | sudo apt install qtchooser
 qdbus com.deepin.dde.Clipboard /com/deepin/dde/Clipboard | tab补全
 dbus-monitor --session interface=org.freedesktop.Notifications  | 监听dbus服务接口
+GLib.Variant('b', False) | d-feet Variant 变量格式
 
 # plantuml (vscode plugin)
 
