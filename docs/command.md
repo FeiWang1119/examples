@@ -140,3 +140,28 @@ DEEPIN_APPLICATION_MANAGER_APP_LAUNCH_HELPER_BIN=./build/apps/app-launch-helper/
 # Qt http passwd
 
 iQbFdwc8jWo+w7FRzqM4SKRJu7+kg4JzmHmA78SM3g
+
+# system runtime 
+
+| command       | description                   |
+|-------------- | ----------------------------- |
+| ipcs          | 进程间通讯设施状态            |
+| uptime        | Linux 系统运行时长            |
+| iostat        | CPU 平均负载和磁盘活动        |
+| sar           | 监控，收集和汇报系统活动      |
+| mpstat        | 监控多处理器使用情况          |
+| pmap          | 监控进程的内存使用情况        |
+| nmon          | 系统管理员调优和基准测量工具  |
+| glances       | 密切关注linux系统             |
+| strace        | 查看系统调用                  |
+| ftptop        | ftp 服务器基本信息            |
+| powertop      | 电源消耗和电源管理            |
+| mytop         | 监控mysql的线程和性能         |
+| htop/top/atop | 系统运行参数分析              |
+| netstat       | linux网络统计监控工具         |
+| ethtool       | 显示和修改网络接口控制器      |
+| tcpdump       | 网络数据包分析利刃            |
+| telnet        | 远程登录服务的标准协议        |
+| iptraf        | 获取实时网络统计信息          |
+| iftop         | 显示主机上网络接口带宽使用情况|
+
