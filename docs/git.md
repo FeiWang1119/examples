@@ -84,29 +84,29 @@
 
 ## 查看信息
 
-命令 | 说明
------|---
-git status | 显示有变更的文件
-git log | 显示当前分支的版本历史
-git log --stat | 显示commit历史，以及每次commit发生变更的文件
-git log -S [keyword] | 搜索提交历史，根据关键词
-git log [tag] HEAD --pretty=format:%s | 显示某个commit之后的所有变动，每个commit占据一行
-git log [tag] HEAD --grep feature | 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
-git log --follow [file] / git whatchanged [file] | 显示某个文件的版本历史，包括文件改名
-git log -p [file] | 显示指定文件相关的每一次diff
-git log -5 --pretty --oneline | 显示过去5次提交
-git shortlog -sn | 显示所有提交过的用户，按提交次数排序
-git blame [file] | 显示指定文件是什么人在什么时间修改过
-git diff | 显示暂存区和工作区的差异
-git diff --cached [file] | 显示暂存区和上一个commit的差异
-git diff HEAD | 显示工作区与当前分支最新commit之间的差异
-git diff HEAD^ HEAD | 显示这次提交和上次之间的差异
-git diff [first-branch]...[second-branch] | 显示两次提交之间的差异
-git diff --shortstat "@{0 day ago}" | 显示今天你写了多少行代码
-git show [commit] | 显示某次提交的元数据和内容变化
-git show --name-only [commit] | 显示某次提交发生变化的文件
-git show [commit]:[filename] | 显示某次提交时，某个文件的内容
-git reflog | 显示当前分支的最近几次提交
+| command                                      | description                                                |
+|----------------------------------------------|------------------------------------------------------------|
+| git status                                   | 显示有变更的文件                                           |
+| git log                                      | 显示当前分支的版本历史                                     |
+| git log --stat                               | 显示commit历史，以及每次commit发生变更的文件               |
+| git log -S [keyword]                           | 搜索提交历史，根据关键词                                   |
+| git log [tag] HEAD --pretty=format:%s          | 显示某个commit之后的所有变动，每个commit占据一行           |
+| git log [tag] HEAD --grep feature              | 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件 |
+| git log --follow [file] / git whatchanged [file] | 显示某个文件的版本历史，包括文件改名                       |
+| git log -p [file]                              | 显示指定文件相关的每一次diff                               |
+| git log -5 --pretty --oneline                | 显示过去5次提交                                            |
+| git shortlog -sn                             | 显示所有提交过的用户，按提交次数排序                       |
+| git blame [file]                               | 显示指定文件是什么人在什么时间修改过                       |
+  git diff                                     | 显示暂存区和工作区的差异                                   |
+| git diff --cached [file]                       | 显示暂存区和上一个commit的差异                             |
+| git diff HEAD                                | 显示工作区与当前分支最新commit之间的差异                   |
+| git diff HEAD^ HEAD                          | 显示这次提交和上次之间的差异                               |
+| git diff [first-branch]...[second-branch]        | 显示两次提交之间的差异                                     |
+| git diff --shortstat "@{0 day ago}"          | 显示今天你写了多少行代码                                   |
+| git show [commit]                              | 显示某次提交的元数据和内容变化                             |
+| git show --name-only [commit]                  | 显示某次提交发生变化的文件                                 |
+| git show [commit]:[filename]                     | 显示某次提交时，某个文件的内容                             |
+| git reflog                                   | 显示当前分支的最近几次提交                                 |
 
 ## 远程同步
 
