@@ -97,7 +97,7 @@
 | git log -5 --pretty --oneline                | 显示过去5次提交                                            |
 | git shortlog -sn                             | 显示所有提交过的用户，按提交次数排序                       |
 | git blame [file]                               | 显示指定文件是什么人在什么时间修改过                       |
-  git diff                                     | 显示暂存区和工作区的差异                                   |
+| git diff                                     | 显示暂存区和工作区的差异                                   |
 | git diff --cached [file]                       | 显示暂存区和上一个commit的差异                             |
 | git diff HEAD                                | 显示工作区与当前分支最新commit之间的差异                   |
 | git diff HEAD^ HEAD                          | 显示这次提交和上次之间的差异                               |
@@ -110,56 +110,57 @@
 
 ## 远程同步
 
-命令 | 说明
------|---
-git review -r origin yourbranchname |  提交到远程仓库某分支
-git fetch [remote] | 下载远程仓库的所有变动
-git fetch origin develop/snipe:snipe | 从远程分支到本地分支
-git fetch origin pull/2/head:branch | 拉去github的pr到分支branch
-git remote -v | 显示所有远程仓库
-git remote show [remote] | 显示某个远程仓库的信息
-git remote add [shortname] [url] | 增加一个新的远程仓库，并命名
-git pull [remote] [branch] | 取回远程仓库的变化，并与本地分支合并
-git submodule update --init --recursive | 已经clone了之后，下载整个子模块
-git pull linuxdeepin pull/92/head:92 | 取回github的某个pr
-git push [remote] [branch] | 上传本地指定分支到远程仓库
-git push [remote] --delete [branch] | 删除远程分支develop
-git push [remote] --force | 强行推送当前分支到远程仓库，即使有冲突
-git push [remote] --all | 推送所有分支到远程仓库
-git checkout [file] | 撤销# 恢复暂存区的指定文件到工作区
-git checkout [commit] [file] | 恢复某个commit的指定文件到暂存区和工作区
-git checkout . | 恢复暂存区的所有文件到工作区
-git checkout hashValue -- file | 将文件file恢复到hashValue的提交
-git checkout hashValue~1 -- file | 将文件file恢复到hashValue的前一个提交
-git reset [file] | 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-git reset --hard | 重置暂存区与工作区，与上一次commit保持一致
-git reset --hard origin/master | 切到master最新的點
-git reset [commit] | 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
-git reset --hard [commit] | 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-git reset --keep [commit] | 重置当前HEAD为指定commit，但保持暂存区和工作区不变
-git revert [commit] | 新建一个commit，用来撤销指定commit。后者的所有变化都将被前者抵消，并且应用到当前分支
-git stash & git stash pop | 暂时将未提交的变化移除，稍后再移入
+| command                                 | description                                                              |
+|-----------------------------------------|--------------------------------------------------------------------------|
+| git review -r origin yourbranchname     | 提交到远程仓库某分支                                                     |
+| git fetch [remote]                        | 下载远程仓库的所有变动                                                   |
+| git fetch origin develop/snipe:snipe    | 从远程分支到本地分支                                                     |
+| git fetch origin pull/2/head:branch     | 拉去github的pr到分支branch                                               |
+| git remote -v                           | 显示所有远程仓库                                                         |
+| git remote show [remote]                  | 显示某个远程仓库的信息                                                   |
+| git remote add [shortname] [url]            | 增加一个新的远程仓库，并命名                                             |
+| git pull [remote] [branch]                  | 取回远程仓库的变化，并与本地分支合并                                     |
+| git submodule update --init --recursive | 已经clone了之后，下载整个子模块                                          |
+| git pull linuxdeepin pull/92/head:92    | 取回github的某个pr                                                       |
+| git push [remote] [branch]                  | 上传本地指定分支到远程仓库                                               |
+| git push [remote] --delete [branch]         | 删除远程分支develop                                                      |
+| git push [remote] --force                 | 强行推送当前分支到远程仓库，即使有冲突                                   |
+| git push [remote] --all                   | 推送所有分支到远程仓库                                                   |
+| git checkout [file]                       | 撤销# 恢复暂存区的指定文件到工作区                                       |
+| git checkout [commit] [file]                | 恢复某个commit的指定文件到暂存区和工作区                                 |
+| git checkout .                          | 恢复暂存区的所有文件到工作区                                             |
+| git checkout hashValue -- file          | 将文件file恢复到hashValue的提交                                          |
+| git checkout hashValue~1 -- file        | 将文件file恢复到hashValue的前一个提交                                    |
+| git reset [file]                          | 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变               |
+| git reset --hard                        | 重置暂存区与工作区，与上一次commit保持一致                               |
+| git reset --hard origin/master          | 切到master最新的點                                                       |
+| git reset [commit]                        | 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变             |
+| git reset --hard [commit]                 | 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致 |
+| git reset --keep [commit]                 | 重置当前HEAD为指定commit，但保持暂存区和工作区不变                       |
+| git revert [commit]                       | 新建一个commit，用来撤销指定commit。                                     |
+| git stash & git stash pop               | 暂时将未提交的变化移除，稍后再移入                                       |
 
 ## git stash
 
-命令 | 说明
------|---
-git stash save "save message" | 执行存储时，添加备注，方便查找。
-git stash list | 查看保存列表
-git stash show | 显示做了哪些改动，默认show第一个存储,如果要显示某个存储，后面加stash@{$num}
-git stash show -p : show  stash@{$num}  -p | 显示第一个存储的改动，如果想显示某个存储 git stash 
-git stash apply | 应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}
-git stash pop | 命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}
-git stash pop stash@{$num} | 如果要应用并删除其他stash，命令
-git stash drop stash@{$num} | 丢弃stash@{$num}存储，从列表中删除这个存储
-git stash clear | 删除所有缓存的stash
-git stash push -m savefile file | 保存特定文件file
+| command                                    | description                                                                        |
+|--------------------------------------------|------------------------------------------------------------------------------------|
+| git stash save "save message"              | 执行存储时，添加备注，方便查找。                                                   |
+| git stash list                             | 查看保存列表                                                                       |
+| git stash show                             | 显示做了哪些改动，默认show第一个存储,如果要显示某个存储，后面加stash@{$num}        |
+| git stash show -p : show  stash@{$num}  -p | 显示第一个存储的改动，如果想显示某个存储 git stash                                 |
+| git stash apply                            | 应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}          |
+| git stash pop                              | 恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，默认为第一个stash,即stash@{0} |
+| git stash pop stash@{$num}                 | 如果要应用并删除其他stash，命令                                                    |
+| git stash drop stash@{$num}                | 丢弃stash@{$num}存储，从列表中删除这个存储                                         |
+| git stash clear                            | 删除所有缓存的stash                                                                |
+| git stash push -m savefile file            | 保存特定文件file                                                                   |
 
 ## 其他
-命令 | 说明
------|---
-git archive |  生成一个可供发布的压缩包
-git clean -df | 删除当前目录下没有被 track 过的文件和文件夹
+
+| command       | description                                 |
+|---------------|---------------------------------------------|
+| git archive   |  生成一个可供发布的压缩包                   |
+| git clean -df | 删除当前目录下没有被 track 过的文件和文件夹 |
 
 # 案例
 
