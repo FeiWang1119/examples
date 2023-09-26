@@ -22,6 +22,27 @@
 | iptraf        | 获取实时网络统计信息           |
 | iftop         | 显示主机上网络接口带宽使用情况 |
 
+# systemd
+
+|command                                      | description                   |
+|---------------------------------------------|-----------------------        |
+| systemctl start unit                        | 开启某个服务                  |
+| systemctl stop unit                         | 停止某个服务                  | 
+| systemctl restart unit                      | 重启某个服务                  |
+| systemctl reload unit                       | 重新加载某个服务              |
+| systemctl status unit                       | 查看某个服务的状态            |
+| systemctl enable unit                       | 使某个服务开机自启动          |
+| systemctl disable unit                      | 使某个服务开机不自启动        |
+| systemctl mask unit                         | 使某个服务不能使用和激活      |
+| systemctl unmask unit                       | 使某个服务能使用和激活        |
+| systemctl daemon-reload                     | 重新加载 systemd manager 配置 |
+| systemctl edit unit                         | 编辑某个服务的配置            |
+| systemctl list-unit-files                   | 列举所有unit文件              |
+| systemctl list-units --all --state=inactive | 列举所有inactive单元          |
+| journalctl -b                               | 最近启动日志信息              |
+| journalctl -k                               | 内核日志信息                  |
+| journalctl -b -u foo.service                | 某个服务的日志信息            |
+
 # debian
 
 |command                        | description           |
