@@ -5,7 +5,7 @@
 | ipcs          | 进程间通讯设施状态             |
 | uptime        | Linux 系统运行时长             |
 | iostat        | CPU 平均负载和磁盘活动         |
-| sar           | 监控，收集和汇报系统活动       |
+| sar           | 监控，收集和汇报系统活动        |
 | mpstat        | 监控多处理器使用情况           |
 | pmap          | 监控进程的内存使用情况         |
 | nmon          | 系统管理员调优和基准测量工具   |
@@ -24,10 +24,10 @@
 
 # systemd
 
-|command                                      | description                   |
-|---------------------------------------------|-----------------------        |
+| command                                     | description                   |
+|---------------------------------------------|-------------------------------|
 | systemctl start unit                        | 开启某个服务                  |
-| systemctl stop unit                         | 停止某个服务                  | 
+| systemctl stop unit                         | 停止某个服务                  |
 | systemctl restart unit                      | 重启某个服务                  |
 | systemctl reload unit                       | 重新加载某个服务              |
 | systemctl status unit                       | 查看某个服务的状态            |
@@ -45,7 +45,7 @@
 
 # debian
 
-|command                        | description           |
+| command                       | description           |
 |-------------------------------|-----------------------|
 | apt build-dep packagename     | 构建依赖              |
 | dpkg-buildpackage -us -uc -nc | 构建deb包             |
@@ -57,48 +57,48 @@
 
 # gsetting
 
-| command                            | description                               |
-|------------------------------------|-------------------------------------------|
-| glib-compile-schemas               | /usr/share/glib-2.0/schemas               |
-| gsettings list-schemas             | 显示系统已安装的不可重定位的schema        | 
-| gsettings list-relocatable-schemas | 显示已安装的可重定位的schema              | 
-| gsettings list-children SCHEMA     | 显示指定schema的children，其中SCHEMA指xml |
-| gsettings list-keys SCHEMA         | 显示指定schema的所有项(key)               |
-| gsettings range SCHEMA KEY         | 查询指定schema的指定项KEY的有效取值范围   |
-| gsettings get SCHEMA KEY           | 显示指定schema的指定项KEY的值             |
-| gsettings set SCHEMA KEY VALUE     | 设置指定schema的指定项KEY的值为VALUE      |
-| gsettings reset SCHEMA KEY         | 恢复指定schema的指定项KEY的值为默认值     |
-| gsettings reset-recursively SCHEMA | 恢复指定schema的所有key的值为默认值       |
-| gsettings list-recursively [SCHEMA]  | 递归显示schema的所有项(key)和值(value)    |
+| command                             | description                              |
+|-------------------------------------|------------------------------------------|
+| glib-compile-schemas                | /usr/share/glib-2.0/schemas              |
+| gsettings list-schemas              | 显示系统已安装的不可重定位的schema       |
+| gsettings list-relocatable-schemas  | 显示已安装的可重定位的schema             |
+| gsettings list-children SCHEMA      | 显示指定schema的children，其中SCHEMA指xml |
+| gsettings list-keys SCHEMA          | 显示指定schema的所有项(key)              |
+| gsettings range SCHEMA KEY          | 查询指定schema的指定项KEY的有效取值范围  |
+| gsettings get SCHEMA KEY            | 显示指定schema的指定项KEY的值            |
+| gsettings set SCHEMA KEY VALUE      | 设置指定schema的指定项KEY的值为VALUE     |
+| gsettings reset SCHEMA KEY          | 恢复指定schema的指定项KEY的值为默认值    |
+| gsettings reset-recursively SCHEMA  | 恢复指定schema的所有key的值为默认值      |
+| gsettings list-recursively [SCHEMA] | 递归显示schema的所有项(key)和值(value)   |
 
 # translation
 
-| command                      | description               |
-|------------------------------|---------------------------|
-| apt install transifex-client | 安装tx                    |
-| tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取）|
-| tx push -s -b master         | 推送翻译                  |
+| command                      | description              |
+|------------------------------|--------------------------|
+| apt install transifex-client | 安装tx                   |
+| tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取） |
+| tx push -s -b master         | 推送翻译                 |
 
 # coredump
 
 | command                      | description                 |
-|------------------------------|---------------------------  |
+|------------------------------|-----------------------------|
 | apt install systemd-coredump | 安装 coredump               |
 | apt install dde-dock-dbgsym  | 安装应用符号调试信息        |
 | ulimit -c                    | 查看是否开启,默认是不开启的 |
 | ulimit -c unlimited          | 开启core dump功能           |
 | coredumpctl list             | 查看崩溃列表 获取崩溃的pid  |
 | coredumpctl dump             | 查看堆栈信息                |
-| coredumpctl info pid         | 查看堆栈信息                |           
+| coredumpctl info pid         | 查看堆栈信息                |
 | apt install lz4; lz4 -d FILE | 来解压coredump文件          |
 
 # ssh
 
-| command               | description              |
-|-----------------------|--------------------------|
-| ssh-keygen            | default key type : RSA   | 
-| ssh-keygen -t ed25519 | specify key type: ed25519|  
-| sshd -T               | 查看出错原因             |
+| command               | description               |
+|-----------------------|---------------------------|
+| ssh-keygen            | default key type : RSA    |
+| ssh-keygen -t ed25519 | specify key type: ed25519 |
+| sshd -T               | 查看出错原因              |
 
 # process 
 
@@ -135,8 +135,8 @@
 
 # changelog
 
-| command  | description  |
-|----------|--------------|
+| command                                                    | description                                      |
+|------------------------------------------------------------|--------------------------------------------------|
 | dch -m -D unstable -bv "5.6.16+test" "Test 5.6.16+test"    | package: devscripts                              |
 | gbp deepin-changelog -N <version> --deepin-branch=<branch> | package: git-buildpackage deepin-gbp-dch-plugins |
 
