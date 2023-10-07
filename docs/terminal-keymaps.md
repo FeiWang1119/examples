@@ -23,7 +23,7 @@
 | Ctrl + C      | Sends SIGI signal and kills currently executing command |
 | Ctrl + D      | Closes the current terminal |
 
-Bash History
+# Bash History
 
 | Shortcut      | description                    |
 |---------------|--------------------------------|
