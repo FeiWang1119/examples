@@ -71,14 +71,6 @@
 | gsettings reset-recursively SCHEMA  | 恢复指定schema的所有key的值为默认值      |
 | gsettings list-recursively [SCHEMA] | 递归显示schema的所有项(key)和值(value)   |
 
-# translation
-
-| command                      | description              |
-|------------------------------|--------------------------|
-| apt install transifex-client | 安装tx                   |
-| tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取） |
-| tx push -s -b master         | 推送翻译                 |
-
 # coredump
 
 | command                      | description                 |

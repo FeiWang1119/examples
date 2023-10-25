@@ -41,3 +41,50 @@ export https_proxy=https://127.0.0.1:7890/
 # Qt http passwd
 
 iQbFdwc8jWo+w7FRzqM4SKRJu7+kg4JzmHmA78SM3g
+
+
+# transifex
+
+home 目录下 ：~/ .transifexrc
+
+```c
+[https://www.transifex.com]
+rest_hostname = https://rest.api.transifex.com
+api_hostname = https://api.transifex.com
+hostname = https://www.transifex.com
+token = ???
+
+项目下： .tx/config
+
+``` c
+[main]
+host = https://www.transifex.com
+minimum_perc = 80
+mode = developer
+
+[o:linuxdeepin:p:deepin-desktop-environment:r:dde-calendar]
+file_filter = translations/dde-calendar_<lang>.ts
+source_file = translations/dde-calendar_en_US.ts
+source_lang = en_US
+type = QT
+
+[o:linuxdeepin:p:deepin-desktop-environment:r:dde-calendar_desktop]
+file_filter = translations/desktop/desktop_<lang>.ts
+source_file = translations/desktop/desktop.ts
+source_lang = en
+type = QT
+
+[o:linuxdeepin:p:deepin-desktop-environment:r:dde-calendar-service]
+file_filter = translations/dde-calendar-service_<lang>.ts
+source_file = translations/dde-calendar-service_en_US.ts
+source_lang = en_US
+type = QT
+```
+
+相关命令（tx --help）
+
+| command                      | description              |
+|------------------------------|--------------------------|
+| apt install transifex-client | 安装tx                   |
+| tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取） |
+| tx push -s -b master         | 推送翻译                 |
