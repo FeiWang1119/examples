@@ -88,3 +88,7 @@ type = QT
 | apt install transifex-client | 安装tx                   |
 | tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取） |
 | tx push -s -b master         | 推送翻译                 |
+
+# printer
+
+b3-9 ip: 10.20.51.241
