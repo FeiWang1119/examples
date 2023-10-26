@@ -22,6 +22,8 @@
 | Ctrl + Q | Resumes suspended command                                         |
 | Ctrl + C | Sends SIGI signal and kills currently executing command           |
 | Ctrl + D | Closes the current terminal                                       |
+| bg       | Resume a suspended process in the background                                                 |
+| fg       | Resume a suspended process in the foreground                                                 |
 
 # Bash History
 
@@ -80,18 +82,6 @@
 | Ctrl + I | Completes the command like TAB                         |
 | Alt + ?  | Display files/folders in the current path for help     |
 | Alt + *  | Display files/folders in the current path as parameter |
-
-# Process Control Shortcuts
-
-| Shortcut | description                                                                                  |
-| -------- | -------------------------------------------------------------------------------------------- |
-| Ctrl + C | Send the SIGINT signal to the current foreground process, usually resulting in termination   |
-| Ctrl + Z | Send the SIGTSTP signal to the current foreground process, suspending its execution          |
-| Ctrl + D | Send an EOF (End of File) to the current process, usually resulting in termination or logout |
-| Ctrl + S | Pause the output to the terminal (useful when scrolling through large amounts of output)     |
-| Ctrl + Q | Resume output to the terminal after pausing with Ctrl + s                                    |
-| bg       | Resume a suspended process in the background                                                 |
-| fg       | Resume a suspended process in the foreground                                                 |
 
 # Miscellaneous Shortcuts
 
