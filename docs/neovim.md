@@ -35,3 +35,6 @@ cd ~/.local/share/nvim/lazy/markdown-preview.nvim/app && npm install
 
 apt install xclip //previde a clipboard tool like xclip for using system's clipboard. 
 
+## cmake
+
+cmake add `CMAKE_EXPORT_COMPILE_COMMANDS=ON` to remove clangd warnings
