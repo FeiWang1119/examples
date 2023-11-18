@@ -14,11 +14,34 @@ The view obtains model indexes from the model; these are references to items of 
 
 In standard views, a delegate renders the items of data. When an item is edited, the delegate communicates with the model directly using model indexes.
 
-###  Models, views, and delegates communicate with each other using signals and slots:
+##  Models, views, and delegates communicate with each other using signals and slots:
 
 - Signals from the model inform the view about changes to the data held by the data source.
 - Signals from the view provide information about the user's interaction with the items being displayed.
 - Signals from the delegate are used during editing to tell the model and view about the state of the editor.
 
-# Models
+# class 
 
+@startuml
+
+QAbstractItemModel <|-- QStandardItemModel 
+QAbstractItemModel <|-- QAbstractItemModelReplica
+QAbstractItemModel <|-- QAbstractListModel
+QAbstractItemModel <|-- QAbstractProxyModel
+QAbstractItemModel <|-- QAbstractTableModel
+QAbstractItemModel <|-- QConcatenateTablesProxyModel
+QAbstractItemModel <|-- QFileSystemModel
+QAbstractItemModel <|-- QHelpContentModel
+QAbstractItemModel <|-- QPdfBookmarkModel 
+
+QAbstractItemView <|-- QListView 
+QAbstractItemView <|-- QColumnView
+QAbstractItemView <|-- QHeaderView
+QAbstractItemView <|-- QTableView
+QAbstractItemView <|-- QTreeView
+
+QAbstractItemDelegate <|-- QItemDelegate
+QAbstractItemDelegate <|-- QStyleItemDelegate
+
+QAbstractItemModel -[#red]-> QAbstractItemView
+@enduml
