@@ -25,14 +25,22 @@ In standard views, a delegate renders the items of data. When an item is edited,
 @startuml
 
 QAbstractItemModel <|-- QStandardItemModel 
-QAbstractItemModel <|-- QAbstractItemModelReplica
 QAbstractItemModel <|-- QAbstractListModel
 QAbstractItemModel <|-- QAbstractProxyModel
 QAbstractItemModel <|-- QAbstractTableModel
-QAbstractItemModel <|-- QConcatenateTablesProxyModel
 QAbstractItemModel <|-- QFileSystemModel
 QAbstractItemModel <|-- QHelpContentModel
 QAbstractItemModel <|-- QPdfBookmarkModel 
+QAbstractItemModel <|-- QAbstractItemModelReplica
+QAbstractItemModel <|-- QConcatenateTablesProxyModel
+
+remove QAbstractProxyModel 
+remove QAbstractTableModel
+remove QFileSystemModel 
+remove QHelpContentModel
+remove QPdfBookmarkModel
+remove QAbstractItemModelReplica
+remove QConcatenateTablesProxyModel
 
 QAbstractItemView <|-- QListView 
 QAbstractItemView <|-- QColumnView
@@ -40,8 +48,16 @@ QAbstractItemView <|-- QHeaderView
 QAbstractItemView <|-- QTableView
 QAbstractItemView <|-- QTreeView
 
+remove QHeaderView
+remove QColumnView
+
 QAbstractItemDelegate <|-- QItemDelegate
 QAbstractItemDelegate <|-- QStyleItemDelegate
 
-QAbstractItemModel -[#red]-> QAbstractItemView
+QAbstractItemModel -[#red]down->"rendering" QAbstractItemView
+QAbstractItemModel -[#blue]right->"editing" QAbstractItemDelegate 
+QAbstractItemDelegate -[#blue]right->"editing" QAbstractItemModel 
+QAbstractItemDelegate -[#blue]right->"rendering" QAbstractItemView 
+QAbstractItemView -[#blue]right->"rendering" QAbstractItemDelegate 
+
 @enduml
