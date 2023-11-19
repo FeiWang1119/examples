@@ -20,9 +20,15 @@ In standard views, a delegate renders the items of data. When an item is edited,
 - Signals from the view provide information about the user's interaction with the items being displayed.
 - Signals from the delegate are used during editing to tell the model and view about the state of the editor.
 
-# class 
+# Class Diagram
 
 @startuml
+
+Abstract QAbstractItemModel #pink ##[bold]red
+Abstract QAbstractItemDelegate #red ##[bold]green
+Abstract QAbstractItemView #yellow ##[bold]red
+class QModelIndex #green ##[bold]red
+class QStandardItem #gray ##[bold]red
 
 QAbstractItemModel <|-- QStandardItemModel 
 QAbstractItemModel <|-- QAbstractListModel
@@ -34,6 +40,7 @@ QAbstractItemModel <|-- QPdfBookmarkModel
 QAbstractItemModel <|-- QAbstractItemModelReplica
 QAbstractItemModel <|-- QConcatenateTablesProxyModel
 
+remove QAbstractListModel
 remove QAbstractProxyModel 
 remove QAbstractTableModel
 remove QFileSystemModel 
@@ -54,10 +61,10 @@ remove QColumnView
 QAbstractItemDelegate <|-- QItemDelegate
 QAbstractItemDelegate <|-- QStyleItemDelegate
 
-QAbstractItemModel -[#red]down->"rendering" QAbstractItemView
-QAbstractItemModel -[#blue]right->"editing" QAbstractItemDelegate 
-QAbstractItemDelegate -[#blue]right->"editing" QAbstractItemModel 
-QAbstractItemDelegate -[#blue]right->"rendering" QAbstractItemView 
-QAbstractItemView -[#blue]right->"rendering" QAbstractItemDelegate 
+QAbstractItemModel -[#red]down->"Rendering" QAbstractItemView
+QAbstractItemModel -[#blue]right->"Editing" QAbstractItemDelegate 
+QAbstractItemDelegate -[#blue]right->"Editing" QAbstractItemModel 
+QAbstractItemDelegate -[#blue]right->"Rendering" QAbstractItemView 
+QAbstractItemView -[#blue]right->"Rendering" QAbstractItemDelegate 
 
 @enduml
