@@ -6,7 +6,7 @@
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.opt.foldenable = true
 
-vim.g.autoformat = true
+vim.g.autoformat = false
 
 local opt = vim.opt
 
