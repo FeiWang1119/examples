@@ -5,3 +5,9 @@
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.opt.foldenable = true
+
+vim.g.autoformat = true
+
+local opt = vim.opt
+
+opt.wrap = true -- Disable line wrap
