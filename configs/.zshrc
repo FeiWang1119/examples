@@ -111,6 +111,7 @@ alias c="cmake -GNinja -Bbuild -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_EXPORT_COMPIL
 alias b="cmake --build build | grep '\(error:\|failed\|undefine\)'"
 alias i="sudo apt install"
 alias u="sudo apt update"
+alias s="apt-file search"
 alias p="dpkg-buildpackage -us -uc -nc"
 alias po="apt policy"
 alias lg="lazygit"
