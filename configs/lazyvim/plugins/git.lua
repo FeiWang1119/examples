@@ -10,9 +10,8 @@ return {
 			changedelete = { text = "▎" },
 			untracked = { text = "▎" },
 		},
-		numhl = true,
-		linehl = true,
-		word_diff = true,
+		numhl = false,
+		word_diff = false,
 		current_line_blame = true,
 		on_attach = function(buffer)
 			local gs = package.loaded.gitsigns
