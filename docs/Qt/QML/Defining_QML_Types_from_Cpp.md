@@ -177,38 +177,33 @@ QML_SINGLETON combined with QML_ELEMENT or QML_NAMED_ELEMENT registers a singlet
 
 QObject 单例类型可以以类似于任何其他 QObject 类型或实例化类型的方式进行交互，只是只存在一个（引擎构造和拥有的）实例，并且必须通过类型名称而不是ID. QObject 的 Q_PROPERTYs被绑定, 并且， QObject模块APIs的Q_INVOKABLE 函数也许被使用信号处理表达式。这使得单一实例类型成为实现样式或主题的理想方式，并且还可以使用它们代替“.pragma 库”脚本导入来存储全局状态或提供全局功能。
 
-Once registered, a QObject singleton type may be imported and used like any other QObject instance exposed to QML. The following example assumes that a QObject singleton type was registered into the "MyThemeModule" namespace with version 1.0, where that QObject has a QColor "color" Q_PROPERTY:
-注册后，可以导入和使用 QObject 单例类型，就像向QML公开的任何其他 QObject 实例一样。以下示例假定在版本 1.0 的“MyThemeModule”命名空间中注册了一个QObject 单一实例类型，其中具有“color”：
+注册后，可以导入和使用 QObject 单例类型，就像向QML公开的任何其他 QObject 实例一样。以下示例假定在版本 1.0 的“MyThemeModule”命名空间中注册了一个QObject 单一实例类型，其中 QObject 具有 QColor “color” Q_PROPERTY：
 
+```js
 import MyThemeModule 1.0 as Theme
 
 Rectangle {
     color: Theme.color // binding.
 }
-A QJSValue may also be exposed as a singleton type, however clients should be aware that properties of such a singleton type cannot be bound to.
-A 也可能公开为单一实例类型，但客户端应注意，此类单一实例类型的属性不能绑定到。
+```
 
-See QML_SINGLETON for more information on how implement and register a new singleton type, and how to use an existing singleton type.
-有关如何实现和注册新的单一实例类型以及如何使用现有单一实例类型的更多信息，请参见。
+一个 QJSValue 也可能公开为单一实例类型，但客户端应注意，此类单一实例类型的属性不能绑定到属性。
 
-Note: Enum values for registered types in QML should start with a capital.
 注意：QML中注册类型的枚举值应以大写字母开头。
 
-Final properties 最终属性
-Properties declared final using the FINAL modifier to Q_PROPERTY cannot be overridden. This means that any properties or functions of the same name, declared either in QML or in C++ on derived types, are ignored by the QML engine. You should declare properties FINAL when possible, in order to avoid accidental overrides. An override of a property is visible not only in derived classes, but also to QML code executing the context of the base class. Such QML code, typically expects the original property, though. This is a frequent source of mistakes.
-不能重写使用 FINAL to 修饰符声明为 final 的属性。这意味着QML引擎将忽略在QML或C++中在派生类型上声明的任何同名属性或函数。应尽可能声明属性 FINAL ，以避免意外重写。属性的覆盖不仅在派生类中可见，而且在执行基类上下文的QML代码中也可见。不过，这样的QML代码通常需要原始属性。这是错误经常出现的根源。
+### Final properties
 
-Properties declared FINAL can also not be overridden by functions in QML, or by Q_INVOKABLE methods in C++.
-声明 FINAL 的属性也不能被QML中的函数或C++中的方法覆盖。
+不能重写对 Q_PROPERTY 使用 FINAL 修饰符声明为 final 的属性。这意味着QML引擎将忽略在QML或C++中在派生类型上声明的任何同名属性或函数。应尽可能声明属性 FINAL ，以避免意外重写。属性的覆盖不仅在派生类中可见，而且在执行基类上下文的QML代码中也可见。不过，这样的QML代码通常需要原始属性。这是错误经常出现的根源。
 
-Type Revisions and Versions
-类型修订和版本
-Many of the type registration functions require versions to be specified for the registered type. Type revisions and versions allow new properties or methods to exist in the new version while remaining compatible with previous versions.
+声明 FINAL 的属性也不能被QML中的函数或C++中的 Q_INVOKABLE 方法覆盖。
+
+### Type Revisions and Versions
+
 许多类型注册函数都需要为注册类型指定版本。类型修订和版本允许新版本中存在新的属性或方法，同时保持与以前版本的兼容性。
 
-Consider these two QML files:
 请考虑以下两个QML文件：
 
+```js
 // main.qml
 import QtQuick 1.0
 
@@ -222,15 +217,15 @@ import MyTypes 1.0
 CppType {
     value: root.x
 }
-where CppType maps to the C++ class CppType.
+```
+
 其中 CppType 映射到 C++ 类 CppType 。
 
-If the author of CppType adds a root property to CppType in a new version of their type definition, root.x now resolves to a different value because root is also the id of the top level component. The author could specify that the new root property is available from a specific minor version. This permits new properties and features to be added to existing types without breaking existing programs.
-如果 CppType 的作者在其类型定义的新版本中向 CppType 添加属性 root ，则现在解析为不同的值， root.x 因为它 root 也是顶级组件 id 的值。作者可以指定新 root 属性可从特定的次要版本获得。这允许在不破坏现有程序的情况下将新属性和功能添加到现有类型中。
+如果 CppType 的作者在其类型定义的新版本中向 CppType 添加属性 root ，则 root.x 现在解析为不同的值，因为 root 也是顶级组件 id 的值。作者可以指定新 root 属性可从特定的次要版本获得。这允许在不破坏现有程序的情况下将新属性和功能添加到现有类型中。
 
-The REVISION tag is used to mark the root property as added in revision 1 of the type. Methods such as Q_INVOKABLE's, signals and slots can also be tagged for a revision using the Q_REVISION(x) macro:
-REVISION 标记用于将 root 属性标记为在类型的修订版 1 中添加。诸如 's、signals 和 slots 之类的方法也可以使用 Q_REVISION(x) 宏为修订进行标记：
+REVISION 标记用于将 root 属性标记为在类型的修订版 1 中添加。诸如 Q_INVOKABLE 之类的方法、signals 和 slots 也可以使用 Q_REVISION(x) 宏为修订进行标记：
 
+```c
 class CppType : public BaseType
 {
     Q_OBJECT
@@ -240,49 +235,43 @@ class CppType : public BaseType
 signals:
     Q_REVISION(1) void rootChanged();
 };
-The revisions given this way are automatically interpreted as minor versions to the major version given in the project file. In this case, root is only available when MyTypes version 1.1 or higher is imported. Imports of MyTypes version 1.0 remain unaffected.
+```
+
 以这种方式给出的修订会自动解释为项目文件中给定的主要版本的次要版本。在这种情况下， root 仅在导入版本 1.1 或更高版本时 MyTypes 可用。版本 1.0 的 MyTypes 导入不受影响。
 
-For the same reason, new types introduced in later versions should be tagged with the QML_ADDED_IN_VERSION macro.
-出于同样的原因，更高版本中引入的新类型应使用宏进行标记。
+出于同样的原因，更高版本中引入的新类型应使用 QML_ADDED_IN_VERSION 宏进行标记。
 
-This feature of the language allows for behavioural changes to be made without breaking existing applications. Consequently QML module authors should always remember to document what changed between minor versions, and QML module users should check that their application still runs correctly before deploying an updated import statement.
 该语言的这一特性允许在不破坏现有应用程序的情况下进行行为更改。因此，QML模块的作者应该始终记住记录次要版本之间的更改，QML模块用户应该在部署更新的import语句之前检查他们的应用程序是否仍然正常运行。
 
-Revisions of a base class that your type depends upon are automatically registered when registering the type itself. This is useful when deriving from base classes provided by other authors, e.g. when extending classes from the Qt Quick module.
 在注册类型本身时，会自动注册类型所依赖的基类的修订。当从其他作者提供的基类派生时，例如从Qt Quick模块扩展类时，这很有用。
 
-Note: The QML engine does not support revisions for properties or signals of grouped and attached property objects.
 注意：QML引擎不支持对分组和附加属性对象的属性或信号进行修订。
 
-Registering Extension Objects
-注册扩展对象
-When integrating existing classes and technology into QML, APIs will often need tweaking to fit better into the declarative environment. Although the best results are usually obtained by modifying the original classes directly, if this is either not possible or is complicated by some other concerns, extension objects allow limited extension possibilities without direct modifications.
-当将现有类和技术集成到QML中时，API通常需要调整以更好地适应声明式环境。尽管通常通过直接修改原始类来获得最佳结果，但如果这是不可能的，或者由于其他一些问题而变得复杂，则扩展对象允许在不直接修改的情况下进行有限的扩展可能性。
+### Registering Extension Objects
 
-Extension objects add additional properties to an existing type. An extended type definition allows the programmer to supply an additional type, known as the extension type, when registering the class. Its members are transparently merged with the original target class when used from within QML. For example:
+当将现有类和技术集成到QML中时，APIs通常需要调整以更好地适应声明式环境。尽管通常通过直接修改原始类来获得最佳结果，但如果这是不可能的，或者由于其他一些问题而变得复杂，则扩展对象允许在不直接修改的情况下进行有限的扩展可能性。
+
 扩展对象向现有类型添加其他属性。扩展类型定义允许程序员在注册类时提供其他类型，称为扩展类型。当从QML中使用时，它的成员与原始目标类透明地合并。例如：
 
+```js
 QLineEdit {
     leftMargin: 20
 }
-The leftMargin property is a new property added to an existing C++ type, QLineEdit, without modifying its source code.
-该 leftMargin 属性是添加到现有 C++ 类型的新属性，而不修改其源代码。
+```
 
-The QML_EXTENDED(extension) macro is for registering extended types. The argument is the name of another class to be used as extension.
-（extension） 宏用于注册扩展类型。该参数是要用作扩展的另一个类的名称。
+该 leftMargin 属性是添加到现有 C++ 类型 QLineEdit 的新属性，而不修改其源代码。
 
-You can also use QML_EXTENDED_NAMESPACE(namespace) to register a namespace, and especially the enumerations declared within, as an extension to a type. If the type you are extending is itself a namespace, you need to use QML_NAMESPACE_EXTENDED(namespace) instead.
-还可以使用 （namespace） 将命名空间（尤其是其中声明的枚举）注册为类型的扩展。如果要扩展的类型本身是命名空间，则需要改用 QML_NAMESPACE_EXTENDED（namespace）。
+QML_EXTENDED（extension） 宏用于注册扩展类型。该参数是要用作扩展的另一个类的名称。
 
-An extension class is a regular QObject, with a constructor that takes a QObject pointer. However, the extension class creation is delayed until the first extended property is accessed. The extension class is created and the target object is passed in as the parent. When the property on the original is accessed, the corresponding property on the extension object is used instead.
-扩展类是一个常规类，其构造函数接受指针。但是，扩展类的创建会延迟，直到访问第一个扩展属性。将创建扩展类，并将目标对象作为父对象传入。访问原始对象上的属性时，将改用扩展对象上的相应属性。
+还可以使用 QML_EXTENDED_NAMESPACE（namespace）将命名空间（尤其是其中声明的枚举）注册为类型的扩展。如果要扩展的类型本身是命名空间，则需要改用 QML_NAMESPACE_EXTENDED（namespace）。
 
-Registering Foreign Types
-注册外来类型
-There may be C++ types that cannot be modified to hold the above mentioned macros. Those may be types from 3rdparty libraries, or types that need to fulfill some contract that contradicts the presence of those macros. You can still expose those types to QML, though, using the QML_FOREIGN macro. In order to do this, create a separate struct that consists entirely of the registration macros, like this:
-可能存在无法修改以保存上述宏的 C++ 类型。这些类型可能是来自第三方库的类型，或者是需要履行与这些宏的存在相矛盾的某些协定的类型。但是，您仍然可以使用宏将这些类型公开给QML。为此，请创建一个完全由注册宏组成的单独结构，如下所示：
+扩展类是一个常规QObject类，其构造函数接受QObject指针。但是，扩展类的创建会延迟，直到访问第一个扩展属性。将创建扩展类，并将目标对象作为父对象传入。访问原始对象上的属性时，将改用扩展对象上的相应属性。
 
+### Registering Foreign Types
+
+可能存在无法修改以保存上述宏的 C++ 类型。这些类型可能是来自第三方库的类型，或者是需要履行与这些宏的存在相矛盾的某些协定的类型。但是，您仍然可以使用 QML_FOREIGN 宏将这些类型公开给QML。为此，请创建一个完全由注册宏组成的单独结构，如下所示：
+
+```c
 // Contains class Immutable3rdParty
 #include <3rdpartyheader.h>
 
@@ -294,11 +283,12 @@ struct Foreign
     QML_ADDED_IN_VERSION(2, 4)
     // QML_EXTENDED, QML_SINGLETON ...
 };
-From this code, you get a QML type with the methods and properties of Immutable3rdParty, and the QML traits (e.g.: singleton, extended) specified in Foreign.
+```
+
 从这段代码中，你得到了一个QML类型，该类型具有Immutable3rdParty的方法和属性，以及Foreign中指定的QML特征（例如：单例、扩展）。
 
-Defining QML-Specific Types and Attributes
-定义特定于QML的类型和属性
+## Defining QML-Specific Types and Attributes
+
 Providing Attached Properties
 提供附加属性
 In the QML language syntax, there is a notion of attached properties and attached signal handlers, which are additional attributes that are attached to an object. Essentially, such attributes are implemented and provided by an attaching type, and these attributes may be attached to an object of another type. This contrasts with ordinary object properties which are provided by the object type itself (or the object's inherited type).
