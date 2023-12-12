@@ -1,11 +1,11 @@
-project(wayland-server)
+project(server)
 
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(wayland-server REQUIRED IMPORTED_TARGET wayland-server)
 
-add_executable(wayland-server main.c)
+add_executable(server main.c)
 
-target_link_libraries(wayland-server PUBLIC
+target_link_libraries(server PUBLIC
     PkgConfig::wayland-server
 )

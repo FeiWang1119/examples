@@ -12,5 +12,6 @@ include(CMakePackageConfigHelpers)
 set(CMAKE_INCLUDE_CURRENT_DIR on)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
-add_subdirectory(wayland-server)
-add_subdirectory(wayland-client)
+add_subdirectory(server)
+add_subdirectory(client)
+add_subdirectory(binding-to-globals)
