@@ -187,38 +187,37 @@ Rectangle {
 }
 ```
 
-Note: To assign a binding expression imperatively, the binding expression must be contained in a function that is passed into Qt.binding(), and then the value returned by Qt.binding() must be assigned to the property. In contrast, Qt.binding() must not be used when assigning a binding expression upon initialization. See Property Binding for more information.
-注意：要强制分配绑定表达式，绑定表达式必须包含在传递给 （） 的函数中，然后必须将 Qt.binding（） 返回的值分配给该属性。相反，在初始化时分配绑定表达式时，不得使用 Qt.binding（）。有关详细信息，请参阅。
+注意：要强制分配绑定表达式，绑定表达式必须包含在传递给 Qt.binding() 的函数中，然后必须将 Qt.binding() 返回的值分配给该属性。相反，在初始化时分配绑定表达式时，不得使用 Qt.binding()。
 
-Type Safety 类型安全
-Properties are type safe. A property can only be assigned a value that matches the property type.
+##### Type Safety
+
 属性是类型安全的。只能为属性分配与属性类型匹配的值。
 
-For example, if a property is a real, and if you try to assign a string to it, you will get an error:
 例如，如果一个属性是实数，并且您尝试为其分配字符串，则会出现错误：
 
+```qml
 property int volume: "four"  // generates an error; the property's object will not be loaded
+```
 
-Likewise if a property is assigned a value of the wrong type during run time, the new value will not be assigned, and an error will be generated.
 同样，如果在运行时为属性分配了错误类型的值，则不会分配新值，并且会生成错误。
 
-Some property types do not have a natural value representation, and for those property types the QML engine automatically performs string-to-typed-value conversion. So, for example, even though properties of the color type store colors and not strings, you are able to assign the string "red" to a color property, without an error being reported.
 某些属性类型没有自然值表示形式，对于这些属性类型，QML引擎会自动执行字符串到类型化值的转换。因此，例如，即使 color 该类型的属性存储颜色而不是字符串，您也可以将字符串 "red" 分配给颜色属性，而不会报告错误。
 
-See QML Value Types for a list of the types of properties that are supported by default. Additionally, any available QML object type may also be used as a property type.
-有关默认支持的属性类型的列表，请参阅。此外，任何可用也可以用作属性类型。
+有关默认支持的属性类型的列表，请参阅 QML 值类型。此外，任何可用 QML 对象类型也可以用作属性类型。
 
-Special Property Types 特殊属性类型
-Object List Property Attributes
-对象列表属性特性
-A list type property can be assigned a list of QML object-type values. The syntax for defining an object list value is a comma-separated list surrounded by square brackets:
-可以为类型属性分配QML对象类型值列表。定义对象列表值的语法是用方括号括起来的逗号分隔列表：
+#### Special Property Types
 
+##### Object List Property Attributes
+
+可以为list类型属性赋值QML对象类型值列表。定义对象列表值的语法是用方括号括起来的逗号分隔列表：
+
+```qml
 [ <item 1>, <item 2>, ... ]
+```
 
-For example, the Item type has a states property that is used to hold a list of State type objects. The code below initializes the value of this property to a list of three State objects:
 例如，该类型具有一个属性，该属性用于保存类型对象的列表。下面的代码将此属性的值初始化为三个对象的列表：
 
+```qml
 import QtQuick 2.0
 
 Item {
@@ -228,26 +227,33 @@ Item {
         State { name: "stopped" }
     ]
 }
-If the list contains a single item, the square brackets may be omitted:
+```
+
 如果列表包含单个项目，则可以省略方括号：
 
+```qml
 import QtQuick 2.0
 
 Item {
     states: State { name: "running" }
 }
-A list type property may be specified in an object declaration with the following syntax:
-可以使用以下语法在对象声明中指定类型属性：
+```
 
+可以使用以下语法在对象声明中指定list类型属性：
+
+```qml
 [default] property list<<objectType>> propertyName
-and, like other property declarations, a property initialization may be combined with the property declaration with the following syntax:
+```
+
 并且，与其他属性声明一样，属性初始化可以与属性声明结合使用，语法如下：
 
+```qml
 [default] property list<<objectType>> propertyName: <value>
+```
 
-An example of list property declaration follows:
 列表属性声明的示例如下：
 
+```qml
 import QtQuick 2.0
 
 Rectangle {
@@ -260,16 +266,17 @@ Rectangle {
         Rectangle { color: "blue"}
     ]
 }
-If you wish to declare a property to store a list of values which are not necessarily QML object-type values, you should declare a var property instead.
-如果您希望声明一个属性来存储不一定是QML对象类型值的值列表，则应声明一个属性。
+```
 
-Grouped Properties 分组属性
-In some cases properties contain a logical group of sub-property attributes. These sub-property attributes can be assigned to using either the dot notation or group notation.
-在某些情况下，属性包含一组子属性的逻辑属性。可以使用点表示法或组表示法为这些子属性分配属性。
+如果您希望声明一个属性来存储不一定是QML对象类型值的值列表，则应声明一个var属性。
 
-For example, the Text type has a font group property. Below, the first Text object initializes its font values using dot notation, while the second uses group notation:
-例如，该类型具有 group 属性。下面，第一个对象使用点表示法初始化其 font 值，而第二个对象使用组表示法：
+#### Grouped Properties
 
+在某些情况下，属性包含一组子属性的逻辑属性。可以使用点表示法或组表示法为这些子属性赋值。
+
+例如，该Text类型具有 group 属性。下面，第一个对象使用点表示法初始化其 font 值，而第二个对象使用组表示法：
+
+```qml
 Text {
     //dot notation
     font.pixelSize: 12
@@ -280,51 +287,51 @@ Text {
     //group notation
     font { pixelSize: 12; b: true }
 }
-Grouped property types are types which have subproperties. If a grouped property type is an object type (as opposed to a value type), the property that holds it must be read-only. This is to prevent you from replacing the object the subproperties belong to.
+```
+
 分组属性类型是具有子属性的类型。如果分组属性类型是对象类型（而不是值类型），则保存该属性的属性必须是只读的。这是为了防止您替换子属性所属的对象。
 
-Property Aliases 属性别名
-Property aliases are properties which hold a reference to another property. Unlike an ordinary property definition, which allocates a new, unique storage space for the property, a property alias connects the newly declared property (called the aliasing property) as a direct reference to an existing property (the aliased property).
-属性别名是保存对另一个属性的引用的属性。与为属性分配新的唯一存储空间的普通属性定义不同，属性别名将新声明的属性（称为别名属性）连接起来，作为对现有属性（别名属性）的直接引用。
+#### Property Aliases 
 
-A property alias declaration looks like an ordinary property definition, except that it requires the alias keyword instead of a property type, and the right-hand-side of the property declaration must be a valid alias reference:
+属性别名是保存对另一个属性的引用的属性。与为属性分配新的唯一存储空间的普通属性定义不同，属性别名将新声明的属性（称为别名属性）连接起来，作为对现有属性（被别名属性）的直接引用。
+
 属性别名声明看起来像普通的属性定义，只不过它需要 alias 关键字而不是属性类型，并且属性声明的右侧必须是有效的别名引用：
 
+```qml
 [default] property alias <name>: <alias reference>
+```
 
-Unlike an ordinary property, an alias has the following restrictions:
 与普通属性不同，别名具有以下限制：
 
-It can only refer to an object, or the property of an object, that is within the scope of the type within which the alias is declared.
-它只能引用在声明别名的范围内的对象或对象的属性。
-It cannot contain arbitrary JavaScript expressions
-它不能包含任意 JavaScript 表达式
-It cannot refer to objects declared outside of the scope of its type.
-它不能引用在其类型范围之外声明的对象。
-The alias reference is not optional, unlike the optional default value for an ordinary property; the alias reference must be provided when the alias is first declared.
-别名引用不是可选的，这与普通属性的可选默认值不同;首次声明别名时，必须提供别名引用。
-It cannot refer to attached properties.
-它不能引用 。
-It cannot refer to properties inside a hierarchy with depth 3 or greater. The following code will not work:
-它不能引用深度为 3 或更大的层次结构中的属性。以下代码将不起作用：
+- 它只能引用在声明别名的范围内的对象或对象的属性。
+- 它不能包含任意 JavaScript 表达式
+- 它不能引用在其类型范围之外声明的对象。
+- 别名引用不是可选的，这与普通属性的可选默认值不同;首次声明别名时，必须提供别名引用。
+- 它不能引用附加属性。
+- 它不能引用深度为 3 或更大的层次结构中的属性。以下代码将不起作用：
+
+```qml
 property alias color: myItem.myRect.border.color
 
 Item {
     id: myItem
     property Rectangle myRect
 }
+```
 
-However, aliases to properties that are up to two levels deep will work.
 但是，最多两级深度的属性的别名将起作用。
 
+```qml
 property alias color: rectangle.border.color
 
 Rectangle {
     id: rectangle
 }
-For example, below is a Button type with a buttonText aliased property which is connected to the text object of the Text child:
-例如，下面是一个 Button 具有 buttonText 别名属性的类型，该属性连接到子 text 对象：
+```
 
+例如，下面是一个 Button 具有 buttonText 别名属性的类型，该属性连接到子 Text 对象：
+
+```qml
 // Button.qml
 import QtQuick 2.0
 
@@ -335,8 +342,9 @@ Rectangle {
 
     Text { id: textItem }
 }
-The following code would create a Button with a defined text string for the child Text object:
-以下代码将为子对象创建一个 Button 定义的文本字符串：
+```
+
+以下代码将为子对象Text创建一个 Button 定义的文本字符串：
 
 Button { buttonText: "Click Me" }
 Here, modifying buttonText directly modifies the textItem.text value; it does not change some other value that then updates textItem.text. If buttonText was not an alias, changing its value would not actually change the displayed text at all, as property bindings are not bi-directional: the buttonText value would have changed if textItem.text was changed, but not the other way around.
