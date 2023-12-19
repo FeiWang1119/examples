@@ -11,3 +11,11 @@ vim.g.autoformat = false
 local opt = vim.opt
 
 opt.wrap = true -- Disable line wrap
+
+-- add qml filetype 
+-- TSInstall qmljs
+vim.filetype.add({
+  extension = {
+    qml = "qmljs",
+  },
+})
