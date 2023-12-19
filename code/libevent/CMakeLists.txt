@@ -13,3 +13,4 @@ set(CMAKE_INCLUDE_CURRENT_DIR on)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
 add_subdirectory(hello-world)
+add_subdirectory(simple-blocking-httpclient)
