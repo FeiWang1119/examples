@@ -346,15 +346,17 @@ Rectangle {
 
 以下代码将为子对象Text创建一个 Button 定义的文本字符串：
 
+```qml
 Button { buttonText: "Click Me" }
-Here, modifying buttonText directly modifies the textItem.text value; it does not change some other value that then updates textItem.text. If buttonText was not an alias, changing its value would not actually change the displayed text at all, as property bindings are not bi-directional: the buttonText value would have changed if textItem.text was changed, but not the other way around.
+```
+
 这里修改 buttonText 直接修改textItem.text值;它不会更改其他一些值，然后更新 textItem.text。如果不是 buttonText 别名，则更改其值实际上根本不会更改显示的文本，因为属性绑定不是双向的：如果更改了 textItem.text，则该值会更改， buttonText 但反之则不会。
 
-Considerations for Property Aliases
-属性别名的注意事项
-Aliases are only activated once a component has been fully initialized. An error is generated when an uninitialized alias is referenced. Likewise, aliasing an aliasing property will also result in an error.
+##### Considerations for Property Aliases
+
 只有在组件完全初始化后，才会激活别名。引用未初始化的别名时会生成错误。同样，对别名属性进行别名化也会导致错误。
 
+```qml
 property alias widgetLabel: label
 
 //will generate an error
@@ -364,13 +366,14 @@ property alias widgetLabel: label
 //property alias widgetLabelText: widgetLabel.text
 
 Component.onCompleted: widgetLabel.text = "Alias completed Initialization"
+```
 
 When importing a QML object type with a property alias in the root object, however, the property appear as a regular Qt property and consequently can be used in alias references.
-但是，当在根对象中导入带有属性别名的属性时，该属性显示为常规的 Qt 属性，因此可以在别名引用中使用。
+但是，当在根对象中导入带有属性别名的QML对象类型时，该属性显示为常规的 Qt 属性，因此可以在别名引用中使用。
 
-It is possible for an aliasing property to have the same name as an existing property, effectively overwriting the existing property. For example, the following QML type has a color alias property, named the same as the built-in Rectangle::color property:
-别名属性可以与现有属性同名，从而有效地覆盖现有属性。例如，以下QML类型具有 color 别名属性，其名称与内置属性相同：
+别名属性可以与现有属性同名，从而有效地覆盖现有属性。例如，以下QML类型具有 color 别名属性，其名称与内置 Rectangle::color 属性相同：
 
+```qml
 Rectangle {
     id: coloredrectangle
     property alias color: bluerectangle.color
@@ -394,14 +397,15 @@ Rectangle {
         color = "#111111"
     }
 }
-Any object that use this type and refer to its color property will be referring to the alias rather than the ordinary Rectangle::color property. Internally, however, the rectangle can correctly set its color property and refer to the actual defined property rather than the alias.
-使用此类型并引用其 color 属性的任何对象都将引用别名而不是普通属性。但是，在内部，矩形可以正确设置其 color 属性并引用实际定义的属性，而不是别名。
+```
 
-Property Aliases and Types
-属性别名和类型
-Property aliases cannot have explicit type specifications. The type of a property alias is the declared type of the property or object it refers to. Therefore, if you create an alias to an object referenced via id with extra properties declared inline, the extra properties won't be accessible through the alias:
+使用此类型并引用其 color 属性的任何对象都将引用别名而不是普通 Rectangle::color 属性。但是，在内部，矩形可以正确设置其 color 属性并引用实际定义的属性，而不是别名。
+
+##### Property Aliases and Types
+
 属性别名不能具有显式类型规范。属性别名的类型是它所引用的属性或对象的声明类型。因此，如果为通过 id 引用的对象创建别名，并使用内联声明的额外属性，则无法通过别名访问额外属性：
 
+```qml
 // MyItem.qml
 Item {
     property alias inner: innerItem
@@ -411,16 +415,20 @@ Item {
         property int extraProperty
     }
 }
-You cannot initialize inner.extraProperty from outside of this component, as inner is only an Item:
-您不能从此组件的外部进行初始化，因为 inner 只是一个：
+```
 
+您不能从此组件的外部进行初始化 inner.extraProperty，因为 inner 只是一个 Item：
+
+```qml
 // main.qml
 MyItem {
     inner.extraProperty: 5 // fails
 }
-However, if you extract the inner object into a separate component with a dedicated .qml file, you can instantiate that component instead and have all its properties available through the alias:
+```
+
 但是，如果使用专用的 .qml 文件将内部对象提取到单独的组件中，则可以实例化该组件，并通过别名提供其所有属性：
 
+```qml
 // MainItem.qml
 Item {
     // Now you can access inner.extraProperty, as inner is now an ExtraItem
@@ -435,13 +443,15 @@ Item {
 Item {
     property int extraProperty
 }
-Default Properties 默认属性
-An object definition can have a single default property. A default property is the property to which a value is assigned if an object is declared within another object's definition without declaring it as a value for a particular property.
-对象定义可以具有单个默认属性。默认属性是将一个对象声明为另一个对象的定义，而没有将其声明为特定属性的值时，为其分配值的属性。
+```
 
-Declaring a property with the optional default keyword marks it as the default property. For example, say there is a file MyLabel.qml with a default property someText:
+#### Default Properties
+
+对象定义可以具有单个默认属性。默认属性是将一个对象声明为另一个对象的定义，而没有将其声明为特定属性的值时，为其赋值的属性。
+
 使用 optional default 关键字声明属性会将其标记为默认属性。例如，假设有一个具有默认属性 someText 的文件 MyLabel.qml：
 
+```qml
 // MyLabel.qml
 import QtQuick 2.0
 
@@ -450,27 +460,30 @@ Text {
 
     text: "Hello, " + someText.text
 }
-The someText value could be assigned to in a MyLabel object definition, like this:
-可以在 someText MyLabel 对象定义中将该值赋值，如下所示：
+```
 
+可以在 MyLabel 对象定义中将该值someText赋值，如下所示：
+
+```qml
 MyLabel {
     Text { text: "world!" }
 }
-This has exactly the same effect as the following:
+```
+
 这与以下效果完全相同：
 
+```qml
 MyLabel {
     someText: Text { text: "world!" }
 }
-However, since the someText property has been marked as the default property, it is not necessary to explicitly assign the Text object to this property.
-但是，由于该 someText 属性已标记为默认属性，因此无需将对象显式分配给此属性。
+```
+但是，由于该 someText 属性已标记为默认属性，因此无需将 Text 对象显式赋值给此属性。
 
-You will notice that child objects can be added to any Item-based type without explicitly adding them to the children property. This is because the default property of Item is its data property, and any items added to this list for an Item are automatically added to its list of children.
-您会注意到，可以将子对象添加到任何基于的类型中，而无需将它们显式添加到属性中。这是因为 的默认属性是它的 data 属性，并且添加到此列表中的任何项都会自动添加到其列表中。
+您会注意到，可以将子对象添加到任何基于Item的类型中，而无需将它们显式添加到 children 属性中。这是因为 Item 的默认属性是它的 data 属性，并且添加到此列表中的任何项都会自动添加到其 children 列表中。
 
-Default properties can be useful for reassigning the children of an item. For example:
-默认属性可用于重新分配项的子项。例如：
+默认属性可用于重新赋值一个项的子项。例如：
 
+```qml
 Item {
     default property alias content: inner.children
 
@@ -478,77 +491,79 @@ Item {
         id: inner
      }
 }
-By setting the default property alias to inner.children, any object assigned as a child of the outer item is automatically reassigned as a child of the inner item.
+```
+
 通过将默认属性别名设置为 inner.children ，任何指定为外部项的子项的对象都将自动重新指定为内部项的子项。
 
-Required Properties 必需属性
-An object declaration may define a property as required, using the required keyword. The syntax is
-对象声明可以使用 required 关键字根据需要定义属性。语法是
+#### Required Properties
 
+对象声明可以使用 required 关键字定义 required 属性。语法是
+
+```qml
 required property <propertyType> <propertyName>
+```
 
-As the name suggests, required properties must be set when an instance of the object is created. Violation of this rule will result in QML applications not starting if it can be detected statically. In case of dynamically instantiated QML components (for instance via Qt.createComponent()), violating this rule results in a warning and a null return value.
-顾名思义，在创建对象的实例时必须设置所需的属性。如果可以静态检测到QML应用程序，则违反此规则将导致QML应用程序无法启动。对于动态实例化的QML组件（例如通过（）），违反此规则会导致警告和空返回值。
+顾名思义，在创建对象的实例时必须设置 required 属性。如果可以静态检测到QML应用程序，则违反此规则将导致QML应用程序无法启动。对于动态实例化的QML组件（例如通过Qt.createComponent()），违反此规则会导致警告和空返回值。
 
-It's possible to make an existing property required with
 可以使现有属性成为必需的
 
+```qml
 required <propertyName>
+```
 
-The following example shows how to create a custom Rectangle component, in which the color property always needs to be specified.
 下面的示例演示如何创建自定义 Rectangle 组件，其中始终需要指定 color 属性。
 
+```qml
 // ColorRectangle.qml
 Rectangle {
     required color
 }
-Note: You can't assign an initial value to a required property from QML, as that would go directly against the intended usage of required properties.
-注意：您不能从QML中为必需属性分配初始值，因为这将直接违背必需属性的预期用途。
+```
 
-Required properties play a special role in model-view-delegate code: If the delegate of a view has required properties whose names match with the role names of the view's model, then those properties will be initialized with the model's corresponding values. For more information, visit the Models and Views in Qt Quick page.
-必需属性在模型-视图-委托代码中扮演特殊角色：如果视图的委托具有必需的属性，其名称与视图模型的角色名称匹配，则这些属性将使用模型的相应值进行初始化。有关更多信息，请访问该页面。
+注意：您不能从QML中为 required 属性分配初始值，因为这将直接违背 required 属性的预期用途。
 
-See QQmlComponent::createWithInitialProperties, QQmlApplicationEngine::setInitialProperties and QQuickView::setInitialProperties for ways to initialize required properties from C++.
-请参阅 ，以及从 C++ 初始化所需属性的方法。
+Required 属性在模型-视图-代理代码中扮演特殊角色：如果视图的代理具有 required 的属性，其名称与视图模型的角色名称匹配，则这些属性将使用模型的相应值进行初始化。
 
-Read-Only Properties 只读属性
-An object declaration may define a read-only property using the readonly keyword, with the following syntax:
+#### Read-Only Properties
+
 对象声明可以使用 readonly 关键字定义只读属性，语法如下：
 
+```qml
 readonly property <propertyType> <propertyName> : <value>
+```
 
-Read-only properties must be assigned a static value or a binding expression on initialization. After a read-only property is initialized, you cannot change its static value or binding expression anymore.
 在初始化时，必须为只读属性分配静态值或绑定表达式。初始化只读属性后，无法再更改其静态值或绑定表达式。
 
-For example, the code in the Component.onCompleted block below is invalid:
 例如，以下 Component.onCompleted 块中的代码无效：
 
+```qml
 Item {
     readonly property int someNumber: 10
 
     Component.onCompleted: someNumber = 20  // TypeError: Cannot assign to read-only property
 }
-Note: A read-only property cannot also be a default property.
-注： 只读属性不能同时也是属性。
+```
 
-Property Modifier Objects
-属性修饰符对象
-Properties can have property value modifier objects associated with them. The syntax for declaring an instance of a property modifier type associated with a particular property is as follows:
-属性可以与它们相关联。声明与特定属性关联的属性修饰符类型的实例的语法如下：
+注： 只读属性不能同时也是默认属性。
 
+#### Property Modifier Objects
+
+属性可以有与它们相关联属性值修复符对象。声明与特定属性关联的属性修饰符类型的实例的语法如下：
+
+```qml
 <PropertyModifierTypeName> on <propertyName> {
     // attributes of the object instance
 }
-This is commonly referred to as "on" syntax.
+```
+
 这通常称为“on”语法。
 
-It is important to note that the above syntax is in fact an object declaration which will instantiate an object which acts on a pre-existing property.
-需要注意的是，上述语法实际上是一个将实例化一个对象，该对象作用于预先存在的属性。
+需要注意的是，上述语法实际上是一个对象声明将实例化一个对象，该对象作用于预先存在的属性。
 
-Certain property modifier types may only be applicable to specific property types, however this is not enforced by the language. For example, the NumberAnimation type provided by QtQuick will only animate numeric-type (such as int or real) properties. Attempting to use a NumberAnimation with non-numeric property will not result in an error, however the non-numeric property will not be animated. The behavior of a property modifier type when associated with a particular property type is defined by its implementation.
 某些属性修饰符类型可能仅适用于特定的属性类型，但语言不会强制执行。例如，提供的 QtQuick 类型将仅对数值 NumberAnimation 类型（例如 int 或 real ）属性进行动画处理。尝试使用 NumberAnimation 具有非数字属性的属性不会导致错误，但不会对非数字属性进行动画处理。属性修饰符类型在与特定属性类型关联时的行为由其实现定义。
 
-Signal Attributes 信号属性
+### Signal Attributes
+
 A signal is a notification from an object that some event has occurred: for example, a property has changed, an animation has started or stopped, or when an image has been downloaded. The MouseArea type, for example, has a clicked signal that is emitted when the user clicks within the mouse area.
 信号是来自对象的通知，表明发生了某些事件：例如，属性已更改、动画已启动或停止，或者图像已下载。例如，该类型具有当用户在鼠标区域内单击时发出的信号。
 
