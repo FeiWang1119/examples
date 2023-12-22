@@ -211,6 +211,8 @@ void run(void)
 
 int main(int c, char **v)
 {
+    // each character written to stdout will be immediately displayed without waiting for a buffer
+    // to be filled.
     setvbuf(stdout, NULL, _IONBF, 0);
 
     run();
