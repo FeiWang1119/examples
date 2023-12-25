@@ -564,15 +564,13 @@ Item {
 
 ### Signal Attributes
 
-A signal is a notification from an object that some event has occurred: for example, a property has changed, an animation has started or stopped, or when an image has been downloaded. The MouseArea type, for example, has a clicked signal that is emitted when the user clicks within the mouse area.
-信号是来自对象的通知，表明发生了某些事件：例如，属性已更改、动画已启动或停止，或者图像已下载。例如，该类型具有当用户在鼠标区域内单击时发出的信号。
+信号是来自对象的通知，表明发生了某些事件：例如，属性已更改、动画已启动或停止，或者图像已下载。例如，该类型具有当用户在鼠标区域内单击时发出的点击信号。
 
-An object can be notified through a signal handler whenever a particular signal is emitted. A signal handler is declared with the syntax on<Signal> where <Signal> is the name of the signal, with the first letter capitalized. The signal handler must be declared within the definition of the object that emits the signal, and the handler should contain the block of JavaScript code to be executed when the signal handler is invoked.
-每当发出特定信号时，都可以通过 通知对象。信号处理程序的声明语法是 where 是信号的名称，第一个字母大写。信号处理程序必须在发出信号的对象的定义中声明，并且处理程序应包含在调用信号处理程序时要执行的 JavaScript 代码块。
+每当发出特定信号时，都可以通过一个信号处理通知对象。信号处理程序的声明语法是 on<Signal>, 其中 <Signal> 是信号的名称，第一个字母大写。信号处理程序必须在发出信号的对象的定义中声明，并且处理程序应包含在调用信号处理程序时要执行的 JavaScript 代码块。
 
-For example, the onClicked signal handler below is declared within the MouseArea object definition, and is invoked when the MouseArea is clicked, causing a console message to be printed:
 例如，下面的 onClicked 信号处理程序在对象定义中声明，并在单击时调用，从而打印控制台消息：
 
+```qml
 import QtQuick 2.0
 
 Item {
@@ -585,19 +583,21 @@ Item {
         }
     }
 }
-Defining Signal Attributes
-定义信号属性
-A signal may be defined for a type in C++ by registering a Q_SIGNAL of a class which is then registered with the QML type system. Alternatively, a custom signal for an object type may be defined in an object declaration in a QML document with the following syntax:
-可以通过注册一个类来为C++中的类型定义一个信号，然后向QML类型系统注册该类。或者，可以在QML文档的对象声明中使用以下语法定义对象类型的自定义信号：
+```
 
+#### Defining Signal Attributes
+
+可以通过注册一个类的 Q_SIGNAL 来为C++中的类型定义一个信号，然后向QML类型系统注册该类。或者，可以在QML文档的对象声明中使用以下语法定义对象类型的自定义信号：
+
+```qml
 signal <signalName>[([<parameterName>: <parameterType>[, ...]])]
+```
 
-Attempting to declare two signals or methods with the same name in the same type block is an error. However, a new signal may reuse the name of an existing signal on the type. (This should be done with caution, as the existing signal may be hidden and become inaccessible.)
 尝试在同一类型块中声明两个同名的信号或方法是错误的。但是，新信号可能会在类型上重用现有信号的名称。（这应谨慎进行，因为现有信号可能会被隐藏并变得无法访问。
 
-Here are three examples of signal declarations:
 以下是信号声明的三个示例：
 
+```qml
 import QtQuick 2.0
 
 Item {
@@ -605,31 +605,31 @@ Item {
     signal hovered()
     signal actionPerformed(action: string, actionResult: int)
 }
-You can also specify signal parameters in property style syntax:
+```
+
 您还可以在属性样式语法中指定信号参数：
 
+```qml
 signal actionCanceled(string action)
-In order to be consistent with method declarations, you should prefer the type declarations using colons.
+```
+
 为了与方法声明保持一致，应首选使用冒号的类型声明。
 
-If the signal has no parameters, the "()" brackets are optional. If parameters are used, the parameter types must be declared, as for the string and var arguments for the actionPerformed signal above. The allowed parameter types are the same as those listed under Defining Property Attributes on this page.
-如果信号没有参数，则“（）”括号是可选的。如果使用参数，则必须声明参数类型，例如上述 actionPerformed 信号的 string and var 参数。允许的参数类型与本页下面列出的参数类型相同。
+如果信号没有参数，则“（）”括号是可选的。如果使用参数，则必须声明参数类型，例如上述 actionPerformed 信号的 string and var 参数。允许的参数类型与本页下面Property Attributes列出的参数类型相同。
 
-To emit a signal, invoke it as a method. Any relevant signal handlers will be invoked when the signal is emitted, and handlers can use the defined signal argument names to access the respective arguments.
 若要发出信号，请将其作为方法调用。当发出信号时，将调用任何相关参数，并且处理程序可以使用定义的信号参数名称来访问相应的参数。
 
-Property Change Signals 属性更改信号
-QML types also provide built-in property change signals that are emitted whenever a property value changes, as previously described in the section on property attributes. See the upcoming section on property change signal handlers for more information about why these signals are useful, and how to use them.
+#### Property Change Signals
+
 QML类型还提供内置的属性更改信号，每当属性值更改时都会发出这些信号，如前面的“一节”中所述。有关这些信号为何有用以及如何使用它们的更多信息，请参阅下一节。
 
-Signal Handler Attributes
-信号处理程序属性
-Signal handlers are a special sort of method attribute, where the method implementation is invoked by the QML engine whenever the associated signal is emitted. Adding a signal to an object definition in QML will automatically add an associated signal handler to the object definition, which has, by default, an empty implementation. Clients can provide an implementation, to implement program logic.
-信号处理程序是一种特殊的，每当发出相关信号时，QML引擎都会调用方法实现。在QML中将信号添加到对象定义中会自动将关联的信号处理程序添加到对象定义中，默认情况下，该对象定义具有空实现。客户端可以提供实现，实现程序逻辑。
+### Signal Handler Attributes
 
-Consider the following SquareButton type, whose definition is provided in the SquareButton.qml file as shown below, with signals activated and deactivated:
+信号处理程序是一种特殊的方法属性，每当发出相关信号时，QML引擎都会调用方法实现。在QML中将信号添加到对象定义中会自动将关联的信号处理程序添加到对象定义中，默认情况下，该对象定义具有空实现。客户端可以提供实现，实现程序逻辑。
+
 请考虑以下 SquareButton 类型，其定义在 SquareButton.qml 文件中提供，如下所示，其中包含 signals activated 和 deactivated ：
 
+```qml
 // SquareButton.qml
 Rectangle {
     id: root
@@ -646,25 +646,26 @@ Rectangle {
         onPressed: (mouse)=> root.activated(mouse.x, mouse.y)
     }
 }
-These signals could be received by any SquareButton objects in another QML file in the same directory, where implementations for the signal handlers are provided by the client:
+```
+
 这些信号可以由同一目录中另一个QML文件中的任何 SquareButton 对象接收，其中信号处理程序的实现由客户端提供：
 
+```qml
 // myapplication.qml
 SquareButton {
     onDeactivated: console.log("Deactivated!")
     onActivated: (xPosition, yPosition)=> console.log("Activated at " + xPosition + "," + yPosition)
 }
-Signal handlers don't have to declare their parameter types because the signal already specifies them. The arrow function syntax shown above does not support type annotations.
+```
+
 信号处理程序不必声明其参数类型，因为信号已指定它们。上面显示的箭头函数语法不支持类型注释。
 
-See the Signal and Handler Event System for more details on use of signals.
-有关使用信号的更多详细信息，请参见 。
 
-Property Change Signal Handlers
-属性更改信号处理程序
-Signal handlers for property change signal take the syntax form on<Property>Changed where <Property> is the name of the property, with the first letter capitalized. For example, although the TextInput type documentation does not document a textChanged signal, this signal is implicitly available through the fact that TextInput has a text property and so it is possible to write an onTextChanged signal handler to be called whenever this property changes:
-属性更改信号的信号处理程序采用 Changed 上的语法形式，其中属性的名称，第一个字母大写。例如，尽管类型文档没有记录信号，但该信号通过具有属性的事实隐式可用，因此可以编写一个 textChanged onTextChanged 信号处理程序，以便在此属性更改时调用：
+##### Property Change Signal Handlers
 
+属性更改信号的信号处理程序采用 on<Property>Changed 上的语法形式，其中<Property>是属性的名称，第一个字母大写。例如，尽管TextInput类型文档没有记录textChanged 信号，但该信号通过TextInput具有text属性的事实隐式可用，因此可以编写一个 onTextChanged 信号处理程序，以便在此属性更改时调用：
+
+```qml
 import QtQuick 2.0
 
 TextInput {
@@ -672,28 +673,29 @@ TextInput {
 
     onTextChanged: console.log("Text has changed to:", text)
 }
-Method Attributes 方法属性
-A method of an object type is a function which may be called to perform some processing or trigger further events. A method can be connected to a signal so that it is automatically invoked whenever the signal is emitted. See Signal and Handler Event System for more details.
-对象类型的方法是一个函数，可以调用它来执行某些处理或触发进一步的事件。方法可以连接到信号，以便在发出信号时自动调用它。有关更多详细信息，请参阅。
+```
 
-Defining Method Attributes
-定义方法属性
-A method may be defined for a type in C++ by tagging a function of a class which is then registered with the QML type system with Q_INVOKABLE or by registering it as a Q_SLOT of the class. Alternatively, a custom method can be added to an object declaration in a QML document with the following syntax:
-可以通过标记类的函数来为C++中的类型定义方法，然后使用QML类型系统注册该函数或将其注册为类。或者，可以使用以下语法将自定义方法添加到QML文档中的对象声明中：
+### Method Attributes
 
+对象类型的方法是一个函数，可以调用它来执行某些处理或触发进一步的事件。方法可以连接到信号，以便在发出信号时自动调用它。
+
+#### Defining Method Attributes
+
+可以通过标记类的函数来为C++中的类型定义方法，然后使用QML类型系统 Q_INVOKABLE 注册该函数或将其注册为类的 Q_SLOT。或者，可以使用以下语法将自定义方法添加到QML文档中的对象声明中：
+
+```qml
 function <functionName>([<parameterName>[: <parameterType>][, ...]]) [: <returnType>] { <body> }
-Methods can be added to a QML type in order to define standalone, reusable blocks of JavaScript code. These methods can be invoked either internally or by external objects.
+```
+
 方法可以添加到QML类型中，以定义独立的，可重用的JavaScript代码块。这些方法可以在内部调用，也可以由外部对象调用。
 
-Unlike signals, method parameter types do not have to be declared as they default to the var type. You should, however, declare them in order to help qmlcachegen generate more performant code, and to improve maintainability.
 与信号不同，方法参数类型不必声明，因为它们默认为类型 var 。但是，您应该声明它们，以帮助 qmlcachegen 生成性能更高的代码，并提高可维护性。
 
-Attempting to declare two methods or signals with the same name in the same type block is an error. However, a new method may reuse the name of an existing method on the type. (This should be done with caution, as the existing method may be hidden and become inaccessible.)
 尝试在同一类型块中声明两个同名的方法或信号是错误的。但是，新方法可以在类型上重用现有方法的名称。（应谨慎执行此操作，因为现有方法可能会被隐藏并变得无法访问。
 
-Below is a Rectangle with a calculateHeight() method that is called when assigning the height value:
 下面是一个在赋值 height 时调用 calculateHeight() 的方法：
 
+```qml
 import QtQuick 2.0
 Rectangle {
     id: rect
@@ -705,9 +707,11 @@ Rectangle {
     width: 100
     height: calculateHeight()
 }
-If the method has parameters, they are accessible by name within the method. Below, when the MouseArea is clicked it invokes the moveTo() method which can then refer to the received newX and newY parameters to reposition the text:
-如果方法具有参数，则可在方法中按名称访问这些参数。下面，当单击 时，它会调用该方法， moveTo() 然后可以引用接收 newX 到 和 newY 参数来重新定位文本：
+```
 
+如果方法具有参数，则可在方法中按名称访问这些参数。下面，当单击 MouseArea 时，它会调用该方法， moveTo() 然后可以引用接收 newX 到 和 newY 参数来重新定位文本：
+
+```qml
 import QtQuick 2.0
 
 Item {
@@ -729,8 +733,10 @@ Item {
         text: "Move me!"
     }
 }
-Attached Properties and Attached Signal Handlers
-附加属性和附加信号处理程序
+```
+
+### Attached Properties and Attached Signal Handlers
+
 Attached properties and attached signal handlers are mechanisms that enable objects to be annotated with extra properties or signal handlers that are otherwise unavailable to the object. In particular, they allow objects to access properties or signals that are specifically relevant to the individual object.
 附加属性和附加信号处理程序是允许使用对象不可用的额外属性或信号处理程序对对象进行批注的机制。特别是，它们允许对象访问与单个对象特别相关的属性或信号。
 
