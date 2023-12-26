@@ -737,21 +737,20 @@ Item {
 
 ### Attached Properties and Attached Signal Handlers
 
-Attached properties and attached signal handlers are mechanisms that enable objects to be annotated with extra properties or signal handlers that are otherwise unavailable to the object. In particular, they allow objects to access properties or signals that are specifically relevant to the individual object.
 附加属性和附加信号处理程序是允许使用对象不可用的额外属性或信号处理程序对对象进行批注的机制。特别是，它们允许对象访问与单个对象特别相关的属性或信号。
 
-A QML type implementation may choose to create an attaching type in C++ with particular properties and signals. Instances of this type can then be created and attached to specific objects at run time, allowing those objects to access the properties and signals of the attaching type. These are accessed by prefixing the properties and respective signal handlers with the name of the attaching type.
-QML类型的实现可以选择具有特定的属性和信号。然后，可以在运行时创建此类型的实例并将其附加到特定对象，从而允许这些对象访问附加类型的属性和信号。可以通过在属性和相应的信号处理程序前面加上附加类型的名称来访问它们。
+QML类型的实现可以选择在C++创建具有特定的属性和信号的一个附加类型。然后，可以在运行时创建此类型的实例并将其附加到特定对象，从而允许这些对象访问附加类型的属性和信号。可以通过在属性和相应的信号处理程序前面加上附加类型的名称来访问它们。
 
-References to attached properties and handlers take the following syntax form:
 对附加属性和处理程序的引用采用以下语法形式：
 
+```qml
 <AttachingType>.<propertyName>
 <AttachingType>.on<SignalName>
+```
 
-For example, the ListView type has an attached property ListView.isCurrentItem that is available to each delegate object in a ListView. This can be used by each individual delegate object to determine whether it is the currently selected item in the view:
-例如，该类型具有一个附加属性，该属性可用于 中的每个委托对象。每个单独的委托对象都可以使用它来确定它是否是视图中的当前选定项：
+例如，该类型 ListView 具有一个附加属性 ListView.isCurrentItem，该属性可用于ListView 中的每个委托对象。每个单独的委托对象都可以使用它来确定它是否是视图中的当前选定项：
 
+```qml
 import QtQuick 2.0
 
 ListView {
@@ -762,12 +761,14 @@ ListView {
         color: ListView.isCurrentItem ? "red" : "yellow"
     }
 }
-In this case, the name of the attaching type is ListView and the property in question is isCurrentItem, hence the attached property is referred to as ListView.isCurrentItem.
+```
+
 在本例中，附加类型的名称为 ListView ，所讨论的属性是 isCurrentItem ，因此附加属性称为 ListView.isCurrentItem 。
 
-An attached signal handler is referred to in the same way. For example, the Component.onCompleted attached signal handler is commonly used to execute some JavaScript code when a component's creation process has been completed. In the example below, once the ListModel has been fully created, its Component.onCompleted signal handler will automatically be invoked to populate the model:
-附加的信号处理程序以相同的方式引用。例如，附加的信号处理程序通常用于在组件的创建过程完成后执行某些 JavaScript 代码。在下面的示例中，一旦完全创建，将自动调用其 Component.onCompleted 信号处理程序来填充模型：
 
+附加的信号处理程序以相同的方式引用。例如，附加的信号处理程序 Component.onCompleted 通常用于在组件的创建过程完成后执行某些 JavaScript 代码。在下面的示例中，一旦 ListModel 完全创建，将自动调用其 Component.onCompleted 信号处理程序来产生 model 项：
+
+```qml
 import QtQuick 2.0
 
 ListView {
@@ -781,17 +782,17 @@ ListView {
     }
     delegate: Text { text: index }
 }
-Since the name of the attaching type is Component and that type has a completed signal, the attached signal handler is referred to as Component.onCompleted.
-由于附加类型的名称是 ， Component 并且该类型具有信号，因此附加的信号处理程序称为 Component.onCompleted 。
+```
 
-A Note About Accessing Attached Properties and Signal Handlers
-有关访问附加属性和信号处理程序的说明
-A common error is to assume that attached properties and signal handlers are directly accessible from the children of the object to which these attributes have been attached. This is not the case. The instance of the attaching type is only attached to specific objects, not to the object and all of its children.
+由于附加类型的名称是 Component， 并且该类型具有信号，因此附加的信号处理程序称为 Component.onCompleted 。
+
+##### A Note About Accessing Attached Properties and Signal Handlers
+
 一个常见的错误是假定附加的属性和信号处理程序可以从这些属性附加到的对象的子级直接访问。事实并非如此。附加类型的实例仅附加到特定对象，而不附加到对象及其所有子对象。
 
-For example, below is a modified version of the earlier example involving attached properties. This time, the delegate is an Item and the colored Rectangle is a child of that item:
-例如，下面是涉及附加属性的前面示例的修改版本。这一次，委托是 ，而 colored 是该项的子项：
+例如，下面是涉及附加属性的前面示例的修改版本。这一次，委托是 Item ，而 colored Rectangle 是该项的子项：
 
+```qml
 import QtQuick 2.0
 
 ListView {
@@ -806,9 +807,11 @@ ListView {
         }
     }
 }
-This does not work as expected because ListView.isCurrentItem is attached only to the root delegate object, and not its children. Since the Rectangle is a child of the delegate, rather than being the delegate itself, it cannot access the isCurrentItem attached property as ListView.isCurrentItem. So instead, the rectangle should access isCurrentItem through the root delegate:
-这不能按预期工作，因为 ListView.isCurrentItem 仅附加到根委托对象，而不是其子对象。由于 是委托的子级，而不是委托本身，因此它不能 isCurrentItem 以 . ListView.isCurrentItem 因此，矩形应该通过根委托进行访问 isCurrentItem ：
+```
 
+这不能按预期工作，因为 ListView.isCurrentItem 仅附加到根委托对象，而不是其子对象。由于 Rectangle 是委托的子级，而不是委托本身，因此它不能 isCurrentItem 附加属性 以及 ListView.isCurrentItem. 因此，矩形应该通过根委托进行访问 isCurrentItem ：
+
+```qml
 ListView {
     //....
     delegate: Item {
@@ -821,13 +824,15 @@ ListView {
         }
     }
 }
-Now delegateItem.ListView.isCurrentItem correctly refers to the isCurrentItem attached property of the delegate.
+```
+
 现在 delegateItem.ListView.isCurrentItem 正确地引用了委托的 isCurrentItem 附加属性。
 
-Enumeration Attributes 枚举属性
-Enumerations provide a fixed set of named choices. They can be declared in QML using the enum keyword:
+### Enumeration Attributes
+
 枚举提供一组固定的命名选项。它们可以在QML中使用 enum 关键字声明：
 
+```qml
 // MyText.qml
 Text {
     enum TextType {
@@ -835,12 +840,13 @@ Text {
         Heading
     }
 }
-As shown above, enumeration types (e.g. TextType) and values (e.g. Normal) must begin with an uppercase letter.
-如上所示，枚举类型（例如）和值（例如 TextType Normal ）必须以大写字母开头。
+```
 
-Values are referred to via <Type>.<EnumerationType>.<Value> or <Type>.<Value>.
+如上所示，枚举类型（例如 TextType）和值（例如 Normal ）必须以大写字母开头。
+
 值通过 <Type>.<EnumerationType>.<Value> 或 <Type>.<Value> 引用。
 
+```qml
 // MyText.qml
 Text {
     enum TextType {
@@ -853,8 +859,5 @@ Text {
     font.bold: textType == MyText.TextType.Heading
     font.pixelSize: textType == MyText.TextType.Heading ? 24 : 12
 }
-More information on enumeration usage in QML can be found in the QML Value Types enumeration documentation.
-有关QML中枚举用法的更多信息，请参见文档。
+```
 
-The ability to declare enumerations in QML was introduced in Qt 5.10.
-在Qt 5.10中引入了在QML中声明枚举的功能。
