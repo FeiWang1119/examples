@@ -289,14 +289,13 @@ struct Foreign
 
 ## Defining QML-Specific Types and Attributes
 
-Providing Attached Properties
-提供附加属性
-In the QML language syntax, there is a notion of attached properties and attached signal handlers, which are additional attributes that are attached to an object. Essentially, such attributes are implemented and provided by an attaching type, and these attributes may be attached to an object of another type. This contrasts with ordinary object properties which are provided by the object type itself (or the object's inherited type).
-在QML语言语法中，有一个概念，它们是附加到对象的附加属性。从本质上讲，这些属性是由附加类型实现和提供的，并且这些属性可以附加到另一种类型的对象。这与由对象类型本身（或对象的继承类型）提供的普通对象属性形成鲜明对比。
+### Providing Attached Properties
 
-For example, the Item below uses attached properties and attached handlers:
+在QML语言语法中，有一个附加属性和附加信号处理程序的概念，它们是附加到对象的额外属性。从本质上讲，这些属性是由附加类型实现和提供的，并且这些属性可以附加到另一种类型的对象。这与由对象类型本身（或对象的继承类型）提供的普通对象属性形成鲜明对比。
+
 例如，下面使用附加属性和附加处理程序：
 
+```qml
 import QtQuick 2.0
 
 Item {
@@ -306,45 +305,42 @@ Item {
     Keys.enabled: false
     Keys.onReturnPressed: console.log("Return key was pressed")
 }
-Here, the Item object is able to access and set the values of Keys.enabled and Keys.onReturnPressed. This allows the Item object to access these extra attributes as an extension to its own existing attributes.
+```
+
 在这里，对象能够访问和设置 Keys.enabled 和 Keys.onReturnPressed 的值。这允许对象访问这些额外的属性，作为其自身现有属性的扩展。
 
-Steps for Implementing Attached Objects
-实现附加对象的步骤
-When considering the above example, there are several parties involved:
-在考虑上述示例时，涉及以下几方：
+### Steps for Implementing Attached Objects
 
-There is an instance of an anonymous attached object type, with an enabled and a returnPressed signal, that has been attached to the Item object to enable it to access and set these attributes.
-有一个匿名附加对象类型的实例，该实例带有 和 enabled returnPressed 信号，该实例已附加到该对象，使其能够访问和设置这些属性。
-The Item object is the attachee, to which the instance of the attached object type has been attached.
-对象是附加对象类型的实例已附加到的随包。
-Keys is the attaching type, which provides the attachee with a named qualifier, "Keys", through which it may access the attributes of the attached object type.
-是附加类型，它为随员提供命名限定符“Keys”，通过该限定符，它可以访问附加对象类型的属性。
-When the QML engine processes this code, it creates a single instance of the attached object type and attaches this instance to the Item object, thereby providing it with access to the enabled and returnPressed attributes of the instance.
+在考虑上述示例时，涉及以下几方面：
+
+- 有一个匿名附加对象类型的实例，该实例带有 enabled 和 returnPressed 信号，该实例已附加到该对象Item，使其能够访问和设置这些属性。
+- Item 对象是附加对象类型的实例已附加到的随包 attachee。
+- Keys 是附加类型，它为随员 attachee 提供命名限定符, “Keys”，通过该限定符，它可以访问附加对象类型的属性。
+
 当QML引擎处理此代码时，它会创建附加对象类型的单个实例，并将此实例附加到该对象，从而为其提供对实例的 enabled 和 returnPressed 属性的访问。
 
 The mechanisms for providing attached objects can be implemented from C++ by providing classes for the attached object type and attaching type. For the attached object type, provide a QObject-derived class that defines the attributes to be made accessible to attachee objects. For the attaching type, provide a QObject-derived class that:
-通过为附加对象类型和附加类型提供类，可以从 C++ 实现提供附加对象的机制。对于附加对象类型，请提供一个 -derived 类，该类定义要使附加对象能够访问的属性。对于附加类型，请提供一个 -derived 类，该类：
+该机制是在 C++ 通过为附加对象类型和附加类型提供类，实现提供附加对象。对于附加对象类型，请提供一个 QObect-derived 类，该类定义要使附加对象能够访问的属性。对于附加 attaching 类型，请提供一个 QObject-derived 类，该类：
 
-implements a static qmlAttachedProperties() with the following signature:
-实现具有以下签名的静态 qmlAttachedProperties（）：
+- 实现具有以下签名的 static qmlAttachedProperties（）：
+
+```c
 static <AttachedPropertiesType> *qmlAttachedProperties(QObject *object);
-This method should return an instance of the attached object type.
+```
+
 此方法应返回附加对象类型的实例。
 
-The QML engine invokes this method in order to attach an instance of the attached object type to the attachee specified by the object parameter. It is customary, though not strictly required, for this method implementation to parent the returned instance to object in order to prevent memory leaks.
-QML引擎调用此方法，以便将附加对象类型的实例附加到 object 参数指定的附加组件。通常（尽管不是严格要求）此方法实现将返回的实例 object 作为父级，以防止内存泄漏。
+QML引擎调用此方法，以便将附加attached对象类型的实例附加到 object 参数指定的附加 attachee 组件。通常（尽管不是严格要求）此方法实现将返回的实例 object 作为父级，以防止内存泄漏。
 
-This method is called at most once by the engine for each attachee object instance, as the engine caches the returned instance pointer for subsequent attached property accesses. Consequently the attachment object may not be deleted until the attachee object is destroyed.
-引擎对每个附加对象实例最多调用一次此方法，因为引擎会缓存返回的实例指针，以便后续附加属性访问。因此，在公文专员 object 被销毁之前，不得删除附件对象。
+引擎对每个附加attachee对象实例最多调用一次此方法，因为引擎会缓存返回的实例指针，以便后续附加属性访问。因此，在 attachment object 被销毁之前，不得删除附件 attachee 对象。
 
-is declared as an attaching type, by adding the QML_ATTACHED(attached) macro to the class declaration. The argument is the name of the attached object type
-通过将 （attached） 宏添加到类声明中，声明为附加类型。参数是附加对象类型的名称
-Implementing Attached Objects: An Example
-实现附加对象：示例
-For example, take the Message type described in an earlier example:
-例如，采用 Message ：
+- 通过将 QML_ATTACHED(attached) 宏添加到类声明中，声明为附加 attaching 类型。参数是附加attached对象类型的名称
 
+### Implementing Attached Objects: An Example
+
+例如，采用更早的 Message 类型为例：
+
+```c
 class Message : public QObject
 {
     Q_OBJECT
@@ -354,6 +350,8 @@ class Message : public QObject
 public:
     // ...
 };
+```
+
 Suppose it is necessary to trigger a signal on a Message when it is published to a message board, and also track when the message has expired on the message board. Since it doesn't make sense to add these attributes directly to a Message, as the attributes are more relevant to the message board context, they could be implemented as attached attributes on a Message object that are provided through a "MessageBoard" qualifier. In terms of the concepts described earlier, the parties involved here are:
 假设有必要在将消息发布到留言板 Message 时触发信号，并跟踪消息何时在留言板上过期。由于将这些属性直接添加到 Message 中没有意义，因为这些属性与消息板上下文更相关，因此它们可以作为 Message 通过“MessageBoard”限定符提供的对象上的附加属性实现。就前面描述的概念而言，这里涉及的各方是：
 
