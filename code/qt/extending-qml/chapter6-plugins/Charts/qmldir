@@ -1,0 +1,4 @@
+# The qmldir file declares the module name and the plugin that is made available by the module:
+
+module Charts
+plugin chartsplugin
