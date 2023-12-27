@@ -1,14 +1,10 @@
 # Defining QML Types from C++
 
-当使用C++代码扩展QML时，可以在QML类型系统中注册C++类，以使该类能够用作QML代码中的数据类型。虽然任何派生类的属性、方法和信号都可以从QML访问，但如中所述，这样的类在注册到类型系统之前不能用作QML的数据类型。此外，注册还可以提供其他功能，例如允许将类用作QML的实例化对象，或者允许从QML导入和使用类的单例实例。
+当使用C++代码扩展QML时，可以在QML类型系统中注册C++类，以使该类能够用作QML代码中的数据类型。虽然任何 QObject 派生类的属性、方法和信号都可以从QML访问，但如中所述，这样的类在注册到类型系统之前不能用作QML的数据类型。此外，注册还可以提供其他功能，例如允许将类用作QML的实例化对象，或者允许从QML导入和使用类的单例实例。
 
 此外，该模块还提供了实现QML特定功能的机制，例如C++中的附加属性和默认属性。
 
-（请注意，本文档中介绍的许多重要概念在本教程中进行了演示。
-
 注意：所有声明QML类型的标头都需要在项目包含路径中没有任何前缀的情况下访问。
-
-有关 C++ 和不同 QML 集成方法的更多信息，请参阅页面。
 
 ## Registering C++ Types with the QML Type System
 
@@ -352,18 +348,15 @@ public:
 };
 ```
 
-Suppose it is necessary to trigger a signal on a Message when it is published to a message board, and also track when the message has expired on the message board. Since it doesn't make sense to add these attributes directly to a Message, as the attributes are more relevant to the message board context, they could be implemented as attached attributes on a Message object that are provided through a "MessageBoard" qualifier. In terms of the concepts described earlier, the parties involved here are:
 假设有必要在将消息发布到留言板 Message 时触发信号，并跟踪消息何时在留言板上过期。由于将这些属性直接添加到 Message 中没有意义，因为这些属性与消息板上下文更相关，因此它们可以作为 Message 通过“MessageBoard”限定符提供的对象上的附加属性实现。就前面描述的概念而言，这里涉及的各方是：
 
-An instance of an anonymous attached object type, which provides a published signal and an expired property. This type is implemented by MessageBoardAttachedType below
-匿名附加对象类型的实例，它提供 published 信号和过期属性。此类型由以下方式 MessageBoardAttachedType 实现
-A Message object, which will be the attachee
-一个 Message 对象，它将是公文专员
-The MessageBoard type, which will be the attaching type that is used by Message objects to access the attached attributes
-类型，该 MessageBoard 类型将是 Message 对象用于访问附加属性的附加类型
-Following is an example implementation. First, there needs to be an attached object type with the necessary properties and signals that will be accessible to the attachee:
-下面是一个示例实现。首先，需要有一个附加对象类型，该对象类型具有必要的属性和信号，这些属性和信号可供随员访问：
+- 匿名附加对象类型的实例，它提供 published 信号和过期属性。此类型由以下方式 MessageBoardAttachedType 实现
+- 一个 Message 对象，它将是 attachee
+- 类型，该 MessageBoard 类型将是 Message 对象用于访问附加属性的 attaching 类型
 
+下面是一个示例实现。首先，需要有一个附加对象类型，该对象类型具有必要的属性和信号，这些属性和信号可供 attachee 访问：
+
+```c
 class MessageBoardAttachedType : public QObject
 {
     Q_OBJECT
@@ -377,9 +370,11 @@ signals:
     void published();
     void expiredChanged();
 };
-Then the attaching type, MessageBoard, must declare a qmlAttachedProperties() method that returns an instance of the attached object type as implemented by MessageBoardAttachedType. Additionally, MessageBoard must be declared as an attaching type via the QML_ATTACHED() macro:
-然后，附加类型 必须 MessageBoard 声明一个 qmlAttachedProperties() 方法，该方法返回由 MessageBoardAttachedType 实现的附加对象类型的实例。此外， MessageBoard 必须通过 （） 宏声明为附加类型：
+```
 
+然后，attaching 类型 MessageBoard 必须声明一个 qmlAttachedProperties() 方法，该方法返回由 MessageBoardAttachedType 实现的附加对象类型的实例。此外， MessageBoard 必须通过 QML_ATTACHED() 宏声明为 attaching 类型：
+
+```c
 class MessageBoard : public QObject
 {
     Q_OBJECT
@@ -391,9 +386,11 @@ public:
         return new MessageBoardAttachedType(object);
     }
 };
-Now, a Message type can access the properties and signals of the attached object type:
+```
+
 现在，类型 Message 可以访问附加对象类型的属性和信号：
 
+```qml
 Message {
     author: "Amelie"
     creationDate: new Date()
@@ -402,37 +399,38 @@ Message {
     MessageBoard.onPublished: console.log("Message by", author, "has been
 published!")
 }
-Additionally, the C++ implementation may access the attached object instance that has been attached to any object by calling the qmlAttachedPropertiesObject() function.
+```
+
 此外，C++ 实现可以通过调用 qmlAttachedPropertiesObject（） 函数来访问已附加到任何对象的附加对象实例。
 
-For example: 例如：
+例如：
 
+```c
 Message *msg = someMessageInstance();
 MessageBoardAttachedType *attached =
         qobject_cast<MessageBoardAttachedType*>(qmlAttachedPropertiesObject<MessageBoard>(msg));
 
 qDebug() << "Value of MessageBoard.expired:" << attached->expired();
-Propagating Attached Properties
-传播附加属性
-QQuickAttachedPropertyPropagator can be subclassed to propagate attached properties from a parent object to its children, similar to font and palette propagation. It supports propagation through items, popups, and windows.
-可以进行子类化，以便将附加属性从父对象传播到其子对象，类似于 和 传播。它支持通过 、 和 进行传播。
+```
 
-Property Modifier Types 属性修饰符类型
-A property modifier type is a special kind of QML object type. A property modifier type instance affects a property (of a QML object instance) which it is applied to. There are two different kinds of property modifier types:
+### Propagating Attached Properties
+
+可以进行子类化 QQuickAttachedPropertyPropagator ，以便将附加属性从父对象传播到其子对象，类似于 font 和 palette 传播。它支持通过items 、popups 和 windows 进行传播。
+
+#### Property Modifier Types
+
 属性修饰符类型是一种特殊的QML对象类型。属性修饰符类型实例会影响应用它的属性（QML对象实例）。有两种不同类型的属性修饰符类型：
 
-property value write interceptors
-属性值写入侦听器
-property value sources 属性值源
-A property value write interceptor can be used to filter or modify values as they are written to properties. Currently, the only supported property value write interceptor is the Behavior type provided by the QtQuick import.
-属性值写入侦听器可用于在将值写入属性时筛选或修改值。目前，唯一支持的属性值写入拦截器是 QtQuick 导入提供的类型。
+- property value write interceptors 属性值写入侦听器
+- property value sources 属性值源
 
-A property value source can be used to automatically update the value of a property over time. Clients can define their own property value source types. The various property animation types provided by the QtQuick import are examples of property value sources.
-属性值源可用于随时间推移自动更新属性的值。客户端可以定义自己的属性值源类型。 QtQuick 导入提供的各种类型都是属性值源的示例。
+属性值写入侦听器可用于在将值写入属性时筛选或修改值。目前，唯一支持的属性值写入侦听器是 QtQuick 导入提供的 Behavior 类型。
 
-Property modifier type instances can be created and applied to a property of a QML object through the "<ModifierType> on <propertyName>" syntax, as the following example shows:
-属性修饰符类型实例可以通过“ on ”语法创建并应用于QML对象的属性，如以下示例所示：
+属性值源可用于随时间推移自动更新属性的值。客户端可以定义自己的属性值源类型。 QtQuick 导入提供的各种属性动画类型都是属性值源的示例。
 
+属性修饰符类型实例可以通过 "<ModifierType> on <propertyName>" 语法创建并应用于QML对象的属性，如以下示例所示：
+
+```js
 import QtQuick 2.0
 
 Item {
@@ -452,22 +450,20 @@ Item {
         }
     }
 }
-This is commonly referred to as "on" syntax.
+```
 这通常称为“on”语法。
 
-Clients can register their own property value source types, but currently not property value write interceptors.
 客户端可以注册自己的属性值源类型，但目前不能注册属性值写入侦听器。
 
-Property Value Sources 属性价值来源
-Property value sources are QML types that can automatically update the value of a property over time, using the <PropertyValueSource> on <property> syntax. For example, the various property animation types provided by the QtQuick module are examples of property value sources.
-属性值源是QML类型，可以使用 <PropertyValueSource> on <property> 语法随时间自动更新属性的值。例如， QtQuick 模块提供的各种类型都是属性值源的示例。
+#### Property Value Sources
 
-A property value source can be implemented in C++ by subclassing QQmlPropertyValueSource and providing an implementation that writes different values to a property over time. When the property value source is applied to a property using the <PropertyValueSource> on <property> syntax in QML, it is given a reference to this property by the engine so that the property value can be updated.
-属性值源可以在 C++ 中实现，方法是子类化并提供随时间推移将不同值写入属性的实现。当使用QML中的 <PropertyValueSource> on <property> 语法将属性值源应用于属性时，引擎会为其提供对此属性的引用，以便可以更新属性值。
+属性值源是QML类型，可以使用 <PropertyValueSource> on <property> 语法随时间自动更新属性的值。例如， QtQuick 模块提供的各种动画类型都是属性值源的示例。
 
-For example, suppose there is a RandomNumberGenerator class to be made available as a property value source, so that when applied to a QML property, it will update the property value to a different random number every 500 milliseconds. Additionally, a maxValue can be provided to this random number generator. This class can be implemented as follows:
+属性值源可以在 C++ 中实现，方法是子类化 QQmlPropertyValueSource 并提供随时间推移将不同值写入属性的实现。当使用QML中的 <PropertyValueSource> on <property> 语法将属性值源应用于属性时，引擎会为其提供对此属性的引用，以便可以更新属性值。
+
 例如，假设有一个 RandomNumberGenerator 类可用作属性值源，因此当应用于QML属性时，它将每500毫秒将属性值更新为不同的随机数。此外，可以向此随机数生成器提供 maxValue。此类可以按如下方式实现：
 
+```c
 class RandomNumberGenerator : public QObject, public QQmlPropertyValueSource
 {
     Q_OBJECT
@@ -500,12 +496,13 @@ private:
     QTimer m_timer;
     int m_maxValue;
 };
-When the QML engine encounters a use of RandomNumberGenerator as a property value source, it invokes RandomNumberGenerator::setTarget() to provide the type with the property to which the value source has been applied. When the internal timer in RandomNumberGenerator triggers every 500 milliseconds, it will write a new number value to that specified property.
+```
+
 当QML引擎遇到 RandomNumberGenerator 用作属性值源的情况时，它会调用 RandomNumberGenerator::setTarget() 以向类型提供已应用值源的属性。当内部计时器每 500 毫秒 RandomNumberGenerator 触发一次时，它将向该指定属性写入一个新的数字值。
 
-Once the RandomNumberGenerator class has been registered with the QML type system, it can be used from QML as a property value source. Below, it is used to change the width of a Rectangle every 500 milliseconds:
 一旦类 RandomNumberGenerator 被注册到QML类型系统，它就可以从QML用作属性值源。下面，它用于每 500 毫秒更改一次宽度：
 
+```qml
 import QtQuick 2.0
 
 Item {
@@ -518,20 +515,19 @@ Item {
         color: "red"
     }
 }
-In all other respects, property value sources are regular QML types that can have properties, signals methods and so on, but with the added capability that they can be used to change property values using the <PropertyValueSource> on <property> syntax.
+```
+
 在所有其他方面，属性值源是常规的QML类型，可以具有属性，信号方法等，但具有附加功能，它们可用于使用 <PropertyValueSource> on <property> 语法更改属性值。
 
-When a property value source object is assigned to a property, QML first tries to assign it normally, as though it were a regular QML type. Only if this assignment fails does the engine call the setTarget() method. This allows the type to also be used in contexts other than just as a value source.
-当属性值源对象被分配给一个属性时，QML首先尝试正常分配它，就好像它是常规的QML类型一样。仅当此赋值失败时，引擎才会调用 （） 方法。这允许在上下文中使用该类型，而不仅仅是作为值源。
+当属性值源对象被赋值给一个属性时，QML首先尝试正常赋值它，就好像它是常规的QML类型一样。仅当此赋值失败时，引擎才会调用 setTarget() 方法。这允许在上下文中使用该类型，而不仅仅是作为值源。
 
-Specifying Default and Parent Properties for QML Object Types
-指定QML对象类型的默认属性和父属性
-Any QObject-derived type that is registered as an instantiable QML object type can optionally specify a default property for the type. A default property is the property to which an object's children are automatically assigned if they are not assigned to any specific property.
+### Specifying Default and Parent Properties for QML Object Types
+
 任何注册为可实例化QML对象类型的派生类型都可以选择性地指定该类型的默认属性。默认属性是对象的子项未分配给任何特定属性时自动分配到的属性。
 
-The default property can be set by calling the Q_CLASSINFO() macro for a class with a specific "DefaultProperty" value. For example, the MessageBoard class below specifies its messages property as the default property for the class:
-可以通过调用具有特定“DefaultProperty”值的类的 （） 宏来设置默认属性。例如，下面的 MessageBoard 类将其 messages 属性指定为类的默认属性：
+可以通过调用具有特定“DefaultProperty”值的类的 Q_CLASSINFO() 宏来设置默认属性。例如，下面的 MessageBoard 类将其 messages 属性指定为类的默认属性：
 
+```c
 class MessageBoard : public QObject
 {
     Q_OBJECT
@@ -544,28 +540,33 @@ public:
 private:
     QList<Message *> m_messages;
 };
-This enables children of a MessageBoard object to be automatically assigned to its messages property if they are not assigned to a specific property. For example:
+```
+
 这样，如果 MessageBoard 对象的子项未分配给特定属性，则可以自动将其分配给其 messages 属性。例如：
 
+```qml
 MessageBoard {
     Message { author: "Naomi" }
     Message { author: "Clancy" }
 }
-If messages was not set as the default property, then any Message objects would have to be explicitly assigned to the messages property instead, as follows:
+```
+
 如果 messages 未设置为默认属性，则必须将任何 Message 对象显式分配给该 messages 属性，如下所示：
 
+```qml
 MessageBoard {
     messages: [
         Message { author: "Naomi" },
         Message { author: "Clancy" }
     ]
 }
-(Incidentally, the Item::data property is its default property. Any Item objects added to this data property are also added to the list of Item::children, so the use of the default property enables visual children to be declared for an item without explicitly assigning them to the children property.)
-（顺便说一句，该属性是其默认属性。添加到此 data 属性的任何对象也会添加到 的列表中，因此使用默认属性可以为项声明可视子项，而无需将其显式分配给该属性。
+```
 
-Additionally, you can declare a "ParentProperty" Q_CLASSINFO() to inform the QML engine which property should denote the parent object in the QML hierarchy. For example, the Message type might be declared as follows:
-此外，您可以声明一个“ParentProperty”（）来通知QML引擎哪个属性应该表示QML层次结构中的父对象。例如，Message 类型可以按如下方式声明：
+（顺便说一句，该属性Item::data是其默认属性。添加到此 data 属性的任何 Item 对象也会添加到 Item::children 的列表中，因此使用默认属性可以为项声明可视子项，而无需将其显式分配给该属性。)
 
+此外，您可以声明一个“ParentProperty” Q_CLASSINFO() 来通知QML引擎哪个属性应该表示QML层次结构中的父对象。例如，Message 类型可以按如下方式声明：
+
+```c
 class Message : public QObject
 {
     Q_OBJECT
@@ -587,27 +588,24 @@ private:
     QProperty<QObject *> m_board;
     QProperty<QString> m_author;
 };
-Defining the parent property affords qmllint and other tools better insight into the intention of your code and avoids false positive warnings on some property accesses.
-定义父属性可以让其他工具更好地了解代码的意图，并避免某些属性访问时出现误报警告。
+```
 
-Defining Visual Items with the Qt Quick Module
-使用Qt Quick Module定义可视化项
-When building user interfaces with the Qt Quick module, all QML objects that are to be visually rendered must derive from the Item type, as it is the base type for all visual objects in Qt Quick. This Item type is implemented by the QQuickItem C++ class, which is provided by the Qt Quick module. Therefore, this class should be subclassed when it is necessary to implement a visual type in C++ that can be integrated into a QML-based user interface.
-使用该模块构建用户界面时，所有要直观呈现的QML对象都必须派生自该类型，因为它是中所有可视对象的基本类型。此类型由模块提供的 C++ 类实现。因此，当需要在 C++ 中实现可集成到基于 QML 的用户界面中的视觉类型时，应将此类子类化。
+定义父属性可以让 qmllint 和其他工具更好地了解代码的意图，并避免某些属性访问时出现误报警告。
 
-See the QQuickItem documentation for more information. Additionally, the Writing QML Extensions with C++ tutorial demonstrates how a QQuickItem-based visual item can be implemented in C++ and integrated into a Qt Quick-based user interface.
-有关详细信息，请参阅文档。此外，本教程还演示了如何在 C++ 中实现基于可视化项并将其集成到基于 Qt Quick 的用户界面中。
+### Defining Visual Items with the Qt Quick Module
 
-Receiving Notifications for Object Initialization
-接收对象初始化通知
-For some custom QML object types, it may be beneficial to delay the initialization of particular data until the object has been created and all of its properties have been set. For example, this may be the case if the initialization is costly, or if the initialization should not be performed until all property values have been initialized.
+使用该模块构建用户界面时，所有要直观呈现的QML对象都必须派生自该 Item 类型，因为它是 Qt Quick 中所有可视对象的基本类型。此 Item 类型由 Qt Quick 模块提供的 C++ QQuickItem 类实现。因此，当需要在 C++ 中实现可集成到基于 QML 的用户界面中的视觉类型时，应将此类子类化。
+
+
+## Receiving Notifications for Object Initialization
+
 对于某些自定义QML对象类型，在创建对象并设置其所有属性之前延迟特定数据的初始化可能是有益的。例如，如果初始化成本很高，或者在初始化所有属性值之前不应执行初始化，则可能会出现这种情况。
 
-The Qt QML module provides the QQmlParserStatus to be subclassed for these purposes. It defines a number of virtual methods that are invoked at various stages during component instantiation. To receive these notifications, a C++ class should inherit QQmlParserStatus and also notify the Qt meta system using the Q_INTERFACES() macro.
-该模块提供了用于这些目的的子类化。它定义了许多在组件实例化过程中的各个阶段调用的虚拟方法。要接收这些通知，C++ 类应该继承并使用 （） 宏通知 Qt 元系统。
+该 Qt QML 模块提供了 QQmlParserStatus 用于这些目的的子类化。它定义了许多在组件实例化过程中的各个阶段调用的虚拟方法。要接收这些通知，C++ 类应该继承 QQmlParserStatus 并使用 Q_INTERFACES() 宏通知 Qt 元系统。
+ 
+例如：
 
-For example: 例如：
-
+```c
 class MyQmlType : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
@@ -619,3 +617,4 @@ public:
         // Perform some initialization here now that the object is fully created
     }
 };
+```
