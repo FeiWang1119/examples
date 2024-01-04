@@ -99,5 +99,5 @@ b3-9 ip: 10.20.51.241
 |------------------------------|--------------------------|
 | integrate                    | 预集成/重新集成          | 
 | integr-topic                 | 主题集成（多个项目集成） |
-| retest                       | check failed 重新build   |
-
+| retest                       | check failed 重新 build  |
+| ok-to-test                   | 同意执行 retest          |
