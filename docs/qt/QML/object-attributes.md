@@ -368,7 +368,6 @@ property alias widgetLabel: label
 Component.onCompleted: widgetLabel.text = "Alias completed Initialization"
 ```
 
-When importing a QML object type with a property alias in the root object, however, the property appear as a regular Qt property and consequently can be used in alias references.
 但是，当在根对象中导入带有属性别名的QML对象类型时，该属性显示为常规的 Qt 属性，因此可以在别名引用中使用。
 
 别名属性可以与现有属性同名，从而有效地覆盖现有属性。例如，以下QML类型具有 color 别名属性，其名称与内置 Rectangle::color 属性相同：
