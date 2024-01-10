@@ -99,6 +99,7 @@ b3-9 ip: 10.20.51.241
 | command                      | description              |
 |------------------------------|--------------------------|
 | integrate                    | 预集成/重新集成          | 
+| topic name                   | 创建/加入主题name        |
 | integr-topic                 | 主题集成（多个项目集成） |
-| retest                       | check failed 重新 build  |
+| retest(check obs)            | check failed 重新 build  |
 | ok-to-test                   | 同意执行 retest          |
