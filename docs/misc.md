@@ -103,3 +103,27 @@ b3-9 ip: 10.20.51.241
 | integr-topic                 | 主题集成（多个项目集成） |
 | retest(check obs)            | check failed 重新 build  |
 | ok-to-test                   | 同意执行 retest          |
+
+# doxygen 
+
+
+- generate template Doxygen:
+
+```sh
+doxygen -g Doxygen  
+```
+
+- generate document:
+
+```sh
+doxygen Doxygen
+```
+
+## configure UML
+
+| command                      | description              |
+|------------------------------|--------------------------|
+| EXTRACT_ALL                  | YES                      |
+| HAVE_DOT                     | YES                      |
+| UML_LOOK                     | YES                      |
+| RECURSIVE                    | YES                      |
