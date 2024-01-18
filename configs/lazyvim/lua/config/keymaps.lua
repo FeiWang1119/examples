@@ -2,86 +2,24 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local opts = { noremap = true, silent = true }
+-- This file is automatically loaded by lazyvim.config.init
 
-local term_opts = { silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
-
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- DO NOT USE THIS IN YOU OWN CONFIG!!
+-- use `vim.keymap.set` instead
+local map = vim.keymap.set
 
 -- Copy all
-keymap("n", "<C-c>", ":%y+<CR>", opts)
+map("n", "<C-c>", "<cmd>%y+<cr>", { desc = "Copy all" })
 
 -- Save all
-keymap("n", "<C-a>", ":wa<CR>", opts)
+map("n", "<C-a>", "<cmd>wa<cr>", { desc = "Save all" })
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-
--- Naviagate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Terminal --
--- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
--- Command --
--- Menu navigation
-keymap("c", "<C-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true })
-keymap("c", "<C-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true })
-
--- Telescope
-keymap("n", "bl", ":Telescope bookmarks list<CR>", opts)
+-- Exit insert mode
+map("i", "jk", "<ESC>", { desc = "exit insert mode" })
 
 -- MarkdownPreview
-keymap("n", "<F12>", ":MarkdownPreviewToggle<CR>", opts)
+map("n", "<F12>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreview" })
 
 -- diffview
-keymap("n", "dv", ":DiffviewOpen<CR>", opts)
-keymap("n", "dc", ":DiffviewClose<CR>", opts)
+map("n", "dv", ":DiffviewOpen<CR>", { desc = "open diffview" })
+map("n", "dc", ":DiffviewClose<CR>", { desc = "close diffview" })
