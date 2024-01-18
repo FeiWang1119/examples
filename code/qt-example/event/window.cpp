@@ -54,6 +54,7 @@ Window::Window(QWidget *parent)
     layout->addWidget(child);
     setLayout(layout);
 
+    child->setFocus(); // accept the key event
     installEventFilter(this);
 }
 

@@ -14,7 +14,7 @@ qt_add_executable(event
     window.cpp window.h
 )
 
-target_link_libraries(lineedits PRIVATE
+target_link_libraries(event PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets

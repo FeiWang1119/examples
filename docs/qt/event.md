@@ -18,7 +18,7 @@ Events can be divided into three categories based on how they are created and ho
 
 When we call `QApplication::exec()` at the end of our `main()` function, the application enters Qt's event loop. Conceptually, the event loop looks like this:
 
-```c++
+```c
     while (!exit_was_called) {
         while (!posted_event_queue_is_empty) {
             process_next_posted_event();
@@ -52,16 +52,16 @@ Qt applications can generate their own events, either of predefined types or of 
 
 Both functions take a `QObject *` and a `QEvent *` as arguments. If you call `postEvent()`, you must create the event object using new and Qt will automatically delete it after it is processed. If you call `sendEvent()`, you must create the event on the stack. Here's an example of posting an event:
 
-```c++
+```c
     QApplication::postEvent(mainWin, new QKeyEvent(QEvent::KeyPress, Key_X, 'X', 0));
-``` 
+```
 
 Here's an example of sending an event:
 
-```c++
+```c
     QKeyEvent event(QEvent::KeyPress, Key_X, 'X', 0);
     QApplication::sendEvent(mainWin, &event);
-``` 
+```
 
 Qt applications rarely need to call `postEvent()` or `sendEvent()` directly because most events are generated automatically by Qt or by the window system when necessary. In most of the cases where you want to send an event, Qt includes a high-level function that does it for you (for example, `update()` and `repaint()`).
 
@@ -73,17 +73,17 @@ Custom types can also be useful in single-threaded applications, as an inter-obj
 
 Here's a code snippet that shows how to post a custom event:
 
-```c++
+```c
     const QEvent::Type MyEvent = (QEvent::Type)1234;
     ...
     QApplication::postEvent(obj, new QCustomEvent(MyEvent));
-``` 
+```
 
 The event must be of type `QCustomEvent` (or a subclass). The argument to the constructor is the type of event. Values under 1024 are reserved by Qt for predefined event types; other values can be used by applications.
 
 To handle custom event types, reimplement the `customEvent()` function:
 
-```c++
+```c
     void MyLineEdit::customEvent(QCustomEvent *event)
     {
         if (event->type() == MyEvent) {
@@ -92,8 +92,8 @@ To handle custom event types, reimplement the `customEvent()` function:
             QLineEdit::customEvent(event);
         }
     }
-``` 
-    
+```
+
 The `QCustomEvent` class has a `void *` member that you can use for your own purposes. You can also subclass `QCustomEvent` and add other members if you want more type safety---but then you also need to cast the `QCustomEvent` to your specific type in `customEvent()`.
 
 # Event Handling and Filtering
@@ -119,8 +119,8 @@ For example, key events are propagated; if the widget that has the focus doesn't
 Events that can be propagated have an `accept()` and an `ignore()` function that you can call to tell Qt that you "accept" or "ignore" the event. If an event handler calls `accept()` on an event, the event won't be propagated further; if an event handler calls `ignore()`, Qt tries to find another receiver.
 
 If you're like most Qt developers, you probably never really bothered calling `accept()` and `ignore()` in your programs. And rightly so. Qt is designed in such a way that you normally never need to call them. The default value is "accept", and the default event handler implementations in QWidget call `ignore()`. If you want to accept the event, you just need to reimplement the event handler and avoid calling the QWidget implementation. If you want to ignore the event, simply pass it on to the QWidget implementation. The following code snippet illustrates the point:
-    
-```c++
+
+```c
     void MyFancyWidget::keyPressEvent(QKeyEvent *event)
     {
         if (event->key() == Key_Escape) {
@@ -133,7 +133,7 @@ If you're like most Qt developers, you probably never really bothered calling `a
 
 In this example, if the user presses `Esc`, we call `doEscape()` and the event is accepted (the default). The event won't be propagated to the parent widget. If the user presses any other key, we call QWidget's default implementation:
 
-```c++
+```c
     void QWidget::keyPressEvent(QKeyEvent *event)
     {
         event->ignore();
@@ -144,7 +144,7 @@ Thanks to the `ignore()` call, the event will be propagated to the parent widget
 
 So far, we've assumed that the base class is `QWidget`. However, the same idiom works at any level, by replacing `QWidget` with the base class. For example:
 
-```c++
+```c
     void MyFancyLineEdit::keyPressEvent(QKeyEvent *event)
     {
         if (event->key() == Key_SysReq) {
@@ -154,10 +154,10 @@ So far, we've assumed that the base class is `QWidget`. However, the same idiom 
         }
     }
 ```
-    
+
 If for some reason you handle the event in `event()` instead of in a specific handler such as `keyPressEvent()`, the procedure is somewhat different. The `event()` function returns a bool that tells the caller whether the event was accepted or not (true means "accept"). Calling `accept()` or `ignore()` on an event from `event()` is pointless. The "accept" flag is a communication mechanism between the specific event handlers and `event()`, whereas the bool return value of `event()` is used to communicate with `QApplication::notify()`. The default `event()` implementation in `QWidget` converts the "accept" flag into a bool as follows:
 
-```c++
+```c
     bool QWidget::event(QEvent *event)
     {
         switch (e->type()) {
@@ -181,7 +181,7 @@ What has been said so far applies not only to key events but also to mouse, whee
 
 Close events work differently. Calling `QCloseEvent::ignore()` cancels the close operation, whereas `accept()` tells Qt to continue closing the operation normally. To avoid any confusion, it's a good idea to call `accept()` or `ignore()` explicitly in your `closeEvent()` reimplementation, like this:
 
-```c++
+```c
     void MainWindow::closeEvent(QCloseEvent *event)
     {
         if (userReallyWantsToQuit()) {
@@ -189,5 +189,37 @@ Close events work differently. Calling `QCloseEvent::ignore()` cancels the close
         } else {
             event->ignore();
         }
+    }
+```
+
+# source parse
+
+从源码中可知，Qt 先处理事件过滤器(eventFilter)，再处理event, event 把事件传递到各个事件处理函数。
+
+```c
+// qapplication: 3290
+
+    // send to all receiver event filters
+    if (sendThroughObjectEventFilters(receiver, e)) {
+        filtered = true;
+        return filtered;
+    }
+
+    // deliver the event
+    consumed = receiver->event(e);
+```
+
+从源码中可知，事件处理函数返回false，事件会传递给父对象(parentWidget) 
+
+```c
+// qapplication: 2791
+    while (w) {
+        ...
+        eventAccepted = (w == receiver ? mouse : &me)->isAccepted();
+        if (res && eventAccepted)
+            break;
+        if (w->isWindow() || w->testAttribute(Qt::WA_NoMousePropagation))
+            break;
+        w = w->parentWidget();
     }
 ```
