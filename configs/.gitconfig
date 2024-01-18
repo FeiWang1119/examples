@@ -1,3 +1,7 @@
+[https]
+	proxy = https://127.0.0.1:7890
+[http]
+	proxy = http://127.0.0.1:7890
 [core]
 	editor = nvim
 [user]
@@ -5,13 +9,6 @@
 	email = wangfei@deepin.org
 [help]
 	autocorrect = 1
-[merge]
-	tool = extMerge
-[mergetool "extMerge"]
-	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-	trustExitCode = false
-[diff]
-	external = extDiff
 [pull]
 	rebase = true
 [remote]

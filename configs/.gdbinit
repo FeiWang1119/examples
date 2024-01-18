@@ -2,9 +2,13 @@ dir /home/fei/repo/qtbase-opensource-src-5.15.8/src/corelib
 dir /home/fei/repo/qtbase-opensource-src-5.15.8/src/gui
 dir /home/fei/repo/qtbase-opensource-src-5.15.8/src/widgets
 dir /home/fei/repo/qtbase-opensource-src-5.15.8/src/dbus
+dir /home/fei/repo/qtdeclarative/src/
 dir /home/fei/repo/dtkcore
 dir /home/fei/repo/dtkgui
 dir /home/fei/repo/dtkwidget
+dir /home/fei/repo/libxcb
+
+set environment LD_LIBRARY_PATH=/home/fei/repo/qtbase/build/lib
 
 define printqstring
     printf "(QString)0x%x (length=%i): \"",&$arg0,$arg0.d->size
