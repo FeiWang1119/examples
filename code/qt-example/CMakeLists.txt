@@ -6,3 +6,4 @@ project(qt-example LANGUAGES CXX)
 
 add_subdirectory(extending-qml)
 add_subdirectory(extending-qml-advanced)
+add_subdirectory(event)
