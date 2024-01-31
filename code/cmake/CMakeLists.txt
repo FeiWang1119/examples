@@ -1,4 +1,3 @@
-#
 cmake_minimum_required(VERSION 3.25)
 
 project(CMakeExample)
@@ -17,7 +16,7 @@ message(variable_cache: ${variable_cache})
 set(variable_cache 3)
 message(variable_cache: ${variable_cache})
 
-# parentscope
+# Directory Scope
 set(parent_variable 4)
 
 add_subdirectory(example)
