@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 
 project(CMakeExample)
 
-set(CMAKE_MESSAGE_LOG_LEVEL "DEBUG" )
+set(CMAKE_MESSAGE_LOG_LEVEL "DEBUG")
 
 # set normal
 set(variable_normal 1)
@@ -27,3 +27,8 @@ set(QT_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
 message(DEBUG option: ${QT_BUILD_SHARED_LIBS})
 
 add_subdirectory(example)
+
+# PROPERTY
+set_property(DIRECTORY example PROPERTY EXCLUDE_FROM_ALL TRUE)
+get_property(exclude_from_all DIRECTORY example PROPERTY EXCLUDE_FROM_ALL)
+message(DEBUG property: ${exclude_from_all})
