@@ -3,17 +3,18 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(event LANGUAGES CXX)
+project(sort LANGUAGES CXX)
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INCLUDE_CURRENT_DIR on)
+set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
-qt_standard_project_setup()
-
-qt_add_executable(event
-    main.cpp
-)
-
-target_link_libraries(event PRIVATE
-    Qt6::Core
-)
-
+add_executable(bubbleSort bubblesort.cpp)
+add_executable(bucketSort bucketsort.cpp)
+add_executable(heapSort heapsort.cpp)
+add_executable(insertionSort insertionsort.cpp)
+add_executable(mergeSort mergesort.cpp)
+add_executable(quickSort quicksort.cpp)
+add_executable(radixSort radixsort.cpp)
+add_executable(selectionSort selectionsort.cpp)
