@@ -38,7 +38,7 @@
 | \xxx       | Octal character xxx |
 | \xhh       | Hex character hh    |
 
-# Quanti­fiers
+# Quantifiers
 
 | Expression | Description |
 | ---------- | ----------- |
@@ -59,25 +59,25 @@ Add a ? to a quantifier to make it ungreedy.
 | \Q         | Begin literal sequence     |
 | \E         | End literal sequence       |
 
-"­Esc­api­ng" is a way of treating characters which have a special meaning in regular expres­sions literally, rather than as special charac­ters.
+"­Escapi­ng" is a way of treating characters which have a special meaning in regular expressions literally, rather than as special characters.
 
 # POSIX
 
 | Expression | Description                    |
 | ---------- | ------------------------------ |
-| [:upper:]  | Upper case letters             |
-| [:lower:]  | Lower case letters             |
-| [:alpha:]  | All letters                    |
-| [:alnum:]  | Digits and letters             |
-| [:digit:]  | Digits                         |
-| [:xdigit:] | Hexade­cimal digits            |
-| [:punct:]  | Punctu­ation                   |
-| [:blank:]  | Space and tab                  |
-| [:space:]  | Blank characters               |
-| [:cntrl:]  | Control characters             |
-| [:graph:]  | Printed characters             |
-| [:print:]  | Printed characters and spaces  |
-| [:word:]   | Digits, letters and underscore |
+| [:upper:]    | Upper case letters             |
+| [:lower:]    | Lower case letters             |
+| [:alpha:]    | All letters                    |
+| [:alnum:]    | Digits and letters             |
+| [:digit:]    | Digits                         |
+| [:xdigit:]   | Hexade­cimal digits            |
+| [:punct:]    | Punctu­ation                   |
+| [:blank:]    | Space and tab                  |
+| [:space:]    | Blank characters               |
+| [:cntrl:]    | Control characters             |
+| [:graph:]    | Printed characters             |
+| [:print:]    | Printed characters and spaces  |
+| [:word:]     | Digits, letters and underscore |
 
 # Assertions               
 
@@ -100,11 +100,11 @@ Add a ? to a quantifier to make it ungreedy.
 | (a         | b)                                 | a or b
 | (...)      | Group                              |
 | (?:...)    | Passive (non-c­apt­uring) group    |
-| [abc]      | Range (a or b or c)                |
-| [^abc]     | Not (a or b or c)                  |
-| [a-q]      | Lower case letter from a to q      |
-| [A-Q]      | Upper case letter from A to Q      |
-| [0-7]      | Digit from 0 to 7                  |
+| [abc]        | Range (a or b or c)                |
+| [^abc]       | Not (a or b or c)                  |
+| [a-q]        | Lower case letter from a to q      |
+| [A-Q]        | Upper case letter from A to Q      |
+| [0-7]        | Digit from 0 to 7                  |
 | \x         | Group/­sub­pattern number "­x"     |
 
 Ranges are inclusive.
@@ -123,22 +123,22 @@ Ranges are inclusive.
 
  \* PCRE modifier                          
 
-# String Replac­ement
+# String Replacement
 
 | Expression                                                               | Description                   |
 | ------------------------------------------------------------------------ | ----------------------------- |
 | $n                                                                       | nth non-pa­ssive group        |
 | $2                                                                       | "­xyz­" in /^(abc­(xy­z))$/   |
 | $1                                                                       | "­xyz­" in /^(?:a­bc)­(xyz)$/ |
-| $`                                               | Before matched string |                               |
+| $`                                                                       | Before matched string         |
 | $'                                                                       | After matched string          |
 | $+                                                                       | Last matched string           |
 | $&                                                                       | Entire matched string         |
 
- Some regex implem­ent­ations use \ instead of $. 
+ Some regex implementations use \ instead of $. 
 
 
- # Common Metach­ara­cters
+ # Common Meta characters
 
 ^
 [
