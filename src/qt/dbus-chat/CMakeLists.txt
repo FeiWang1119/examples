@@ -17,16 +17,29 @@ find_package(Qt6 REQUIRED COMPONENTS Core DBus Gui Widgets)
 qt_standard_project_setup()
 
 set(chat_SRCS)
+
+# qt_add_dbus_interface(<VAR>
+# dbus_spec
+# basename
+# )
 qt_add_dbus_interface(chat_SRCS
     org.example.chat.xml
     chat_interface
 )
 
+# qt_add_dbus_adaptor(<VAR> 
+#     dbus_spec 
+#     header
+#     [parent_class]
+#     [basename] The default file and class name are generated from the last segment in the dbus_spec base name:
+#     [classname] The default file and class name are generated from the last segment in the dbus_spec base name:
+# )
 qt_add_dbus_adaptor(chat_SRCS
-    org.example.chat.xml
-    qobject.h
-    QObject
-    chat_adaptor
+    org.example.chat.xml # dbus_spec
+    qobject.h # header
+    QObject # parent_class
+    chat_adaptor # basename option
+    # classname use default
 )
 
 qt_add_executable(chat
