@@ -32,7 +32,7 @@
 *.app
 
 # Build
-code/*/build/*
+src/*/build/
 
 # cache
-code/*/.cache/*
+src/*/.cache/
