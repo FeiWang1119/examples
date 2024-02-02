@@ -14,10 +14,9 @@ set(INSTALL_EXAMPLEDIR "${INSTALL_EXAMPLESDIR}/dbus/chat")
 
 find_package(Qt6 REQUIRED COMPONENTS Core DBus Gui Widgets)
 
-qt_standard_project_setup()
-
 set(chat_SRCS)
 
+# client
 # qt_add_dbus_interface(<VAR>
 # dbus_spec
 # basename
@@ -27,6 +26,7 @@ qt_add_dbus_interface(chat_SRCS
     chat_interface
 )
 
+# server
 # qt_add_dbus_adaptor(<VAR> 
 #     dbus_spec 
 #     header

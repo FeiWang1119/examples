@@ -7,8 +7,6 @@ project(event LANGUAGES CXX)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
-qt_standard_project_setup()
-
 qt_add_executable(event
     main.cpp
     window.cpp window.h

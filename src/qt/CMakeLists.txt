@@ -4,6 +4,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(qt-example LANGUAGES CXX)
 
+find_package(Qt6 REQUIRED COMPONENTS Core)
+qt_standard_project_setup()
+
 add_subdirectory(extending-qml)
 add_subdirectory(extending-qml-advanced)
 add_subdirectory(event)
