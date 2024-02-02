@@ -51,3 +51,13 @@ function(TestFunction _sources _xml_file _include) # _optionalParentClass _optio
 endfunction()
 
 TestFunction("a" "b" "c")
+
+# CMAKE_INCLUDE_CURRENT_DIR
+message(DEBUG CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR})
+message(DEBUG CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR})
+get_property(include_dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+message("Include Directories: ${include_dirs}")
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+include_directories(/path/to/include1 /path/to/include2)
+get_property(include_dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+message("Include Directories: ${include_dirs}")

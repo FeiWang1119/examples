@@ -1,29 +1,33 @@
 // Copyright (C) 2016 The Qt Company Ltd.
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 
+#include "chat.h"
+
+#include "chat_adaptor.h"
+#include "chat_interface.h"
+
 #include <QApplication>
 #include <QInputDialog>
 #include <QMessageBox>
-
-#include "chat.h"
-#include "chat_adaptor.h"
-#include "chat_interface.h"
 
 ChatMainWindow::ChatMainWindow()
 {
     setupUi(this);
 
-    connect(messageLineEdit, &QLineEdit::textChanged, this,
-            [this](const QString &newText) { sendButton->setEnabled(!newText.isEmpty()); });
+    connect(messageLineEdit, &QLineEdit::textChanged, this, [this](const QString &newText) {
+        sendButton->setEnabled(!newText.isEmpty());
+    });
     connect(sendButton, &QPushButton::clicked, this, [this]() {
         emit message(m_nickname, messageLineEdit->text());
         messageLineEdit->clear();
     });
-    connect(actionChangeNickname, &QAction::triggered,
-            this, &ChatMainWindow::changeNickname);
-    connect(actionAboutQt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this); });
-    connect(qApp, &QApplication::lastWindowClosed, this,
-            [this]() { emit action(m_nickname, tr("leaves the chat")); });
+    connect(actionChangeNickname, &QAction::triggered, this, &ChatMainWindow::changeNickname);
+    connect(actionAboutQt, &QAction::triggered, this, [this]() {
+        QMessageBox::aboutQt(this);
+    });
+    connect(qApp, &QApplication::lastWindowClosed, this, [this]() {
+        emit action(m_nickname, tr("leaves the chat"));
+    });
 
     // add our D-Bus interface and connect to D-Bus
     new ChatAdaptor(this);
