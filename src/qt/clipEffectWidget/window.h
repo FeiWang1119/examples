@@ -24,9 +24,6 @@ class Window : public DBlurEffectWidget
 public:
     Window(QWidget *parent = nullptr);
 
-    /* protected: */
-    /*     virtual void resizeEvent(QResizeEvent *event) override; */
-
 private:
     Widget *w = nullptr;
 };

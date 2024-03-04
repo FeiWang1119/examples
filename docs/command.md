@@ -86,11 +86,12 @@
 
 # ssh
 
-| command               | description               |
-|-----------------------|---------------------------|
-| ssh-keygen            | default key type : RSA    |
-| ssh-keygen -t ed25519 | specify key type: ed25519 |
-| sshd -T               | 查看出错原因              |
+| command                                  | description                                           |
+|------------------------------------------|-------------------------------------------------------|
+| ssh-keygen                               | default key type : RSA                                |
+| ssh-keygen -t ed25519                    | specify key type: ed25519                             |
+| sshd -T                                  | 查看出错原因                                          |
+| ssh-copy-id -i key_file [user@]server_name | install a public key automatically on a remote server |
 
 # process 
 

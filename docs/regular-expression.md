@@ -156,3 +156,7 @@ $
 \>
 
 The escape character is usually \
+
+| Expression                                                               | Description                   |
+| ------------------------------------------------------------------------ | ----------------------------- |
+|\<word\>| match the boundary of a word|
