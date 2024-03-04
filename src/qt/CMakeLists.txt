@@ -1,18 +1,43 @@
-# Copyright (C) 2022 The Qt Company Ltd.
-# SPDX-License-Identifier: BSD-3-Clause
-
 cmake_minimum_required(VERSION 3.16)
 project(qt-example LANGUAGES CXX)
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
-qt_standard_project_setup()
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(AUTOMOC_COMPILER_PREDEFINES ON)
+set(CMAKE_MESSAGE_LOG_LEVEL "DEBUG")
 
-add_subdirectory(extending-qml)
-add_subdirectory(extending-qml-advanced)
-add_subdirectory(event)
-add_subdirectory(simple-qml)
-add_subdirectory(icon)
-add_subdirectory(clipboard)
-add_subdirectory(dbus-chat)
-add_subdirectory(dbus-pingpong)
-add_subdirectory(dbus-complexpingpong)
+if(QML)
+    message(DEBUG "QML Demo")
+    add_subdirectory(simple-qml)
+    add_subdirectory(extending-qml)
+    add_subdirectory(extending-qml-advanced)
+endif()
+
+if(DBUS)
+    message(DEBUG "DBUS Demo")
+    add_subdirectory(dbus-chat)
+    add_subdirectory(dbus-pingpong)
+    add_subdirectory(dbus-complexpingpong)
+endif()
+
+if(EVENT)
+    message(DEBUG "Event demo")
+    add_subdirectory(event)
+endif()
+
+if(ICON)
+    message(DEBUG "Icon demo")
+    add_subdirectory(icon)
+endif()
+
+if(CLIPBOARD)
+    message(DEBUG "Clipboard demo")
+    add_subdirectory(clipboard)
+endif()
+
+if(DTK)
+    message(DEBUG "DTK demo")
+    add_subdirectory(clipEffectWidget)
+endif()
