@@ -1,12 +1,9 @@
 # Custom style 
 
-You have two choices when it comes to giving a custom style to your Qt widgets.
-
-Qt Style Sheets are very convenient for getting started — just a few CSS-like rules, and they work.
-
-It is our experience, however, that Qt Style Sheets create too much trouble and a QStyle subclass (*) gives a better solution, in the long run.
-
-The following chart compares the two choices, to show you why a QStyle subclass trumps Qt Style Sheets:
+You have two choices when it comes to giving a custom style to your Qt widgets.  
+Qt Style Sheets are very convenient for getting started — just a few CSS-like rules, and they work.  
+It is our experience, however, that Qt Style Sheets create too much trouble and a QStyle subclass (*) gives a better solution, in the long run.  
+The following chart compares the two choices, to show you why a QStyle subclass trumps Qt Style Sheets:  
 
 | Scenario                                                         | Qt Style Sheets                                                                                                                                                                                                                                                                                                                                                                 | QStyle                                                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
