@@ -70,7 +70,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,6 +104,9 @@ alias dfm="dde-file-manager ./"
 alias l="ls"
 alias ll="ls -la"
 alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
 alias n="nvim ."
 alias rb="rm build -rf"
 alias mb="mkdir build && cd build"
@@ -121,6 +124,7 @@ alias doc="cd /home/fei/document"
 alias repo="cd /home/fei/repo"
 alias build="cd /home/fei/build"
 alias example="cd /home/fei/repo/example"
+alias dtk="cd /home/fei/repo/dtk"
 alias dtkcommon="cd /home/fei/repo/dtkcommon"
 alias dtkcore="cd /home/fei/repo/dtkcore"
 alias dtkgui="cd /home/fei/repo/dtkgui"
@@ -156,12 +160,28 @@ alias qtdeclarative="cd /home/fei/repo/qtdeclarative"
 alias qttools="cd /home/fei/repo/qttools"
 alias qtwayland="cd /home/fei/repo/qtwayland"
 alias diff="/home/fei/software/p4v/bin/p4merge"
-alias qt5-plugin="cd /usr/lib/x86_64-linux-gnu/qt5/plugins"
-alias qt6-plugin="cd /usr/lib/x86_64-linux-gnu/qt6/plugins"
+alias qt5plugin="cd /usr/lib/x86_64-linux-gnu/qt5/plugins"
+alias qt6plugin="cd /usr/lib/x86_64-linux-gnu/qt6/plugins"
 alias qtcreator-plugin="cd /usr/lib/x86_64-linux-gnu/qtcreator/plugins"
 alias cmake-config="cd /usr/lib/x86_64-linux-gnu/cmake"
 alias lowercase="for i in *; do mv "$i" "$(echo $i|tr A-Z a-z)"; done"
-export GOPATH=/usr/share/gocode:/home/fei/go
-DEBEMAIL="wangfeia@uniontech.com"
-DEBFULLNAME="wangfei"
-export DEBEMAIL DEBFULLNAME
+
+export TLDR_COLOR_NAME="cyan"
+export TLDR_COLOR_DESCRIPTION="white"
+export TLDR_COLOR_EXAMPLE="green"
+export TLDR_COLOR_COMMAND="red"
+export TLDR_COLOR_PARAMETER="white"
+export TLDR_LANGUAGE="es"
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/main/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+echo "this is a zsh"
+export PATH="/home/fei/repo/job-data/scripts:$PATH"
+export GOPATH="/home/fei/go:/usr/share/gocode"
+export DEBEMAIL="Wang Fei <wangfei@deepin.org>"
+export DEBFULLNAME="Wang Fei"
+export CDPATH=.:~:~/repo:/usr/lib/x86_64-linux-gnu
