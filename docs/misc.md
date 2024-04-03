@@ -127,3 +127,9 @@ doxygen Doxygen
 | HAVE_DOT                     | YES                      |
 | UML_LOOK                     | YES                      |
 | RECURSIVE                    | YES                      |
+
+## deb source uos-professional
+
+deb http://pools.uniontech.com/ppa/dde-eagle eagle/1070 main contrib non-free
+deb http://pools.uniontech.com/desktop-professional eagle contrib non-free
+
