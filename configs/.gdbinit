@@ -1,13 +1,13 @@
 python
 import os,sys
-sys.path.insert(0, os.environ['HOME'] + "/.gdb/")
+sys.path.insert(0, os.environ['HOME'] + "/.gdb/qt")
 from qt import register_qt_printers
 register_qt_printers (None)
 end
 
 python
 	import sys
-	sys.path.insert(0, os.environ['HOME'] + "/.gdb/python")
+	sys.path.insert(0, os.environ['HOME'] + "/.gdb/stl/python")
 	from libstdcxx.v6.printers import register_libstdcxx_printers
 	register_libstdcxx_printers (None)
 end
