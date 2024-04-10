@@ -41,3 +41,8 @@ if(DTK)
     message(DEBUG "DTK demo")
     add_subdirectory(clipEffectWidget)
 endif()
+
+if(LINEEDIT)
+    message(DEBUG "lineedit demo")
+    add_subdirectory(lineedit)
+endif()
