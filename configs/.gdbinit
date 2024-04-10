@@ -37,13 +37,34 @@ dir /home/fei/repo/libxcb
 dir /home/fei/repo/libxkbcommon
 dir /home/fei/repo/libxkbcommon/src
 
-set print pretty on
+# gdb options
 set confirm off
-# set environment LD_LIBRARY_PATH=/home/fei/repo/dtkwidget/build/src
+set verbose off
+set history filename ~/.gdb_history
+set history save on
+set print pretty on
+set height 0
+set width 0
+set pagination off
+set step-mode on
+set $SHOW_CONTEXT = 1
+set $SHOW_NEST_INSN = 0
+set $CONTEXTSIZE_STACK = 6
+set $CONTEXTSIZE_DATA  = 8
+set $CONTEXTSIZE_CODE  = 8
+
 set args -nograb -platformpluginpath /home/fei/repo/qt5platform-plugins/build/plugins/
 
 # set environment LD_LIBRARY_PATH=/home/fei/repo/dtkcore/build/src:/home/fei/repo/dtkgui/build/src:/home/fei/repo/dtkwidget/build/src:/home/fei/repo/qtbase-opensource-src-5.15.8/build/lib
-# set environment LD_LIBRARY_PATH=/home/fei/repo/qtbase/build/lib
-# :/home/fei/repo/qtdeclarative/build/lib/x86_64-linux-gnu:/home/fei/repo/qtdeclarative/build/lib/x86_64-linux-gnu/qt6/qml/QtQuick/Controls/
+# :/home/fei/repo/qtbase/build/lib
+# :/home/fei/repo/qtdeclarative/build/lib/x86_64-linux-gnu
+# :/home/fei/repo/qtdeclarative/build/lib/x86_64-linux-gnu/qt6/qml/QtQuick/Controls/
 # set environment QML_IMPORT_PATH=/home/fei/repo/qtdeclarative/build/lib/x86_64-linux-gnu/qt6/qml/QtQuick/Controls/
 
+define cls
+    shell clear
+end
+document cls
+Syntax: cls
+| Clear screen.
+end
