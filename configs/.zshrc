@@ -190,6 +190,8 @@ export GOPATH="/home/fei/go:/usr/share/gocode"
 export DEBEMAIL="Wang Fei <wangfei@deepin.org>"
 export DEBFULLNAME="Wang Fei"
 export CDPATH=.:~:~/repo:/usr/lib/x86_64-linux-gnu
+export http_proxy=http://127.0.0.1:7897/
+export https_proxy=http://127.0.0.1:7897/
 
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
