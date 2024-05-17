@@ -46,3 +46,8 @@ if(LINEEDIT)
     message(DEBUG "lineedit demo")
     add_subdirectory(lineedit)
 endif()
+
+if(LOCALE)
+    message(DEBUG "locale demo")
+    add_subdirectory(locale)
+endif()
