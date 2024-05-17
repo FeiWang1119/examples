@@ -43,16 +43,20 @@ int main(int argc, char *argv[])
             attr.mq_maxmsg = atoi(optarg);
             attrp = &attr;
             break;
+        case 's':
+            attr.mq_msgsize = atoi(optarg);
+            attrp = &attr;
+            break;
         case 'x':
             flags |= O_EXCL;
             break;
         default:
-            usageErr(argv[0]);
+            usageError(argv[0]);
         }
     }
 
     if (optind >= argc) {
-        usageErr(argv[0]);
+        usageError(argv[0]);
     }
 
     perms = (argc <= optind + 1) ? (S_IRUSR | S_IWUSR)
