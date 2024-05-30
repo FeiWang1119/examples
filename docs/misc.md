@@ -1,25 +1,32 @@
 # proxy
 
-10.20.52.42  7890  
-localhost, 127.0.0.0/8, ::1, *.org.deepin.org, *.uniontech.com, *.deepin.com  
-
-proxy config：~/.ssh/config
+## ssh config(~/.ssh/config)
 
 ``` sh
 Host github.com
     Hostname github.com
     ProxyCommand /usr/bin/corkscrew 10.20.52.42 7890 %h %p
 ```
-git config --global http.proxy 'http://127.0.0.1:7890'  
-git config --global https.proxy 'https://127.0.0.1:7890'  
-export http_proxy=http://127.0.0.1:7890/  
-export https_proxy=http://127.0.0.1:7890/  
+
+## git config(~/.gitconfig)
+
+git config --global http.proxy 'http://127.0.0.1:7890'
+git config --global https.proxy 'https://127.0.0.1:7890'
+
+## http config(~/.zshrc)
+
+export http_proxy=http://127.0.0.1:7890/
+export https_proxy=http://127.0.0.1:7890/
+
+## npm config (~/.npmrc)
+
+npm config set https-proxy http://127.0.0.1:7897
 
 # plantuml (vscode plugin)
 
 install java & Graphviz
-
 ``` sh
+
 sudo apt install default-jre graphviz
 ```
 
@@ -36,7 +43,6 @@ take effect immediately：
 
 ``` sh
 sudo sysctl --system -a -p | grep yama
-export https_proxy=https://127.0.0.1:7890/  
 ```
 
 # Qt http passwd

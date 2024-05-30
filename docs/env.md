@@ -38,6 +38,11 @@ chmod u+x nvim.appimage
 
 sudo mv ./nvim.appimage /usr/local/bin/nvim
 ```
+Notice: clangd does work in MakeFile by using Bear tools
+
+```sh
+bear -- <your-build-command>
+```
 
 # lazygit
 
