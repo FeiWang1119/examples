@@ -52,7 +52,7 @@ iQbFdwc8jWo+w7FRzqM4SKRJu7+kg4JzmHmA78SM3g
 
 # transifex
 
-home 目录下 ：~/ .transifexrc
+## ~/.transifexrc
 
 ```c
 [https://www.transifex.com]
@@ -60,8 +60,9 @@ rest_hostname = https://rest.api.transifex.com
 api_hostname = https://api.transifex.com
 hostname = https://www.transifex.com
 token = ???
+```
 
-项目下： .tx/config
+## .tx/config(project)
 
 ``` c
 [main]
@@ -88,13 +89,14 @@ source_lang = en_US
 type = QT
 ```
 
-相关命令（tx --help）
+## tx
 
 | command                      | description              |
 |------------------------------|--------------------------|
 | apt install transifex-client | 安装tx                   |
-| tx pull -t -a -s -b master   | 拉取翻译（-a -f 全部拉取） |
-| tx push -s -b master         | 推送翻译                 |
+| tx pull -t -a -s -branch m23   | 拉取翻译（-a -f 全部拉取） |
+| tx push -s -branch m23         | 推送翻译                 |
+ |tx push --branch m23 --languages zh_CN --t dde-control-center | 推送某个语言翻译|
 
 # printer
 
