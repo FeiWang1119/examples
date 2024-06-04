@@ -185,14 +185,16 @@ export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 echo "this is a zsh"
-export PATH="/home/fei/npm/bin:/home/fei/.local/bin:/home/fei/repo/job-data/scripts:$PATH"
+export PATH="/home/fei/.cargo/bin:/home/fei/.local/kitty.app/bin:/home/fei/npm/bin:/home/fei/.local/bin:/home/fei/repo/job-data/scripts:$PATH"
 export GOPATH="/home/fei/go:/usr/share/gocode"
 export DEBEMAIL="Wang Fei <wangfei@deepin.org>"
 export DEBFULLNAME="Wang Fei"
 export CDPATH=.:~:~/repo:/usr/lib/x86_64-linux-gnu
 export http_proxy=http://127.0.0.1:7897/
 export https_proxy=http://127.0.0.1:7897/
+export EDITOR=/usr/local/bin/nvim
 
+source ~/.venv/bin/activate
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
