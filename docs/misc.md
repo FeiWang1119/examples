@@ -141,3 +141,29 @@ doxygen Doxygen
 deb http://pools.uniontech.com/ppa/dde-eagle eagle/1070 main contrib non-free
 deb http://pools.uniontech.com/desktop-professional eagle contrib non-free
 
+
+# python virtual environment
+
+1. create a virtual environment in a local folder named .venv:
+
+```sh
+python3 -m venv .venv
+```
+
+2. activate a virtual environment:
+
+```sh
+source .venv/bin/activate
+```
+
+3. check the location of your Python interpreter:
+
+```sh
+which python
+```
+
+4. switch projects or leave your virtual environment, deactivate the environment:
+
+```sh
+deactivate
+```
