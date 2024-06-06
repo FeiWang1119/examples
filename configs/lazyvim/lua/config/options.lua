@@ -10,6 +10,11 @@ vim.g.autoformat = false
 
 local opt = vim.opt
 
+opt.tabstop = 4 -- Number of spaces tabs count for
+opt.shiftwidth = 4
+opt.expandtab = true
+vim.bo.softtabstop = 4
+
 opt.wrap = true -- Disable line wrap
 
 vim.filetype.add({
