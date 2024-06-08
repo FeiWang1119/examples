@@ -1,0 +1,23 @@
+new_tab job-data
+
+cd ~/repo/job-data/
+
+launch nvim .
+
+focus
+
+launch zsh
+
+cd ~/repo/job-data/
+
+new_tab qtbase
+
+cd ~/repo/qtbase
+
+launch nvim .
+
+focus
+
+launch zsh
+
+cd ~/repo/qtbase/
