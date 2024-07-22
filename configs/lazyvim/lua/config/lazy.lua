@@ -52,11 +52,24 @@ require("lspconfig").qmlls.setup({
 
 require("neo-tree").setup({
   filesystem = {
-    bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
-    cwd_target = {
-      sidebar = "tab",   -- sidebar is when position = left or right
-      current = "window" -- current is when position = current
-    },
-  }
-})
+     follow_current_file = {
+       enabled = true, -- This will find and focus the file in the active buffer every time
+       --              -- the current file is changed while the tree is open.
+       leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+     },
+     window = {
+       mappings = {
+         ["<leader>p"] = "image_wezterm", -- " or another map
+       },
+     },
+     commands = {
+       image_wezterm = function(state)
+         local node = state.tree:get_node()
+         if node.type == "file" then
+           require("image_preview").PreviewImage(node.path)
+         end
+       end,
+     },
+   },
+ })
 
