@@ -22,3 +22,5 @@ vim.filetype.add({
     qml = "qmljs",
   },
 })
+
+vim.g.codeium_disable_bindings = 1

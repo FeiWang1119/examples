@@ -1,0 +1,13 @@
+# job-data
+new_tab job-data
+
+cd ~/repo/job-data/
+
+launch nvim .
+
+focus
+
+launch zsh
+
+cd ~/repo/job-data/
+

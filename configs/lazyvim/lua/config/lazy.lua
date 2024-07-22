@@ -50,6 +50,12 @@ require("lspconfig").qmlls.setup({
 	filetypes = { "qml", "qmljs" },
 })
 
+require("ts-comments").setup({
+    lang = {
+     qmljs = "// %s"
+    },
+})
+
 require("neo-tree").setup({
   filesystem = {
      follow_current_file = {

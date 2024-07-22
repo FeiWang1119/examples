@@ -26,7 +26,6 @@ sudo apt install exa bat zoxide
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-
 ```
 
 # neovim
@@ -43,6 +42,11 @@ Notice: clangd does work in MakeFile by using Bear tools
 ```sh
 bear -- <your-build-command>
 ```
+
+## install qml treesitter languages
+
+TSInstall qmljs qmlldir
+
 
 # lazygit
 
