@@ -65,13 +65,18 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 ## dependencies
 
-apt install ripgrep // telescope grep doesn't work
+``` sh
+# install ripgrep, or telescope grep doesn't work
+apt install ripgrep 
 
-apt install npm // markdown-preview  
+# markdown-preview
+apt install npm
 cd ~/.local/share/nvim/lazy/markdown-preview.nvim/app && npm install
 
-apt install xclip //previde a clipboard tool like xclip for using system's clipboard. 
+# previde a clipboard tool like xclip for using system's clipboard. 
+apt install xclip 
+```
 
 ## cmake
 
-cmake add `CMAKE_EXPORT_COMPILE_COMMANDS=ON`` to remove clangd warnings
+cmake add `CMAKE_EXPORT_COMPILE_COMMANDS=ON` to remove clangd warnings
