@@ -38,8 +38,131 @@ func main() {
 	fmt.Println("Hello, World!")
 }
 
+func testSlice() {
+	// Create a slice of strings by the built-in function make.
+	// Contains a length and capacity of 5 elements.
+	slice1 := make([]string, 5)
+	fmt.Println(slice1)
+
+	// Create a slice of strings.
+	// Contains a length of 5 elements and a capacity of 10 elements.
+	// compiler error setting capacity less than length
+	slice2 := make([]string, 5, 10)
+	fmt.Println(slice2)
+
+	// Declaring a slice with a slice literal.
+	slice3 := []string{"red", "green", "blue", "yellow", "orange"}
+	fmt.Println(slice3)
+
+	// Declaring a slice with index positions.
+	// Initialize the 100th element with an empty string.
+	slice4 := []string{99: ""}
+	fmt.Println(slice4)
+
+	// Declaration difference between array and slice.
+	// an array is created, when a value inside the [] operator is specified.
+	array := [3]int{1, 2, 3}
+	slice5 := []int{1, 2, 3}
+	fmt.Println(array)
+	fmt.Println(slice5)
+
+	// Declaring a nil slice.
+	var slice6 []int
+	fmt.Println(slice6)
+
+	// Use make to create an empty slice of integers.
+	slice7 := make([]int, 0)
+	fmt.Println(slice7)
+
+	// Use a slice literal to create an empty slice of integers.
+	slice8 := []int{}
+	fmt.Println(slice8)
+
+	slice9 := []int{10, 20, 30, 40, 50}
+	// Change the value of index 1, use the [] operator.
+	slice9[1] = 25
+
+	// Taking the slice of a slice
+	// two slices are sharing the same underlying array(capacity k = 5).
+	// Howerver, each slice views the underlying array in a different way.
+	// For slice[i:j], or slice[1:3]
+	// Length:   j - i or 3 - 1 = 2
+	// Capacity: k - i or 5 - 1 = 4
+	slice10 := []int{10, 20, 30, 40, 50}
+	newSlice := slice10[1:3]
+	fmt.Println(newSlice)
+
+	// Changes made to the new slice are reflected in the original slice.
+	// Change index 1 of newSlice.
+	// Change index 2 of the original slice.
+	newSlice[1] = 25
+	fmt.Println(slice10)
+
+	// Using append to add an element to a slice.
+	// slice10 also see the changes in index 3.
+	newSlice = append(newSlice, 60)
+
+	// Using append to increase the length and capacity of a slice.
+	// When the capacity of a slice is not sufficient,
+	// create a new underlying array, copy the existing values, and assign the new value
+	// new slice has own underlying array, and the capacity is doubled from its original size under 1000 elements.
+	slice11 := []int{10, 20, 30, 40, 50}
+	newSlice1 := append(slice11, 60)
+	fmt.Println(newSlice1)
+
+	// performing a three-index slice.
+	// For slice[i:j:k], or slice[2:3:4]
+	// Length:   j - i or 3 - 2 = 1
+	// Capacity: k - i or 4 - 2 = 2
+	// Runtime error setting capcity larger than existing capacity
+	source := []string{"Apple", "Banana", "Orange", "Mango", "Grape"}
+	slice12 := source[2:3:4]
+	fmt.Println(slice12)
+
+	// Benifit of setting length and capacity to be the same
+	// call append and it will create a new underlying array of two elements
+	// copy the fruit orange, add the new fruit pear, return a new slice that references this new underlying array.
+	source1 := []string{"Apple", "Banana", "Orange", "Mango", "Grape"}
+	slice13 := source1[2:3:3]
+	slice13 = append(slice13, "Pear")
+
+	// use the ... operator to append all the elements of one slice into another
+	s1 := []int{1, 2}
+	s2 := []int{3, 4}
+	fmt.Println(append(s1, s2...))
+
+	// iterating over a slice using for range
+	// index is the index position of the element in the slice
+	// value is a copy of the element in that index position
+	slice14 := []int{1, 2, 3, 4, 5}
+	for index, value := range slice14 {
+		fmt.Println(index, value)
+	}
+
+	// Composing slices of slices
+	multidimensionalSlice := [][]int{
+		{10},
+		{100, 200},
+	}
+	// Appending the value 20 to the first slice of integers.
+	multidimensionalSlice[0] = append(multidimensionalSlice[0], 20)
+	fmt.Println(multidimensionalSlice)
+
+	// Passubg slices between functions
+	// Only the slice is being copied, not the underlying array.
+	slice15 := []int{1, 2, 3, 4, 5}
+	appendSlice(slice15)
+	fmt.Println(slice15)
+
+}
+
+func appendSlice(slice []int) []int {
+	slice = append(slice, 6)
+	return slice
+}
+
 func testArray() {
-	
+
 	// Declare an array1 of 5 ints
 	var array1 [5]int
 	fmt.Println(array1)
@@ -51,11 +174,10 @@ func testArray() {
 
 	// Only arrays of the same type can be assigned.
 	// the type of an array variable includes the length and the type of data that can be stored in each element.
-	array1 = array2  // the type of array1 is [5]int
-	
+	array1 = array2 // the type of array1 is [5]int
 
 	// Declare an array3 of 5 ints. The array3 is initialized with the values 1, 2, 3, 4, and 5.
-	// Capacity is determined based on the number of values initialized.
+	// If the length is given as ..., capacity is determined based on the number of values initialized.
 	array3 := [...]int{1, 2, 3, 4, 5}
 	fmt.Println(array3)
 
@@ -64,19 +186,18 @@ func testArray() {
 	// The rest of the elements are initialized with the zero value for the int type.
 	array4 := [...]int{1: 10, 2: 20}
 	fmt.Println(array4)
-	
 
-	array5 := [5]*int{0:new(int), 1:new(int)}
+	array5 := [5]*int{0: new(int), 1: new(int)}
 	*array5[0] = 10
 	*array5[1] = 20
 	fmt.Println(array5)
-	
+
 	// Declare a two-dimensional array of four elements by two elements.
 	array6 := [4][2]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
 	fmt.Println(array6)
 
 	// Declare and Initialize individual elements of the outer and inner arrays.
-	array7 := [4][2]int{1: {0:20}, 3: {1:30}}
+	array7 := [4][2]int{1: {0: 20}, 3: {1: 30}}
 	array7[0][0] = 10
 	array7[0][1] = 20
 	array7[1][0] = 30
@@ -88,4 +209,3 @@ func testArray() {
 	var array8 [2]int = array7[1]
 	fmt.Println(array8)
 }
-	
