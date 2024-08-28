@@ -38,6 +38,67 @@ func main() {
 	fmt.Println("Hello, World!")
 }
 
+func testMap() {
+	// Create a map with a key of type string and a value of type int.
+	dict1 := make(map[string]int)
+	fmt.Println(dict1)
+
+	// Create a map with a key of type string and a value of type int.
+	dict2 := map[string]int{"one": 1, "two": 2, "three": 3}
+	fmt.Println(dict2)
+
+	// The map key can be value from any built-in type, or a struct type as long as the value can be used in an expression with the == operator.
+	// Slices, functions, and struct types that contain slices cannot be used as map keys.
+	// dic := map[[]string]int{} Compiler Exception: invalid map key type []string
+
+	// Assigning values to a map.
+	dict3 := map[string]string{}
+	dict3["one"] = "1"
+	fmt.Println(dict3)
+	
+	// Runtime error assigned to a nil map
+	// var colors map[string]string
+	// colors["red"] = "#FF0000"
+	// Runtime Error: 
+	// panic: runtime error: assignment to entry in nil map
+	
+	// Retrieving a value from a map and testing existence.
+	color := map[string]string{"red": "#FF0000", "green": "#00FF00", "blue": "#0000FF"}
+	value, exists := color["red"]
+	if exists {
+		fmt.Println(value)
+	}
+	
+	// Retrieving a value from a map testing the value for existence.
+	// when the key doesn't exist, the zero value of the value's type is returned.
+	value1 := color["red"]
+	if value1 != "" {
+		fmt.Println(value1)
+	}
+
+	//  iterate over a map using for range
+	for key, value := range color {
+		fmt.Println(key, value)
+	}
+
+	// Removing an item from a map.
+	delete(color, "red")
+	for key, value := range color {
+		fmt.Println(key, value)
+	}
+
+	// Passing maps between functions
+	// Doesn't make a copy of the map.
+	removeColor(color, "blue")
+	for key, value := range color {
+		fmt.Println(key, value)
+	}
+}
+
+func removeColor(colors map[string]string, color string) {
+	delete(colors, color)
+}
+
 func testSlice() {
 	// Create a slice of strings by the built-in function make.
 	// Contains a length and capacity of 5 elements.
