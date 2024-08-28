@@ -7,8 +7,6 @@ package main
 // 1. The Go installation directory where standard library source code is contained, e,g, /usr/local/go/src/pkg/fmt
 // 2. Each directory listed in the GOPATH environment variable.
 
-import "fmt"
-
 // import "strings" output an error whenever the compiler finds a package that you don't use.
 // sometimes need to import a package that you don't need to reference identifiers from.
 // e.g. just to call init function from a package, you can use the blank identifier _ to rename an import.
@@ -27,6 +25,12 @@ import "fmt"
 // 	fileconvert "file/convert"
 // )
 
+import (
+	"fmt"
+	"counters"
+	// "github.com/linuxdeepin/go-lib/notify"
+)
+
 // each package can have many init functions, which are called prior to main funcion being executed
 func init() {
 	fmt.Println("init function")
@@ -34,8 +38,170 @@ func init() {
 
 // compiler must find a function named main in main package, which is the entry point for the program
 func main() {
-	testArray()
 	fmt.Println("Hello, World!")
+}
+
+// notifier is an interface that defined notification type behavior.
+type notifier interface {
+	notify()
+}
+
+type user struct {
+	name       string
+	email      string
+	ext        int
+	privileged bool
+}
+
+// Declaring fields based on other struct types.
+type admin struct {
+	user // Embedded type as an inner type of the outer type admin
+	level  string
+}
+
+// notify implements a method with a pointer receiver.
+func (u *user) notify() {
+	fmt.Printf("name: %s, email: %s, ext: %d, privileged: %t", u.name, u.email, u.ext, u.privileged)
+}
+
+// notify implements a method that can be called vi a value of type admin.
+// inner type (user)'s implementation was not promoted once the outer type (admin) implemented the notify method.
+func (a *admin) notify() {
+	fmt.Printf("admin name: %s, email: %s, ext: %d, privileged: %t, level: %s", a.user.name, a.user.email, a.user.ext, a.user.privileged, a.level)
+}
+
+// There are two types of receivers in Go: value receivers and pointer receivers.
+
+// Declaration of a method with a value receiver.
+// The method will always be operating against a copy of the value used to make the method call.
+func (u user) notify0() {
+	fmt.Printf("name: %s, email: %s, ext: %d, privileged: %t", u.name, u.email, u.ext, u.privileged)
+}
+
+// Declaration of a method with a pointer receiver.
+// pointer receivers operate on the actual value.
+func (u *user) changeEmail(email string) {
+	u.email = email
+}
+
+// Decalring of a new type based on an int64
+// duration and int64 are two distinct and different types
+// var dur duration
+// dur = int64(10)
+// Compiler error assigning value of different types
+type duration int64
+
+// built-in types: numeric, string, and Boolean types
+// reference types: slice, map, channel, interface, and function types. All the different
+// header values from the different reference types contain a pointer to an underlying
+// data structure.
+func testType() {
+	// Declare a variable of type user, set it to a zero value
+	// the zero value of a struct is the zero value for each field of the struct
+	var bill user
+	println(bill)
+
+	// Declare a variable of the struct type using a struct literal.
+	// The short variable declaration operator serves two purposes: it both declares and initializes a variable.
+	// The order of the fields dones't matter.
+	lisa := user{name: "Lisa", email: "lisa@example.com", ext: 10, privileged: true}
+	println(lisa)
+
+	// Create a struct type value without declaring the field names.
+	// The order of the fields does matter and need to match the order of the fields in the struct declaration.
+	tom := user{"Tom", "tom@example.com", 20, false}
+	println(tom)
+
+	fred := admin{
+		user: user{
+			name:       "Fred",
+			email:      "fred@example.com",
+			ext:        30,
+			privileged: true,
+		},
+		level: "super",
+	}
+	
+	// access the inner type's method notify directly
+	fred.user.notify()
+
+	// the inner type's method is promoted.
+	fred.notify()
+
+	//The embedded inner type's implementation of the interface is promoted to the outer type.
+	sendNotification(&fred)
+
+	println(fred)
+
+	// calling a method with a value receiver
+	// the value of lisa is the receiver of the method call
+	// and the notify0 method is operating against a copy of this value.
+	lisa.notify0()
+	// Value of type user can be used to call methods declared with a pointer receiver.
+	// Imagine that Go is performing the following operation:
+	// (&lisa).changeEmail("lisa@google.com")
+	lisa.changeEmail("lisa@google.com")
+
+	adam := &user{"Adam", "adam@example.com", 40, false}
+	// calling a method with a pointer receiver
+	// the pointer of lisa is the receiver of the method call
+	// the value used to make the call is shared with the method.
+	adam.changeEmail("adam@google.com")
+	// Pointer of type user can also be used to call methods declared with a value receiver.
+	// Imagine that Go is performing the following operation:
+	// (*adam).notify0()
+	adam.notify0()
+
+	// u := user{"Adam", "adam@example.com", 40, false}
+	// sendNotification(u)
+	// compiler error: user does not implement notifier (notify method has pointer receiver)
+	
+	// Looking at these rules from the perspective of the value
+	// Methods sets as described by the specification
+	// Values         Methods Receivers
+    // -----------------------------------------------
+    // T             (t T)
+    // *T            (t T) and (t *T)
+	// 1. a value of type T only has methods declared that have a value receiver.
+	// 2. pointers of type T have methods declared with both value and pointer receivers.
+
+	// Looking at these rules from the perspective of receivers
+	// Methods Receivers    Values         
+    // -----------------------------------------------
+    // (t T)                T and *T
+    // (t *T)               *T
+	// 1. implement an interface using a value receiver, then both the values and pointers of the type implement the interface.
+	// 2. implement an interface using a pointer receiver, then only the pointers of the type implement the interface.
+	
+	// only the pointers of the type implement the interface.
+	// The question now is why the restriction?
+	// The answer comes from the fact that it's not always possible to get the address of a value.
+	u := user{"Adam", "adam@example.com", 40, false}
+	sendNotification(&u)
+
+	// Create a varable of the unexported type using the exported New function from the package counters.
+	// 1. identifier are exported or unexported, not values.
+	// 2. the short variable declaration operator is capable of inferring the type and creating a variable of the unexported type.
+	counter := counters.New(10)
+	fmt.Println(counter)
+
+	a := counters.Admin{
+		Rights: 10,
+	}
+
+	// Set the exported field from the unexported inner type.
+	// the identifiers from the inner type are promoted to the outer type.
+	// those exported fields are known through a value of the outer type.
+	// There's no access to the inner type directly.
+	a.Name = "admin"
+	a.Email = "admin@example.com"
+	fmt.Println(a)
+}
+
+// sendNotification accepts values that implement the notifier interface.
+// and sends notifications.
+func sendNotification(n notifier) {
+	n.notify()
 }
 
 func testMap() {
@@ -55,20 +221,20 @@ func testMap() {
 	dict3 := map[string]string{}
 	dict3["one"] = "1"
 	fmt.Println(dict3)
-	
+
 	// Runtime error assigned to a nil map
 	// var colors map[string]string
 	// colors["red"] = "#FF0000"
-	// Runtime Error: 
+	// Runtime Error:
 	// panic: runtime error: assignment to entry in nil map
-	
+
 	// Retrieving a value from a map and testing existence.
 	color := map[string]string{"red": "#FF0000", "green": "#00FF00", "blue": "#0000FF"}
 	value, exists := color["red"]
 	if exists {
 		fmt.Println(value)
 	}
-	
+
 	// Retrieving a value from a map testing the value for existence.
 	// when the key doesn't exist, the zero value of the value's type is returned.
 	value1 := color["red"]
@@ -214,7 +380,6 @@ func testSlice() {
 	slice15 := []int{1, 2, 3, 4, 5}
 	appendSlice(slice15)
 	fmt.Println(slice15)
-
 }
 
 func appendSlice(slice []int) []int {
