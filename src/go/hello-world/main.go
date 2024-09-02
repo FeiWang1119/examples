@@ -28,11 +28,14 @@ package main
 import (
 	"fmt"
 	"hello-world/counters"
+	"hello-world/runner"
+	"log"
 	"math/rand"
 	"runtime"
 	"sync"
 	"sync/atomic"
 	"time"
+	"os"
 	// "github.com/linuxdeepin/go-lib/notify"
 )
 
@@ -44,7 +47,8 @@ func init() {
 
 // compiler must find a function named main in main package, which is the entry point for the program
 func main() {
-	testBuffed()
+	testRunner()
+	// testBuffed()
 	// testUnbufferedChannelByRelayRace()
 	// testUnbufferedChannelByTennis()
 	// testAtomicLoadAndStore()
@@ -467,7 +471,39 @@ var (
 const (
 	numberGoroutines = 4  // Number of goroutines to use.
 	taskLoad         = 10 // Amount of work to process.
+	timeout          = 3 * time.Second
 )
+
+func testRunner() {
+	log.Println("Starting Work.")
+
+	// Create a new timer value for this run.
+	r := runner.New(timeout)
+
+	// Add the task to be run.
+	r.Add(createTask(), createTask(), createTask())
+
+	// Run the tasks and handle the results.
+	if err := r.Start(); err != nil {
+		switch err {
+		case runner.ErrTimeout:
+			log.Println("Termianting due to timeout.")
+			os.Exit(1)
+		case runner.ErrInterrupt:
+			log.Println("Termianting due to interrupt.")
+			os.Exit(2)
+		}
+	}
+
+	log.Println("Process end.")
+}
+
+func createTask() func(int) {
+	return func(id int) {
+		log.Printf("Processor - Task #%d", id)
+		time.Sleep(time.Duration(id) * time.Second)
+	}
+}
 
 func testBuffed() {
 	// Create a buffered channel to manage the task load.
@@ -488,7 +524,7 @@ func testBuffed() {
 	// when all the work is done.
 	close(tasks)
 
-	// Wait fo all the work to get done.
+	// Wait for all the work to get done.
 	wg.Wait()
 }
 
