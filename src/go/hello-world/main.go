@@ -27,18 +27,30 @@ package main
 
 import (
 	"fmt"
-	"counters"
+	"hello-world/counters"
+	"math/rand"
+	"runtime"
+	"sync"
+	"sync/atomic"
+	"time"
 	// "github.com/linuxdeepin/go-lib/notify"
 )
 
 // each package can have many init functions, which are called prior to main funcion being executed
 func init() {
+	rand.Seed(time.Now().UnixNano())
 	fmt.Println("init function")
 }
 
 // compiler must find a function named main in main package, which is the entry point for the program
 func main() {
-	fmt.Println("Hello, World!")
+	testBuffed()
+	// testUnbufferedChannelByRelayRace()
+	// testUnbufferedChannelByTennis()
+	// testAtomicLoadAndStore()
+	// testRaceCondition()
+	// testGoroutine()
+	// fmt.Println("Hello, World!")
 }
 
 // notifier is an interface that defined notification type behavior.
@@ -55,8 +67,13 @@ type user struct {
 
 // Declaring fields based on other struct types.
 type admin struct {
-	user // Embedded type as an inner type of the outer type admin
-	level  string
+	user  // Embedded type as an inner type of the outer type admin
+	level string
+}
+
+// Implementing the Stringer interface.
+func (u user) String() string {
+	return fmt.Sprintf("name: %s, email: %s, ext: %d, privileged: %t", u.name, u.email, u.ext, u.privileged)
 }
 
 // notify implements a method with a pointer receiver.
@@ -99,18 +116,18 @@ func testType() {
 	// Declare a variable of type user, set it to a zero value
 	// the zero value of a struct is the zero value for each field of the struct
 	var bill user
-	println(bill)
+	fmt.Println(bill)
 
 	// Declare a variable of the struct type using a struct literal.
 	// The short variable declaration operator serves two purposes: it both declares and initializes a variable.
 	// The order of the fields dones't matter.
 	lisa := user{name: "Lisa", email: "lisa@example.com", ext: 10, privileged: true}
-	println(lisa)
+	fmt.Println(lisa)
 
 	// Create a struct type value without declaring the field names.
 	// The order of the fields does matter and need to match the order of the fields in the struct declaration.
 	tom := user{"Tom", "tom@example.com", 20, false}
-	println(tom)
+	fmt.Println(tom)
 
 	fred := admin{
 		user: user{
@@ -121,7 +138,7 @@ func testType() {
 		},
 		level: "super",
 	}
-	
+
 	// access the inner type's method notify directly
 	fred.user.notify()
 
@@ -131,7 +148,7 @@ func testType() {
 	//The embedded inner type's implementation of the interface is promoted to the outer type.
 	sendNotification(&fred)
 
-	println(fred)
+	fmt.Println(fred)
 
 	// calling a method with a value receiver
 	// the value of lisa is the receiver of the method call
@@ -155,24 +172,24 @@ func testType() {
 	// u := user{"Adam", "adam@example.com", 40, false}
 	// sendNotification(u)
 	// compiler error: user does not implement notifier (notify method has pointer receiver)
-	
+
 	// Looking at these rules from the perspective of the value
 	// Methods sets as described by the specification
 	// Values         Methods Receivers
-    // -----------------------------------------------
-    // T             (t T)
-    // *T            (t T) and (t *T)
+	// -----------------------------------------------
+	// T             (t T)
+	// *T            (t T) and (t *T)
 	// 1. a value of type T only has methods declared that have a value receiver.
 	// 2. pointers of type T have methods declared with both value and pointer receivers.
 
 	// Looking at these rules from the perspective of receivers
-	// Methods Receivers    Values         
-    // -----------------------------------------------
-    // (t T)                T and *T
-    // (t *T)               *T
+	// Methods Receivers    Values
+	// -----------------------------------------------
+	// (t T)                T and *T
+	// (t *T)               *T
 	// 1. implement an interface using a value receiver, then both the values and pointers of the type implement the interface.
 	// 2. implement an interface using a pointer receiver, then only the pointers of the type implement the interface.
-	
+
 	// only the pointers of the type implement the interface.
 	// The question now is why the restriction?
 	// The answer comes from the fact that it's not always possible to get the address of a value.
@@ -434,4 +451,321 @@ func testArray() {
 	// copy the second element of array7 to array8
 	var array8 [2]int = array7[1]
 	fmt.Println(array8)
+}
+
+var (
+	// wg is used to wait for the program to finish.
+	wg sync.WaitGroup
+	// mutex is used to define a critical section of code.
+	mutex sync.Mutex
+	// counter is a variable incremented by all goroutines.
+	counter int64
+	// shutdown is a flag to alert running goroutines to shutdown.
+	shutdown int64
+)
+
+const (
+	numberGoroutines = 4  // Number of goroutines to use.
+	taskLoad         = 10 // Amount of work to process.
+)
+
+func testBuffed() {
+	// Create a buffered channel to manage the task load.
+	tasks := make(chan string, taskLoad)
+
+	// Launch goroutines to handle the work.
+	wg.Add(numberGoroutines)
+	for gr := 1; gr <= numberGoroutines; gr++ {
+		go worker(tasks, gr)
+	}
+
+	// Add a bunch of work to get donw.
+	for post := 1; post <= taskLoad; post++ {
+		tasks <- fmt.Sprintf("Task : %d", post)
+	}
+
+	// Close the channel so the gorountines will quit
+	// when all the work is done.
+	close(tasks)
+
+	// Wait fo all the work to get done.
+	wg.Wait()
+}
+
+// worker is launched as a goroutine to process work from the buffered channel.
+func worker(tasks chan string, worker int) {
+	// Report that we just returned.
+	defer wg.Done()
+
+	for {
+		// Wait for work to be assigned.
+		task, ok := <-tasks
+		if !ok {
+			//This means the channel is empty and closed.
+			fmt.Printf("Worker %d : Shutting Down\n", worker)
+			return
+		}
+
+		// Display we are starting the work.
+		fmt.Printf("Worker %d : Starting %s\n", worker, task)
+
+		// Randomly wait to simulate work time.
+		sleep := rand.Int63n(100)
+		time.Sleep(time.Duration(sleep) * time.Millisecond)
+
+		// Display we finished the work.
+		fmt.Printf("Worker %d : Completed %s\n", worker, task)
+	}
+}
+
+func testUnbufferedChannelByRelayRace() {
+	// Create an unbuffered channel
+	baton := make(chan int)
+
+	// Add a count of one for the last runner.
+	wg.Add(1)
+
+	// First runner to his mark.
+	go Runner(baton)
+
+	// Start the race
+	baton <- 1
+
+	// Wait for the race finish
+	wg.Wait()
+}
+
+// Runner simulates a person running in the relay race.
+func Runner(baton chan int) {
+	var newRunner int
+
+	// Wait to receive the baton.
+	runner := <-baton
+
+	// Start running around the track.
+	fmt.Printf("Runner %d Running With Baton\n", runner)
+
+	// New runner to the line
+	if runner != 4 {
+		newRunner = runner + 1
+		fmt.Printf("Runner %d To The Line\n", newRunner)
+		go Runner(baton)
+	}
+
+	// Running around the track.
+	time.Sleep(100 * time.Millisecond)
+
+	// Is the race over?
+	if runner == 4 {
+		fmt.Printf("Runner %d Finished, Race Over\n", runner)
+		wg.Done()
+		return
+	}
+
+	// Exchange the baton for a new runner.
+	fmt.Printf("Runner %d Exchange With Runner %d\n", runner, newRunner)
+
+	baton <- newRunner
+}
+
+func testUnbufferedChannelByTennis() {
+	// Create an unbuffered channel
+	court := make(chan int)
+
+	// Add a count of 2, one for each goroutine.
+	wg.Add(2)
+
+	// Launch two players.
+	go player("Nadal", court)
+	go player("Roger Federer", court)
+
+	// Start the set.
+	court <- 1
+
+	// Wait for the goroutines to finish.
+	wg.Wait()
+}
+
+// player simulates a person playing the game of tennis.
+func player(name string, court chan int) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+	for {
+		// Wait for the ball to be hit back to us.
+		ball, ok := <-court
+		if !ok {
+			// If the channel was closed we won.
+			fmt.Printf("Player %s Won\n", name)
+			return
+		}
+
+		// Pick a random number and see if we miss the ball.
+		n := rand.Intn(100)
+		if n%13 == 0 {
+			fmt.Printf("Player %s Missed\n", name)
+
+			// Close the channel to signal we lost.
+			close(court)
+			return
+		}
+
+		// Display and then increment the hit count by one.
+		fmt.Printf("Player %s Hit %d\n", name, ball)
+		ball++
+
+		// Hit the ball back to the opposing player.
+		court <- ball
+	}
+
+}
+
+func testAtomicLoadAndStore() {
+	// Add a count of 2, one for each goroutine.
+	wg.Add(2)
+
+	// Create two goroutines.
+	go doWork("A")
+	go doWork("B")
+
+	// Give the goroutines time to run.
+	time.Sleep(1 * time.Second)
+
+	// Safely flag it is time to shutdown.
+	fmt.Println("Shutdown Now")
+	atomic.StoreInt64(&shutdown, 1)
+
+	// Wait for the goroutines to finish.
+	wg.Wait()
+}
+
+// doWork simulates a goroutine peforming work and
+// checking the shutdown flag to terminate early.
+func doWork(name string) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+	for {
+		fmt.Printf("Dong %s Work\n", name)
+		time.Sleep(250 * time.Millisecond)
+
+		// Do we need to shutdown?
+		if atomic.LoadInt64(&shutdown) == 1 {
+			fmt.Printf("Shutdown %s Down\n", name)
+			break
+		}
+	}
+}
+
+// go build -race: build the code using the race detector flag
+func testRaceCondition() {
+	// Add a count of 2, one for each goroutine.
+	wg.Add(2)
+
+	// Create two goroutines.
+	// go incCounter(1)
+	// go incCounter(2)
+
+	go incCounterAtomic(1)
+	go incCounterAtomic(2)
+
+	// Wait for the goroutines to finish.
+	wg.Wait()
+
+	fmt.Println("Final Counter:", counter)
+}
+
+func incCounter(id int) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+	for count := 0; count < 2; count++ {
+		// Capture the value of counter.
+		value := counter
+
+		// Yield the thread and be placed back in queue, give other goroutines a chance to run.
+		runtime.Gosched()
+
+		// Increment our local value of Counter.
+		value++
+
+		// Store the value back into Counter.
+		counter = value
+	}
+}
+
+func incCounterAtomic(id int) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+	for count := 0; count < 2; count++ {
+		// Safely Add One To Counter.
+		atomic.AddInt64(&counter, 1)
+
+		// Yield the thread and be placed back in queue, give other goroutines a chance to run.
+		runtime.Gosched()
+	}
+}
+
+// incCounterMutex increments the package level Counter variable
+// using a mutex to synchronize and provide safe access.
+func incCounterMutex(id int) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+	for count := 0; count < 2; count++ {
+		// Only allow one goroutine through this critical section at a time.
+		mutex.Lock()
+		{
+			// Capture the value of counter.
+			value := counter
+
+			// Yield the thread and be placed back in queue, give other goroutines a chance to run.
+			runtime.Gosched()
+
+			// Increment our local value of Counter.
+			value++
+
+			// Store the value back into Counter.
+			counter = value
+		}
+		mutex.Unlock()
+		// Release the lock and allow any waiting goroutines through.
+	}
+}
+
+func testGoroutine() {
+	// Allocate 1 logical processor for the scheduler to use.
+	runtime.GOMAXPROCS(1)
+	// Create a new wait group.
+
+	// Add a count of 2, one for each goroutine.
+	wg.Add(2)
+
+	// Create two goroutines.
+	fmt.Println("Create Goroutines")
+	go printPrime("A")
+	go printPrime("B")
+
+	// Wait for the goroutines to finish.
+	fmt.Println("Wait To Finish")
+	wg.Wait()
+
+	fmt.Println("Terminating Program")
+}
+
+func printPrime(prefix string) {
+	// Schedule the call to Done to tell main we're done.
+	defer wg.Done()
+
+next:
+	for outer := 2; outer < 5000; outer++ {
+		for inner := 2; inner < outer; inner++ {
+			if outer%inner == 0 {
+				continue next
+			}
+		}
+		fmt.Printf("%s %d\n", prefix, outer)
+	}
+	fmt.Println("Completed", prefix)
 }
