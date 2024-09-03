@@ -30,7 +30,8 @@ import (
 	"fmt"
 	"hello-world/counters"
 	_ "hello-world/pool"
-	"hello-world/runner"
+	_ "hello-world/runner"
+	"hello-world/work"
 	"math/rand"
 	"runtime"
 	"sync"
@@ -47,8 +48,9 @@ func init() {
 
 // compiler must find a function named main in main package, which is the entry point for the program
 func main() {
+	work.TestWorker()
 	// pool.TestPool()
-	runner.TestRunner()
+	// runner.TestRunner()
 	// testUnbufferedChannelByRelayRace()
 	// testUnbufferedChannelByTennis()
 	// testAtomicLoadAndStore()
