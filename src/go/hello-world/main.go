@@ -1,4 +1,5 @@
-// the executable program must have a package main, or compiler will regard it as an package, like hello, not an executable / command
+// the executable program must have a package called main,
+// otherwise compiler will regard it as an package, like hello, not an executable / command
 // the package is intented to be compiled into an binary executable
 
 package main
@@ -28,12 +29,9 @@ package main
 import (
 	"fmt"
 	"hello-world/counters"
-	"hello-world/pool"
+	_ "hello-world/pool"
 	"hello-world/runner"
-	"io"
-	"log"
 	"math/rand"
-	"os"
 	"runtime"
 	"sync"
 	"sync/atomic"
@@ -49,9 +47,8 @@ func init() {
 
 // compiler must find a function named main in main package, which is the entry point for the program
 func main() {
-	testPool()
-	// testRunner()
-	// testBuffed()
+	// pool.TestPool()
+	runner.TestRunner()
 	// testUnbufferedChannelByRelayRace()
 	// testUnbufferedChannelByTennis()
 	// testAtomicLoadAndStore()
@@ -474,111 +471,7 @@ var (
 const (
 	numberGoroutines = 4  // Number of goroutines to use.
 	taskLoad         = 10 // Amount of work to process.
-	timeout          = 3 * time.Second
-	maxGoroutines    = 25 // the number of routines to use.
-	pooledResources  = 2  // number of resources in the pool.
 )
-
-// dbConnection simulates a resource to share.
-type dbConnection struct {
-	ID int32
-}
-
-//  CLose implements the io.Closer interface so dbConnection
-//  can be managed by the pool. Close performs any resource
-//  release mangement.
-func (dbConn *dbConnection) Close() error {
-	fmt.Println("Close: Connection", dbConn.ID)
-	return nil
-}
-
-// idCounter provides support for giving each connection a unique ID.
-var idCounter int32
-
-// createConnection is a factory method that will be called by
-// the pool when a new connection is needed.
-func createConnection() (io.Closer, error) {
-	id := atomic.AddInt32(&idCounter, 1)
-	log.Println("Create: New Connection", id)
-
-	return &dbConnection{id}, nil
-}
-
-func testPool() {
-	var wg sync.WaitGroup
-	wg.Add(maxGoroutines)
-
-	// Create the pool to manage our connections.
-	p, err := pool.New(createConnection, pooledResources)
-	if err != nil {
-		log.Println(err)
-	}
-
-	// Perform queries using connections from the pool.
-	for query := 0; query < maxGoroutines; query++ {
-		// Each goroutine needs its own copy of the query
-		// value else they will all be sharing the same query variable.
-		go func(q int) {
-			peformQueries(q, p)
-			wg.Done()
-		} (query)
-	}
-
-	// Wait for the goroutines to finish.
-	wg.Wait()
-
-	// Close the pool.
-	log.Println("Shutdown Program")
-	p.Close()
-}
-
-// performQueries tests the resouce pool of connections.
-func peformQueries(query int, p *pool.Pool) {
-	// Acquire a connection from the pool.
-	conn, err := p.Acquire()
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
-	// Release the connection back to the pool.
-	defer p.Release(conn)
-
-	// Wait to simulate a query response.
-	time.Sleep(time.Duration(rand.Intn(1000)) * time.Microsecond)
-	log.Printf("QID(%d) CID(%d)\n", query, conn.(*dbConnection).ID)
-}
-
-func testRunner() {
-	log.Println("Starting Work.")
-
-	// Create a new timer value for this run.
-	r := runner.New(timeout)
-
-	// Add the task to be run.
-	r.Add(createTask(), createTask(), createTask())
-
-	// Run the tasks and handle the results.
-	if err := r.Start(); err != nil {
-		switch err {
-		case runner.ErrTimeout:
-			log.Println("Termianting due to timeout.")
-			os.Exit(1)
-		case runner.ErrInterrupt:
-			log.Println("Termianting due to interrupt.")
-			os.Exit(2)
-		}
-	}
-
-	log.Println("Process end.")
-}
-
-func createTask() func(int) {
-	return func(id int) {
-		log.Printf("Processor - Task #%d", id)
-		time.Sleep(time.Duration(id) * time.Second)
-	}
-}
 
 func testBuffed() {
 	// Create a buffered channel to manage the task load.

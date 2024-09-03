@@ -7,6 +7,11 @@ import (
 	"os"
 	"os/signal"
 	"time"
+	"log"
+)
+
+const (
+	timeout          = 3 * time.Second
 )
 
 // Runners runs a set of tasks within a given timeout and can be
@@ -95,5 +100,36 @@ func (r *Runner) gotInterrupt() bool {
 	// Continue running as normal.
 	default:
 		return false
+	}
+}
+
+func TestRunner() {
+	log.Println("Starting Work.")
+
+	// Create a new timer value for this run.
+	r := New(timeout)
+
+	// Add the task to be run.
+	r.Add(createTask(), createTask(), createTask())
+
+	// Run the tasks and handle the results.
+	if err := r.Start(); err != nil {
+		switch err {
+		case ErrTimeout:
+			log.Println("Termianting due to timeout.")
+			os.Exit(1)
+		case ErrInterrupt:
+			log.Println("Termianting due to interrupt.")
+			os.Exit(2)
+		}
+	}
+
+	log.Println("Process end.")
+}
+
+func createTask() func(int) {
+	return func(id int) {
+		log.Printf("Processor - Task #%d", id)
+		time.Sleep(time.Duration(id) * time.Second)
 	}
 }
