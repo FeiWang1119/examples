@@ -19,3 +19,8 @@ map("i", "jk", "<ESC>", { desc = "exit insert mode" })
 
 -- MarkdownPreview
 map("n", "<F12>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreview" })
+
+-- DiffView
+map("n", "<leader>dv", ":DiffviewOpen<CR>", { desc = "Open DiffView"})
+map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Close DiffView"})
+map("n", "<leader>df", ":DiffviewFileHistory<CR>", { desc = "Open file history"})
