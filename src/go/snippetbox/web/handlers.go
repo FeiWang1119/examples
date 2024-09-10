@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"strconv"
 	"html/template"
 	"log"
+	"net/http"
+	"strconv"
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -16,7 +16,12 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	// Initialize a slice containing the paths to the two files. Note that the home.page.template
 	// file must be the "first" file in the slice.
-	files := []string{"./ui/html/home.page.tmpl", "./ui/html/base.layout.tmpl"}
+	// Include the footer partial in the template files.
+	files := []string{
+		"./ui/html/home.page.tmpl", 
+		"./ui/html/base.layout.tmpl", 
+		"./ui/html/footer.partial.tmpl",
+	}
 
 	// Use the template.ParseFiles()) function to read the template file into a template set.
 	// If there is an error, we log the detailed error message and the http.Error() function
