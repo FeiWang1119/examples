@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
-	"flag"
 	"os"
 )
 
@@ -12,7 +12,7 @@ import (
 // we'll add more to it as the build progresses.
 type application struct {
 	errorLog *log.Logger
-	infoLog *log.Logger
+	infoLog  *log.Logger
 }
 
 func (app *application) routes() *http.ServeMux {
@@ -43,13 +43,11 @@ func main() {
 	// Importantly, we use the flag.Parse() function to parse the command-line
 	// This reads in the command-line flag value and assigns it to the addr variable.
 	// You need to call this *before* you use the addr variable
-	// ohterwise ist will always contain the default value of ":8000", If any errors encountered 
+	// ohterwise ist will always contain the default value of ":8000", If any errors encountered
 	// during parsing the application will be terminated.
 	flag.Parse()
 
-
-
-	// Use log.new() to create a logger for writing information messages. This 
+	// Use log.new() to create a logger for writing information messages. This
 	// three parameters: the destination to write the logs to (os.Stdout), a String
 	// prefix for message (INFO followed by a tab), and flags to indicate what
 	// additional information to include (local date and time). Note that the flags
@@ -63,17 +61,17 @@ func main() {
 
 	app := &application{
 		errorLog: errorLog,
-		infoLog: infoLog,
+		infoLog:  infoLog,
 	}
 
 	// Initialize a new http.Server struct. We set the Addr and Handler fields
-	// that the server uses the same network address and routes as before. and 
+	// that the server uses the same network address and routes as before. and
 	// the ErrorLog field so that the server now uses the custom errorLog logger
 	// the event of any problems
 	srv := &http.Server{
-		Addr:    *addr,
-		ErrorLog:errorLog,
-		Handler: app.routes(), // Call the new app.routes() method
+		Addr:     *addr,
+		ErrorLog: errorLog,
+		Handler:  app.routes(), // Call the new app.routes() method
 	}
 
 	// The value returned from the flag.String() function is a pointer to the flag

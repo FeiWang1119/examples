@@ -19,8 +19,8 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// file must be the "first" file in the slice.
 	// Include the footer partial in the template files.
 	files := []string{
-		"./ui/html/home.page.tmpl", 
-		"./ui/html/base.layout.tmpl", 
+		"./ui/html/home.page.tmpl",
+		"./ui/html/base.layout.tmpl",
 		"./ui/html/footer.partial.tmpl",
 	}
 
