@@ -15,6 +15,24 @@ type application struct {
 	infoLog *log.Logger
 }
 
+func (app *application) routes() *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", app.home)
+	mux.HandleFunc("/snippets", app.showSnippet)
+	mux.HandleFunc("/snippets/create", app.createSnippet)
+
+	// Create a file server which serves files out of the "./ui/static" directory.
+	// Note that the path given to the http.Dir function is relative to the project
+	// directory root.
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
+	// Use the mux.Handle() function to register the file server as the handler
+	// all URL paths that start with "/static/". For matching paths, we strip the
+	// "/static/" prefix before the request reaches the file server.
+	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+
+	return mux
+}
+
 func main() {
 
 	// Define a new command-line flag with the name "addr", a default value of ":8000",
@@ -48,29 +66,14 @@ func main() {
 		infoLog: infoLog,
 	}
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/snippets", app.showSnippet)
-	mux.HandleFunc("/snippets/create", app.createSnippet)
-
-	// Create a file server which serves files out of the "./ui/static" directory.
-	// Note that the path given to the http.Dir function is relative to the project
-	// directory root.
-	fileServer := http.FileServer(http.Dir("./ui/static/"))
-
-	// Use the mux.Handle() function to register the file server as the handler
-	// all URL paths that start with "/static/". For matching paths, we strip the
-	// "/static/" prefix before the request reaches the file server.
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
-
 	// Initialize a new http.Server struct. We set the Addr and Handler fields
 	// that the server uses the same network address and routes as before. and 
 	// the ErrorLog field so that the server now uses the custom errorLog logger
 	// the event of any problems
 	srv := &http.Server{
 		Addr:    *addr,
-		ErrorLog: errorLog,
-		Handler: mux,
+		ErrorLog:errorLog,
+		Handler: app.routes(), // Call the new app.routes() method
 	}
 
 	// The value returned from the flag.String() function is a pointer to the flag
