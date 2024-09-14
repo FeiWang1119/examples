@@ -24,3 +24,8 @@ map("n", "<F12>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreview" }
 map("n", "<leader>dv", ":DiffviewOpen<CR>", { desc = "Open DiffView"})
 map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Close DiffView"})
 map("n", "<leader>df", ":DiffviewFileHistory<CR>", { desc = "Open file history"})
+
+-- Auto-Session Manager
+map("n", "<leader>Ss", ":SessionSave<CR>", { desc = "Session Save"})
+map("n", "<leader>Sr", ":SessionRestore<CR>", { desc = "Session Restore", noremap = true, silent = true })
+map("n", "<leader>Sd", ":SessionDelete<CR>", { desc = "Session Delete", noremap = true, silent = true })

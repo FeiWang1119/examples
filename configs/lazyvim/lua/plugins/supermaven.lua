@@ -1,11 +1,14 @@
+-- if true then return {} end
+
 return {
   "supermaven-inc/supermaven-nvim",
+  event="VeryLazy",
   config = function()
     require("supermaven-nvim").setup({
       keymaps = {
-        accept_suggestion = "<C-k>",
+        accept_suggestion = "<C-a>",
         clear_suggestion = "<C-]>",
-        accept_word = "<C-j>",
+        accept_word = "<C-l>",
       },
       ignore_filetypes = { cpp = true },
       color = {
