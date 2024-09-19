@@ -1,0 +1,8 @@
+identitydock:
+  build: .
+  ports:
+    - "8000:8000"
+  environment:
+    ENV: DEV
+  volumes:
+    - ./app:/app
