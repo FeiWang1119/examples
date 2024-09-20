@@ -11,7 +11,7 @@ import (
 // *application.
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		app.noFound(w) // Use the noFound() helper.
+		app.notFound(w) // Use the notFound() helper.
 		return
 	}
 
