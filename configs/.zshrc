@@ -105,6 +105,7 @@ alias l="ls"
 alias ll="ls -la"
 
 [[ -n "$(command -v batcat)" ]] && alias cat="batcat"
+[[ -n "$(command -v bat)" ]] && alias cat="bat"
 [[ -n "$(command -v exa)" ]] && alias ls="exa"
 [[ -n "$(command -v fdfind)" ]] && alias fd="fdfind"
 [[ -n "$(command -v duf)" ]] && alias df="duf"
@@ -159,7 +160,7 @@ export http_proxy=http://127.0.0.1:7897/
 export https_proxy=http://127.0.0.1:7897/
 export EDITOR=vim
 
-source ~/.venv/bin/activate
+[[ -e ~/.venv/bin/activate ]] && source ~/.venv/bin/activate
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
@@ -285,4 +286,4 @@ fi
 
 
 
-eval $(thefuck --alias)
+[[ -n "$(command -v thefuck)" ]] && eval $(thefuck --alias)
