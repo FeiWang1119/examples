@@ -55,27 +55,3 @@ require("ts-comments").setup({
      qmljs = "// %s"
     },
 })
-
-require("neo-tree").setup({
-  filesystem = {
-     follow_current_file = {
-       enabled = true, -- This will find and focus the file in the active buffer every time
-       --              -- the current file is changed while the tree is open.
-       leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-     },
-     window = {
-       mappings = {
-         ["<leader>p"] = "image_wezterm", -- " or another map
-       },
-     },
-     commands = {
-       image_wezterm = function(state)
-         local node = state.tree:get_node()
-         if node.type == "file" then
-           require("image_preview").PreviewImage(node.path)
-         end
-       end,
-     },
-   },
- })
-
