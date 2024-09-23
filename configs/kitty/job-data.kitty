@@ -1,5 +1,5 @@
 # job-data
-new_tab job-data
+new_tab code
 
 cd ~/repo/job-data/
 
@@ -10,4 +10,11 @@ focus
 launch zsh
 
 cd ~/repo/job-data/
+
+new_tab cmd
+
+launch zsh
+
+launch zsh
+
 
