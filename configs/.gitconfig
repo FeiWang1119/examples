@@ -3,7 +3,7 @@
 [http]
 	proxy = http://127.0.0.1:7897
 [core]
-	editor = nvim
+	editor = vim
 [user]
 	name = wangfei
 	email = wangfei@deepin.org
