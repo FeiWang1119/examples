@@ -1,22 +1,21 @@
 FROM golang AS development
 
-WORKDIR /snippetbox/web
+WORKDIR /snippetbox
 
-COPY /snippetbox/ /snippetbox
+COPY /src/ /snippetbox/src
 
-RUN go mod init go-web
+RUN go mod init snippetbox
 RUN go mod tidy
-RUN go build -o /go-webserver
+RUN go build -o /snippetbox/snippetbox ./src/web/*.go
 
 
 FROM debian AS builder
 
 WORKDIR /
 
-COPY --from=development /go-webserver /go-webserver
-COPY /snippetbox/ui /ui
-COPY cmd.sh /
+COPY --from=development /snippetbox/snippetbox /usr/bin/snippetbox
+COPY /src/ui /ui
 
 EXPOSE 8888
 
-CMD ["/cmd.sh"]
+CMD ["snippetbox", "-addr=:8888"]
