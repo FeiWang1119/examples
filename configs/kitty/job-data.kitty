@@ -5,8 +5,9 @@ cd ~/repo/job-data/
 
 launch nvim .
 
-new_tab build
-
-cd ~/repo/job-data/
-
 focus
+
+new_tab cmd
+
+launch zsh
+
