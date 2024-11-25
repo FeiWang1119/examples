@@ -167,3 +167,10 @@ which python
 ```sh
 deactivate
 ```
+
+# dpkg-shlibdeps: error: no dependency information found folder
+
+```sh
+override_dh_shlibdeps:
+    dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+```
