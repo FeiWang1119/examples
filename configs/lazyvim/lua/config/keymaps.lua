@@ -29,3 +29,10 @@ map("n", "<leader>df", ":DiffviewFileHistory<CR>", { desc = "Open file history"}
 map("n", "<leader>Ss", ":SessionSave<CR>", { desc = "Session Save"})
 map("n", "<leader>Sr", ":SessionRestore<CR>", { desc = "Session Restore", noremap = true, silent = true })
 map("n", "<leader>Sd", ":SessionDelete<CR>", { desc = "Session Delete", noremap = true, silent = true })
+
+-- Insert new line
+map('n', '<CR>', 'm`o<Esc>``')
+map('n', '<S-CR>', 'm`O<Esc>``')
+
+-- Insert empty character
+map('n', '<C-i>', 'i<space><esc><right>')
