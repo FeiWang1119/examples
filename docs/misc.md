@@ -96,7 +96,7 @@ type = QT
 | apt install transifex-client | 安装tx                   |
 | tx pull -t -a -s -branch m23   | 拉取翻译（-a -f 全部拉取） |
 | tx push -s -branch m23         | 推送翻译                 |
- |tx push --branch m23 --languages zh_CN --t dde-control-center | 推送某个语言翻译|
+| tx push --branch m23 --languages zh_CN --t dde-control-center | 推送某个语言翻译|
 
 # printer
 

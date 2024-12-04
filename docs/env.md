@@ -18,7 +18,7 @@ git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.o
 # Add it to FPATH in your .zshrc by adding the following line before source "$ZSH/oh-my-zsh.sh"
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-cp ../configs/.zshrc ~
+cp ~/repo/job-data/configs/.zshrc ~
 
 # exa bat zoxide
 sudo apt install exa bat zoxide
