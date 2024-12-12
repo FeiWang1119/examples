@@ -35,4 +35,4 @@ map('n', '<CR>', 'm`o<Esc>``')
 map('n', '<S-CR>', 'm`O<Esc>``')
 
 -- Insert empty character
-map('n', '<C-i>', 'i<space><esc><right>')
+map('n', '<C-q>', 'i<space><esc><right>')
