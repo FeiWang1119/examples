@@ -61,7 +61,7 @@
 | git branch --track [branch] [remote-branch]        | 新建一个分支，与指定的远程分支建立追踪关系   |
 | git checkout [branch-name]                         | 切换到指定分支，并更新工作区                 |
 | git checkout -                                     | 切换到上一个分支                             |
-| git branch --set-upstream [branch] [remote-branch] | 建立追踪关系，在现有分支与指定的远程分支之间 |
+| git branch --set-upstream-to [remote-branch] [branch] | 建立追踪关系，在现有分支与指定的远程分支之间 |
 | git merge [branch]                                 | 合并指定分支到当前分支                       |
 | git cherry-pick [commit]                           | 选择一个commit，合并进当前分支               |
 | git branch -d [branch-name]                        | 删除分支                                     |
