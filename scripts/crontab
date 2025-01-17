@@ -1,0 +1,3 @@
+ 0 9-18/1 * * * $HOME/repo/job-data/scripts/timer.sh 动一动，走一走 
+ 30 11 * * * $HOME/repo/job-data/scripts/timer.sh 吃药
+ 0 16 * * * $HOME/repo/job-data/scripts/timer.sh 下午茶
